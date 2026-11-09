@@ -57,11 +57,15 @@ section { padding-block:clamp(48px, 8vw, 88px); }
 .intro { max-width:62ch; color:var(--apoio); margin-top:14px; }
 .grupo { margin-top:36px; }
 .grupo h3 { margin-bottom:14px; color:var(--dest); }
-.pecas { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:14px; }
-.peca { display:flex; flex-direction:column; gap:8px; }
-.peca div { background:var(--sup); border:1px solid var(--linha); height:150px; display:flex; align-items:center; justify-content:center; padding:10px; border-radius:4px; }
+.pecas { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:18px; }
+.peca { display:flex; flex-direction:column; gap:6px; }
+.peca div { background:var(--sup); border:1px solid var(--linha); height:230px; display:flex; align-items:center; justify-content:center; padding:10px; border-radius:4px; }
 .peca img { max-height:100%; max-width:100%; width:auto; height:auto; box-shadow:0 2px 6px rgba(0,0,0,.15); }
-.peca span { font-size:15px; line-height:1.3; }
+.peca span { font-size:15px; line-height:1.3; font-weight:700; }
+.peca small { font-size:13px; line-height:1.3; color:var(--apoio); }
+.sel { align-self:flex-start; margin-top:2px; font-size:11.5px; font-weight:700; line-height:1.2; padding:4px 10px; border-radius:7px; background:var(--botao); color:var(--btxt); font-style:normal; }
+.aviso { border:2px solid var(--dest); border-radius:8px; padding:16px 20px; background:var(--sup); max-width:62ch; }
+.aviso b { color:var(--dest); }
 .versoes { background:var(--sup); }
 .versoes .grade { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px; margin-top:28px; }
 .versoes figure { margin:0; display:flex; flex-direction:column; gap:10px; }
@@ -104,9 +108,9 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
   .fotos .grade { grid-template-columns:repeat(3, minmax(220px, 1fr)); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; }
   .fotos .grade img { scroll-snap-align:start; }
   .passos { grid-template-columns:1fr; }
-  .pecas { grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
-  .peca div { height:104px; padding:6px; }
-  .peca span { font-size:13px; }
+  .pecas { grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+  .peca div { height:190px; padding:6px; }
+  .peca span { font-size:14px; }
   .grupo { margin-top:28px; }
   .barra { display:flex; }
 }
