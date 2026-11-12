@@ -35,6 +35,10 @@ header { padding-block:18px; border-bottom:1px solid var(--linha); }
 header .miolo { display:flex; align-items:center; justify-content:space-between; gap:16px; }
 header img { height:46px; width:auto; }
 header a.mini { font-size:15px; font-weight:600; text-decoration:none; }
+.menu { border-bottom:1px solid var(--linha); }
+.menu .miolo { display:flex; gap:4px 22px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
+.menu a { color:var(--tinta); text-decoration:none; font-weight:600; font-size:15px; min-height:44px; display:inline-flex; align-items:center; }
+.menu a:hover { color:var(--dest); }
 .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:12px 26px;
   background:var(--botao); color:var(--btxt); font-family:var(--fx); font-size:17px; font-weight:700; text-decoration:none;
   border-radius:6px; transition:transform .15s ease; }
@@ -116,8 +120,6 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
 }
 @media (prefers-reduced-motion: reduce) { .botao { transition:none; } }
 
-.topo nav { display:flex; gap:6px 22px; flex-wrap:wrap; align-items:center; }
-.topo nav a { color:var(--tinta); text-decoration:none; font-weight:600; font-size:15px; min-height:44px; display:inline-flex; align-items:center; }
 .hero { padding-block:clamp(36px, 7vw, 80px); }
 .hero .grade { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:center; }
 .hero h1 { font-style:normal; font-size:clamp(38px, 6.4vw, 68px); letter-spacing:-0.02em; }
@@ -170,7 +172,6 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
   .fotos4 { grid-template-columns:repeat(2, minmax(0,1fr)); }
   .hero .grade, .conteudo, .embreve .grade, .combo { grid-template-columns:1fr; }
   .porque ul { grid-template-columns:1fr; gap:18px; }
-  .topo nav { display:none; }
   .vitrine { gap:14px; }
   .card .info { padding:12px 12px 14px; }
   .card h3 { font-size:15px; }
@@ -185,8 +186,9 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
 
 <header class="borda topo"><div class="miolo">
   <a href="./"><img src="img/loja/logo.png" alt="Bem Planejado Educacional" width="147" height="46"></a>
-  <nav aria-label="Seções"><a href="#encerramento">Missão Cumprida</a><a href="#formatura">Formatura</a><a href="#sobre">Sobre</a></nav>
+  <a class="mini" href="planners/">Planners 2027</a>
 </div></header>
+<nav class="menu borda" aria-label="Menu"><div class="miolo"><a href="">Início</a><a href="produtos/">Todos os produtos</a><a href="planners/">Planners 2027</a><a href="#encerramento">Missão Cumprida</a><a href="#formatura">Formatura</a></div></nav>
 
 <main>
 <section class="hero borda"><div class="miolo grade">

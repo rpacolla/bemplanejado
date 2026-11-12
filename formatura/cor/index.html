@@ -35,6 +35,10 @@ header { padding-block:18px; border-bottom:1px solid var(--linha); }
 header .miolo { display:flex; align-items:center; justify-content:space-between; gap:16px; }
 header img { height:46px; width:auto; }
 header a.mini { font-size:15px; font-weight:600; text-decoration:none; }
+.menu { border-bottom:1px solid var(--linha); }
+.menu .miolo { display:flex; gap:4px 22px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
+.menu a { color:var(--tinta); text-decoration:none; font-weight:600; font-size:15px; min-height:44px; display:inline-flex; align-items:center; }
+.menu a:hover { color:var(--dest); }
 .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:12px 26px;
   background:var(--botao); color:var(--btxt); font-family:var(--fx); font-size:17px; font-weight:700; text-decoration:none;
   border-radius:6px; transition:transform .15s ease; }
@@ -124,6 +128,7 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
   <img src="img/logo.png" alt="Bem Planejado Educacional" width="147" height="46">
   <a class="mini" href="https://pay.hotmart.com/J108354767B">Comprar · R$ 29,90</a>
 </div></header>
+<nav class="menu borda" aria-label="Menu"><div class="miolo"><a href="../../">Início</a><a href="../../produtos/">Todos os produtos</a><a href="../../planners/">Planners 2027</a><a href="../../#encerramento">Missão Cumprida</a><a href="../../#formatura">Formatura</a></div></nav>
 
 <main>
 <section class="abre borda"><div class="miolo grade">
