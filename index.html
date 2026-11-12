@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Bem Planejado Educacional · Kits e planners para professores</title>
-<meta name="description" content="Kits e planners prontos para professores. Edite no Google Apresentações, imprima e pronto.">
+<title>Bem Planejado Educacional · Planners, cadernos e kits para professoras</title>
+<meta name="description" content="Planners, cadernos e kits prontos para professoras. Arquivos digitais para imprimir: Planner Pedagógico 2027, kits de formatura e de encerramento.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Bem Planejado Educacional · Kits e planners para professores">
-<meta property="og:description" content="Kits e planners prontos para professores. Edite no Google Apresentações, imprima e pronto.">
-<meta property="og:image" content="https://bemplanejadoeducacional.com.br/formatura/4-estilos/img/capa.jpg">
+<meta property="og:title" content="Bem Planejado Educacional · Planners, cadernos e kits para professoras">
+<meta property="og:description" content="Planners, cadernos e kits prontos para professoras. Arquivos digitais para imprimir: Planner Pedagógico 2027, kits de formatura e de encerramento.">
+<meta property="og:image" content="https://bemplanejadoeducacional.com.br/img/zodiaco/banner.jpg">
 <meta property="og:url" content="https://bemplanejadoeducacional.com.br/">
+<link rel="canonical" href="https://bemplanejadoeducacional.com.br/">
 <meta name="theme-color" content="#F8F4EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,14 +32,6 @@ h2 { font-size:clamp(28px, 4.2vw, 44px); font-style:normal; }
 h3 { font-size:clamp(19px, 2.2vw, 22px); font-family:var(--fx); font-weight:700; }
 p { margin:0; }
 .rot { font-family:var(--fx); font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--dest); }
-header { padding-block:18px; border-bottom:1px solid var(--linha); }
-header .miolo { display:flex; align-items:center; justify-content:space-between; gap:16px; }
-header img { height:46px; width:auto; }
-header a.mini { font-size:15px; font-weight:600; text-decoration:none; }
-.menu { border-bottom:1px solid var(--linha); }
-.menu .miolo { display:flex; gap:4px 22px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
-.menu a { color:var(--tinta); text-decoration:none; font-weight:600; font-size:15px; min-height:44px; display:inline-flex; align-items:center; }
-.menu a:hover { color:var(--dest); }
 .botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:12px 26px;
   background:var(--botao); color:var(--btxt); font-family:var(--fx); font-size:17px; font-weight:700; text-decoration:none;
   border-radius:6px; transition:transform .15s ease; }
@@ -98,10 +91,6 @@ details p { padding:0 0 18px; color:var(--apoio); }
 .cruza img { border-radius:4px; }
 .outros { display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:12px; }
 .outros a { font-weight:600; min-height:44px; display:inline-flex; align-items:center; }
-footer { padding-block:36px 110px; border-top:1px solid var(--linha); font-size:15px; color:var(--apoio); }
-footer .miolo { display:flex; flex-wrap:wrap; gap:14px 28px; align-items:center; justify-content:space-between; }
-footer img { height:40px; width:auto; }
-footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:center; gap:8px; }
 .barra { position:fixed; left:0; right:0; bottom:0; display:none; align-items:center; justify-content:space-between; gap:12px;
   background:var(--sup); border-top:1px solid var(--linha); padding:10px max(16px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); z-index:5; }
 .barra b { font-family:var(--ft); font-size:24px; font-weight:800; }
@@ -120,38 +109,79 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
 }
 @media (prefers-reduced-motion: reduce) { .botao { transition:none; } }
 
-.hero { padding-block:clamp(36px, 7vw, 80px); }
-.hero .grade { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:center; }
-.hero h1 { font-style:normal; font-size:clamp(38px, 6.4vw, 68px); letter-spacing:-0.02em; }
-.hero h1 em { font-style:normal; color:var(--dest); }
-.hero .sub { font-size:1.15em; color:var(--apoio); margin:18px 0 26px; max-width:36ch; }
-.hero .grade { grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); }
-.hero .foto-hero { border-radius:14px; width:100%; aspect-ratio:1/1; object-fit:cover; box-shadow:0 18px 40px rgba(29,74,58,.16); }
-.hero .preco { margin:0 0 18px; }
-.hero .acoes { display:flex; gap:12px 18px; flex-wrap:wrap; align-items:center; }
-.hero .acoes .sec { color:var(--tinta); font-weight:700; min-height:44px; display:inline-flex; align-items:center; }
-.selo { display:inline-block; background:var(--dest); color:#FFF; font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:5px 10px; border-radius:6px; margin-bottom:14px; }
-.fotos4 { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:28px; }
-.fotos4 img { border-radius:10px; aspect-ratio:4/5; object-fit:cover; width:100%; }
-.conteudo { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,56px); align-items:start; }
-.conteudo ul { margin:0; padding-left:20px; color:var(--apoio); }
-.conteudo li { margin-bottom:6px; }
-.porque h2 { font-style:normal; margin-bottom:22px; }
-.porque { background:var(--sup); padding-block:40px; }
+.lj-topo, .lj-rodape { font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size:15px; line-height:1.5; background:#F8F4EC; color:#1D4A3A; }
+.grade > *, .tres > *, .oferta > *, .dest > *, .combo > *, .entradas > *, .signos > *, .prod > * { min-width:0; }
+.lj-topo { border-bottom:1px solid #E6D3C6; }
+.lj-topo .miolo { display:flex; align-items:center; justify-content:space-between; gap:0 28px; }
+.lj-topo .logo { display:inline-flex; align-items:center; min-height:56px; }
+.lj-topo .logo img { height:40px; width:auto; }
+.lj-nav { display:flex; gap:0 24px; }
+.lj-nav a { color:#1D4A3A; text-decoration:none; font-weight:600; font-size:15px; min-height:56px; display:inline-flex; align-items:center; border-bottom:3px solid transparent; border-top:3px solid transparent; }
+.lj-nav a:hover { color:#A5523C; }
+.lj-nav a[aria-current] { border-bottom-color:#A5523C; color:#A5523C; }
+.lj-topo a:focus-visible, .lj-rodape a:focus-visible { outline:3px solid #A5523C; outline-offset:2px; }
+.trilha { font-size:14px; padding-block:6px 0; color:var(--apoio); font-family:var(--fx); }
+.trilha .miolo { display:flex; flex-wrap:wrap; gap:0 8px; align-items:center; }
+.trilha a { color:var(--apoio); min-height:44px; display:inline-flex; align-items:center; }
+.trilha span[aria-current] { color:var(--tinta); font-weight:600; }
+.lj-rodape { border-top:1px solid #E6D3C6; padding-block:36px 110px; color:#45594F; }
+.lj-rodape .miolo { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.2fr); gap:24px 40px; align-items:start; }
+.lj-rodape img { height:40px; width:auto; margin-bottom:10px; }
+.lj-rodape b { display:block; color:#1D4A3A; margin-bottom:4px; }
+.lj-rodape a { color:#1D4A3A; font-weight:600; min-height:44px; display:flex; align-items:center; gap:8px; text-decoration:none; }
+.lj-rodape a:hover { color:#A5523C; }
+.lj-rodape .cols { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
+@media (max-width:760px) {
+  .lj-topo .miolo { flex-direction:column; align-items:stretch; }
+  .lj-topo .logo { min-height:52px; }
+  .lj-nav { justify-content:space-between; gap:0; }
+  .lj-nav a { font-size:14.5px; min-height:48px; }
+  .lj-rodape .miolo { grid-template-columns:1fr; }
+}
+
+h1, h2 { font-style:normal; letter-spacing:-0.015em; }
+.lanc { background:#0B1325; color:#F4EFE6; padding-block:clamp(32px, 6vw, 72px); }
+.lanc .grade { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(24px,4vw,56px); align-items:center; }
+.lanc .rot { color:#D4AF37; }
+.lanc h1 { font-size:clamp(36px, 5.6vw, 62px); margin:12px 0 0; }
+.lanc h1 em { font-style:normal; color:#D4AF37; }
+.lanc .sub { color:#C5CBDA; font-size:1.12em; margin:18px 0 24px; max-width:38ch; }
+.lanc .botao { background:#D4AF37; color:#0B1325; }
+.lanc .acoes { display:flex; gap:10px 22px; flex-wrap:wrap; align-items:center; }
+.lanc .sec { color:#F4EFE6; font-weight:700; min-height:44px; display:inline-flex; align-items:center; }
+.lanc img { border-radius:10px; width:100%; box-shadow:0 20px 50px rgba(0,0,0,.5); }
+.lanc .de { margin-top:18px; color:#C5CBDA; font-size:15px; }
+.entradas { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:22px; margin-top:26px; }
+.ent { background:var(--sup); border:1px solid var(--linha); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; color:var(--tinta); transition:transform .15s ease, box-shadow .15s ease; }
+.ent:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(29,74,58,.12); }
+.ent img { width:100%; aspect-ratio:4/3; object-fit:cover; }
+.ent .info { padding:20px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.ent h3 { font-size:22px; font-weight:800; }
+.ent p { color:var(--apoio); flex:1; }
+.ent .pe { display:flex; justify-content:space-between; align-items:center; gap:10px; min-height:44px; font-weight:800; font-size:18px; }
+.ent .pe span { color:var(--dest); font-size:15px; font-weight:700; }
+.dest { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); background:var(--sup); border:1px solid var(--linha); border-radius:14px; overflow:hidden; text-decoration:none; color:var(--tinta); margin-top:26px; }
+.dest img { width:100%; height:100%; object-fit:cover; aspect-ratio:4/3; }
+.dest .info { padding:clamp(22px,4vw,44px); display:flex; flex-direction:column; justify-content:center; gap:12px; }
+.dest h3 { font-size:clamp(24px,3vw,34px); font-weight:800; line-height:1.15; font-family:var(--fx); }
+.dest p { color:var(--apoio); }
+.dest b.v { font-size:30px; font-weight:800; }
+.dest .botao { align-self:flex-start; }
+.sub2 { margin-top:clamp(40px, 6vw, 64px); }
+.porque { background:var(--sup); padding-block:44px; }
+.porque h2 { margin-bottom:22px; }
 .porque ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px; }
 .porque b { display:block; font-size:18px; margin-bottom:6px; }
 .porque p { color:var(--apoio); }
-.secao h2 { font-style:normal; letter-spacing:-0.01em; }
-.secao .intro { margin-bottom:28px; }
-.vitrine { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:22px; }
+.vitrine { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:22px; margin-top:26px; }
 .card { background:var(--sup); border:1px solid var(--linha); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; color:var(--tinta); transition:transform .15s ease, box-shadow .15s ease; }
 .card:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(29,74,58,.12); }
-.card:focus-visible { outline:3px solid var(--dest); outline-offset:3px; }
+.card:focus-visible, .ent:focus-visible, .dest:focus-visible, .combo:focus-visible { outline:3px solid var(--dest); outline-offset:3px; }
 .card img { width:100%; aspect-ratio:1/1; object-fit:cover; }
 .card .info { padding:16px 16px 18px; display:flex; flex-direction:column; gap:6px; flex:1; }
 .card h3 { font-family:var(--fx); font-size:17px; font-weight:700; }
 .card p { color:var(--apoio); font-size:14.5px; line-height:1.45; flex:1; }
-.card .rodape-card { display:flex; justify-content:space-between; align-items:center; margin-top:8px; gap:10px; }
+.card .rodape-card { display:flex; justify-content:space-between; align-items:center; margin-top:8px; gap:10px; min-height:32px; }
 .card .preco-card { font-weight:800; font-size:18px; }
 .card .ver { font-weight:700; font-size:14px; color:var(--dest); }
 .combo { margin-top:22px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); background:var(--tinta); color:var(--btxt); border-radius:14px; overflow:hidden; text-decoration:none; }
@@ -161,16 +191,30 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
 .combo h3 { font-family:var(--fx); font-size:clamp(24px,3vw,34px); font-weight:800; line-height:1.15; }
 .combo p { opacity:.92; }
 .combo .linha-preco { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-top:6px; }
-.combo s { opacity:.7; }
+.combo s { opacity:.75; }
 .combo b { font-size:34px; font-weight:800; }
 .combo .botao { align-self:flex-start; background:var(--btxt); color:var(--tinta); margin-top:6px; }
-.embreve { background:var(--sup); }
-.embreve .grade { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,56px); }
-.embreve p { color:var(--apoio); }
+.sobre { max-width:64ch; }
+.sobre p { color:var(--apoio); margin-top:14px; }
+.atalhos { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+.atalhos a { border:1px solid var(--linha); background:var(--sup); border-radius:22px; padding:0 18px; min-height:44px; display:inline-flex; align-items:center; text-decoration:none; color:var(--tinta); font-weight:600; font-size:15px; }
+.mc-abre .grade { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(24px,4vw,56px); align-items:center; }
+.mc-abre .txt { display:flex; flex-direction:column; gap:18px; }
+.mc-abre h1 em { font-style:normal; color:var(--dest); }
+.mc-abre .sub { color:var(--apoio); font-size:1.12em; max-width:38ch; }
+.mc-abre img { border-radius:14px; width:100%; aspect-ratio:1/1; object-fit:cover; box-shadow:0 18px 40px rgba(29,74,58,.16); }
+.mc-pecas { list-style:none; padding:0; margin:28px 0 0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:26px 22px; }
+.mc-pecas img { border-radius:10px; width:100%; aspect-ratio:4/3; object-fit:cover; }
+.mc-pecas h3 { margin-top:10px; }
+.mc-pecas p { color:var(--apoio); font-size:15px; }
+.mc-lista { margin:18px 0 0; padding-left:20px; color:var(--apoio); columns:2; column-gap:40px; }
+.mc-lista li { margin-bottom:6px; break-inside:avoid; }
+.mc-fotos { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+.mc-fotos img { border-radius:12px; width:100%; aspect-ratio:4/3; object-fit:cover; }
 @media (max-width:900px) { .vitrine { grid-template-columns:repeat(2, minmax(0,1fr)); } }
 @media (max-width:760px) {
-  .fotos4 { grid-template-columns:repeat(2, minmax(0,1fr)); }
-  .hero .grade, .conteudo, .embreve .grade, .combo { grid-template-columns:1fr; }
+  .lanc .grade, .dest, .combo, .mc-abre .grade, .entradas { grid-template-columns:1fr; }
+  .lanc img, .mc-abre img { order:-1; }
   .porque ul { grid-template-columns:1fr; gap:18px; }
   .vitrine { gap:14px; }
   .card .info { padding:12px 12px 14px; }
@@ -178,70 +222,77 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
   .card p { display:none; }
   .card .rodape-card { flex-direction:column; align-items:flex-start; gap:2px; }
   .combo img { max-height:260px; }
+  .mc-pecas { grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px 12px; }
+  .mc-lista { columns:1; }
+  .mc-fotos { grid-template-columns:1fr; }
+  .dest .botao { align-self:stretch; }
 }
 </style>
 <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
-<header class="borda topo"><div class="miolo">
-  <a href="./"><img src="img/loja/logo.png" alt="Bem Planejado Educacional" width="147" height="46"></a>
-  <a class="mini" href="planners/">Planners 2027</a>
+<header class="lj-topo borda"><div class="miolo">
+  <a class="logo" href="./" aria-label="Bem Planejado Educacional, página inicial"><img src="img/loja/logo.png" alt="Bem Planejado Educacional" width="128" height="40"></a>
+  <nav class="lj-nav" aria-label="Menu"><a href="planners/">Planners</a><a href="cadernos/">Cadernos</a><a href="kits/">Kits</a><a href="kits/formatura/">Formatura</a><a href="produtos/">Todos</a></nav>
 </div></header>
-<nav class="menu borda" aria-label="Menu"><div class="miolo"><a href="">Início</a><a href="produtos/">Todos os produtos</a><a href="planners/">Planners 2027</a><a href="#encerramento">Missão Cumprida</a><a href="#formatura">Formatura</a></div></nav>
 
 <main>
-<section class="hero borda"><div class="miolo grade">
+<section class="lanc borda"><div class="miolo grade">
   <div>
-    <span class="selo">Destaque</span>
-    <p class="rot">Encerramento de ano · 1º ao 5º ano</p>
-    <h1>Kit Missão <em>Cumprida</em></h1>
-    <p class="sub">A turma vira uma tripulação de astronautas que passou o ano explorando. Certificado, insígnia, convite, cartinha, lembrancinha e festa contam a mesma história.</p>
-    <div class="preco"><b>R$ 29,90</b><span>ou 3x no cartão</span></div>
-    <div class="acoes"><a class="botao" href="https://go.hotmart.com/R108309211O">Quero o Kit Missão Cumprida</a><a class="sec" href="#encerramento">Ver o que vem no kit ›</a></div>
+    <p class="rot">Lançamento · Planner Pedagógico 2027</p>
+    <h1>A professora de <em>cada signo</em></h1>
+    <p class="sub">Doze edições do planner, uma para cada signo. 110 páginas em A4 com calendários, semanário de 48 semanas, presença, notas e projetos, prontas para imprimir.</p>
+    <div class="acoes"><a class="botao" href="planners/">Ver os 12 planners</a><a class="sec" href="kits/signo/">Kit com caderno e brindes ›</a></div>
+    <p class="de">Planner R$ 19,90 · Caderno R$ 19,90 · Kit R$ 29,90</p>
   </div>
-  <img class="foto-hero" src="img/loja/hero-missao.jpg" alt="Todas as peças do Kit Missão Cumprida sobre a mesa" fetchpriority="high">
+  <img src="img/zodiaco/colecao.jpg" alt="Três planners da coleção, de Peixes, Leão e Áries" fetchpriority="high" width="1500" height="1000">
 </div></section>
 
-<section class="secao borda" id="encerramento"><div class="miolo">
-  <div class="fotos4"><img src="img/loja/02-insignia-em-uso.jpg" alt="Insígnia Missão Cumprida pendurada no pescoço de um aluno" loading="lazy"><img src="img/loja/03-convite-formatura.jpg" alt="Convite impresso da formatura do 5º ano" loading="lazy"><img src="img/loja/10-faixa-missao-cumprida.jpg" alt="Professora pendurando a faixa Missão Cumprida na sala" loading="lazy"><img src="img/loja/04-cartinha-turma.jpg" alt="Aluno lendo a cartinha da professora para a turma" loading="lazy"></div>
-  <div class="conteudo">
-    <div>
-      <p class="rot">O que vem no kit</p>
-      <h2 style="margin:8px 0 14px">Do primeiro convite ao último abraço</h2>
-      <p>Tudo editável no Google Apresentações: troque os nomes da turma e da escola, imprima em casa ou na gráfica e mande o digital pelo WhatsApp.</p>
-    </div>
-    <div>
-      <ul><li>Certificados e insígnias para cada aluno</li><li>Convite impresso, para o feed, stories e WhatsApp</li><li>Cartinha para a turma e carta para as famílias</li><li>Tags de lembrancinha, toppers, rótulos e kit festa</li><li>Atividades de fim de ano e documentos da cerimônia</li><li>Versão inclusiva, com pictogramas e letra grande</li></ul>
-      <p style="margin-top:18px"><a class="botao" href="https://go.hotmart.com/R108309211O">Quero o kit por R$ 29,90</a></p>
-    </div>
+<section class="borda"><div class="miolo">
+  <p class="rot">Coleção 2027</p>
+  <h2>Comece pelo que você precisa</h2>
+  <div class="entradas">
+    <a class="ent" href="planners/"><img src="img/zodiaco/aries/planner-card.jpg" alt="Planner Pedagógico 2027 de Áries sobre a mesa" loading="lazy" width="900" height="675">
+      <div class="info"><h3>Planners</h3><p>O ano letivo organizado: calendários, semanário, projetos, presença, notas e atas.</p><div class="pe">R$ 19,90<span>Ver os 12 signos ›</span></div></div></a>
+    <a class="ent" href="cadernos/"><img src="img/zodiaco/leao/caderno-card.jpg" alt="Capa e página pautada do Caderno A4 de Leão" loading="lazy" width="900" height="675">
+      <div class="info"><h3>Cadernos</h3><p>96 folhas pautadas com a moldura do signo, para reuniões, formações e anotações.</p><div class="pe">R$ 19,90<span>Ver os 12 signos ›</span></div></div></a>
+    <a class="ent" href="kits/signo/"><img src="img/zodiaco/peixes/kit-card.jpg" alt="Planner e caderno de Peixes saindo de uma bolsa" loading="lazy" width="900" height="675">
+      <div class="info"><h3>Kits do signo</h3><p>Planner e caderno juntos, com 12 adesivos e 3 marca-páginas. R$ 9,90 a menos que separados.</p><div class="pe">R$ 29,90<span>Ver os 12 signos ›</span></div></div></a>
   </div>
 </div></section>
 
-<section class="porque borda"><div class="miolo"><h2>Menos correria, mais sala de aula.</h2><ul>
-  <li><b>O evento inteiro, combinando</b><p>Do convite à lembrancinha, passando por certificados, cartas e placas: tudo desenhado junto, no mesmo estilo.</p></li>
-  <li><b>Sem Canva, sem programa pago</b><p>Os arquivos abrem no Google Apresentações, que é gratuito. Você faz uma cópia e troca os nomes.</p></li>
-  <li><b>Pronto para imprimir</b><p>Versão clara para a impressora de casa e escura para a gráfica e o celular. Acesso na hora, 7 dias de garantia.</p></li>
-</ul></div></section>
-
-<section class="secao borda" id="formatura"><div class="miolo">
-  <p class="rot">Formatura · do 5º ano ao Ensino Médio</p>
-  <h2>Escolha o estilo da formatura</h2>
-  <p class="intro">Quatro kits com o mesmo conteúdo e visuais diferentes: certificados, convites, divulgação, documentos da cerimônia, placas e festa.</p>
-  <div class="vitrine"><a class="card" href="formatura/classica/">
-  <img src="formatura/classica/img/capa.jpg" alt="Kit Formatura Clássica" loading="lazy" width="1080" height="1080">
+<section class="borda" id="encerramento" style="padding-top:0"><div class="miolo">
+  <p class="rot">Para fechar o ano</p>
+  <h2>Kits de encerramento e formatura</h2>
+  <p class="intro">Tudo editável no Google Apresentações: você troca os nomes da turma e da escola e imprime.</p>
+  <a class="dest" href="kits/missao-cumprida/">
+    <img src="img/loja/hero-missao.jpg" alt="Todas as peças do Kit Missão Cumprida sobre a mesa" loading="lazy">
+    <div class="info">
+      <p class="rot">Encerramento de ano · 1º ao 5º ano</p>
+      <h3>Kit Missão Cumprida</h3>
+      <p>A turma vira uma tripulação de astronautas que passou o ano explorando. Certificado, insígnia, convite, cartinha, lembrancinha e festa contam a mesma história.</p>
+      <b class="v">R$ 29,90</b>
+      <span class="botao">Ver o kit por dentro</span>
+    </div>
+  </a>
+  <div class="sub2" id="formatura">
+    <p class="rot">Formatura · do 5º ano ao Ensino Médio</p>
+    <h2>Quatro estilos, o mesmo kit completo</h2>
+    <div class="vitrine"><a class="card" href="kits/formatura/classica/">
+  <img src="kits/formatura/classica/img/capa.jpg" alt="Kit Formatura Clássica" loading="lazy" width="1080" height="1080">
   <div class="info"><h3>Kit Formatura Clássica</h3><p>Azul-marinho e dourado, moldura fina de diploma e capelo em gravura, para uma cerimônia solene.</p>
-  <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a><a class="card" href="formatura/editorial/">
-  <img src="formatura/editorial/img/capa.jpg" alt="Kit Formatura Editorial" loading="lazy" width="1080" height="1080">
+  <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a><a class="card" href="kits/formatura/editorial/">
+  <img src="kits/formatura/editorial/img/capa.jpg" alt="Kit Formatura Editorial" loading="lazy" width="1080" height="1080">
   <div class="info"><h3>Kit Formatura Editorial</h3><p>Layout limpo, letras elegantes e o ano em dourado bem grande, com cara de revista.</p>
-  <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a><a class="card" href="formatura/cor/">
-  <img src="formatura/cor/img/capa.jpg" alt="Kit Formatura Cor" loading="lazy" width="1080" height="1080">
+  <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a><a class="card" href="kits/formatura/cor/">
+  <img src="kits/formatura/cor/img/capa.jpg" alt="Kit Formatura Cor" loading="lazy" width="1080" height="1080">
   <div class="info"><h3>Kit Formatura Cor</h3><p>Blocos de cor, formas grandes e textos alegres, para uma formatura que é festa.</p>
-  <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a><a class="card" href="formatura/radiante/">
-  <img src="formatura/radiante/img/capa.jpg" alt="Kit Formatura Radiante" loading="lazy" width="1080" height="1080">
+  <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a><a class="card" href="kits/formatura/radiante/">
+  <img src="kits/formatura/radiante/img/capa.jpg" alt="Kit Formatura Radiante" loading="lazy" width="1080" height="1080">
   <div class="info"><h3>Kit Formatura Radiante</h3><p>Verde, raios de luz e letras calorosas, sofisticado sem ser sério demais.</p>
   <div class="rodape-card"><span class="preco-card">R$ 29,90</span><span class="ver">Ver o kit ›</span></div></div></a></div>
-  <a class="combo" href="formatura/4-estilos/">
+    <a class="combo" href="kits/formatura/4-estilos/">
     <img src="img/loja/combo.jpg" alt="Os certificados dos quatro estilos" loading="lazy" width="1200" height="760">
     <div class="info">
       <p class="rot">Os 4 estilos juntos</p>
@@ -251,26 +302,29 @@ footer a { font-weight:600; min-height:44px; display:inline-flex; align-items:ce
       <span class="botao">Ver os 4 estilos</span>
     </div>
   </a>
+  </div>
 </div></section>
 
-<section class="embreve borda" id="sobre"><div class="miolo grade">
-  <div>
-    <p class="rot">Sobre</p>
-    <h2 style="margin:8px 0 14px">Feito por quem está na sala de aula</h2>
-    <p>A Bem Planejado nasceu da rotina de uma escola pública, de quem sabe quanto o fim de ano pesa. Cada kit é desenhado peça por peça, com cuidado de design e com o que a professora precisa de verdade: editar rápido, imprimir sem gastar muito e ter um evento bonito.</p>
-  </div>
-  <div>
-    <p class="rot">O que vem aí</p>
-    <h2 style="margin:8px 0 14px">Planners e kits de datas</h2>
-    <p>Estamos preparando planners e kits para as datas do calendário escolar. Os lançamentos saem primeiro no Instagram <a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener">@bemplanejadoeducacional</a>.</p>
-  </div>
+<section class="porque borda"><div class="miolo"><h2>Menos correria, mais sala de aula.</h2><ul>
+  <li><b>Pronto para imprimir</b><p>Arquivos em A4, pensados para a impressora de casa, a papelaria ou a gráfica.</p></li>
+  <li><b>Acesso na hora</b><p>A compra é pela Hotmart. O e-mail com o acesso chega logo depois do pagamento.</p></li>
+  <li><b>7 dias de garantia</b><p>Se não for o que você esperava, a Hotmart devolve o seu dinheiro.</p></li>
+</ul></div></section>
+
+<section class="borda" id="sobre"><div class="miolo sobre">
+  <p class="rot">Sobre</p>
+  <h2>Feito por quem está na sala de aula</h2>
+  <p>A Bem Planejado nasceu da rotina de uma escola pública, de quem sabe quanto o ano pesa. Cada material é desenhado peça por peça, com cuidado de design e com o que a professora precisa de verdade: imprimir sem gastar muito e ter um material bonito para usar.</p>
+  <p>Os lançamentos saem primeiro no Instagram <a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener">@bemplanejadoeducacional</a>.</p>
 </div></section>
 </main>
-
-<footer class="borda"><div class="miolo">
-  <img src="img/loja/logo.png" alt="Bem Planejado Educacional" width="128" height="40">
-  <a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>@bemplanejadoeducacional</a>
-  <span>Dúvidas: bemplanejadoeducacional@gmail.com</span>
+<footer class="lj-rodape borda"><div class="miolo">
+  <div><img src="img/loja/logo.png" alt="Bem Planejado Educacional" width="128" height="40">
+    <p>Planners, cadernos e kits prontos para professoras. Arquivos digitais para imprimir.</p></div>
+  <div><b>Loja</b><div class="cols"><a href="planners/">Planners</a><a href="cadernos/">Cadernos</a><a href="kits/">Kits</a><a href="kits/formatura/">Formatura</a><a href="produtos/">Todos</a><a href="kits/missao-cumprida/">Missão Cumprida</a></div></div>
+  <div><b>Fale com a gente</b><a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>@bemplanejadoeducacional</a>
+    <a href="mailto:bemplanejadoeducacional@gmail.com">bemplanejadoeducacional@gmail.com</a><p>Compra segura pela Hotmart · 7 dias de garantia</p></div>
 </div></footer>
+
 </body>
 </html>
