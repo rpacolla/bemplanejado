@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /entrar/
+Disallow: /criar-conta/
+Disallow: /conta/
+
+Sitemap: https://bemplanejadoeducacional.com.br/sitemap.xml
