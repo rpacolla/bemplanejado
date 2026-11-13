@@ -15,7 +15,7 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="/img/marca/favicon-32.png"><link rel="apple-touch-icon" href="/img/marca/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600;700;900&display=swap">
 <style>
 :root { --bg:#F7F2EC; --sup:#FFFFFF; --tinta:#1D4A3A; --apoio:#45594F; --dest:#A5523C;
   --botao:#1D4A3A; --btxt:#F7F2EC; --linha:#E3C3B4;
@@ -112,41 +112,44 @@ details p { padding:0 0 18px; color:var(--apoio); }
 
 .grade > *, .par > *, .duas > *, .dq > *, .man > *, .pal > *, .est > *, .grade4 > *, .comp > * { min-width:0; }
 .lj-topo, .lj-rodape { font-family:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-.lj-topo { position:sticky; top:0; z-index:20; background:rgba(251,247,241,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid rgba(42,36,32,.14); color:#2A2420; }
-.lj-topo .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; align-items:center; justify-content:space-between; gap:0 28px; }
-.lj-topo .logo { display:inline-flex; align-items:center; min-height:56px; }
-.lj-topo .logo img { height:40px; width:auto; }
-.lj-nav { display:flex; gap:0 clamp(14px,2.2vw,30px); }
-.lj-nav a { color:#2A2420; text-decoration:none; font-weight:600; font-size:13px; letter-spacing:.1em; text-transform:uppercase; min-height:56px; display:inline-flex; align-items:center; position:relative; }
-.lj-nav a::after { content:''; position:absolute; left:0; right:0; bottom:14px; height:1.5px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
-.lj-nav a:hover::after, .lj-nav a[aria-current]::after { transform:scaleX(1); }
+.lj-topo { position:sticky; top:0; z-index:20; background:#FBF7F1; border-bottom:2px solid #2A2420; color:#2A2420; }
+.lj-topo .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; align-items:stretch; justify-content:space-between; gap:0 32px; }
+.lj-topo .logo { display:flex; align-items:center; padding-block:18px; transition:padding .2s ease; }
+.lj-topo .logo img { height:60px; width:auto; display:block; transition:height .2s ease; }
+.lj-topo.rolou .logo { padding-block:12px; }
+.lj-topo.rolou .logo img { height:44px; }
+.lj-nav { display:flex; gap:0 clamp(18px,2.6vw,38px); }
+.lj-nav a { color:#2A2420; text-decoration:none; font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; min-height:44px; display:flex; align-items:center; position:relative; white-space:nowrap; }
+.lj-nav a::after { content:''; position:absolute; left:0; right:0; bottom:0; height:4px; background:#F15A24; transform:scaleY(0); transform-origin:bottom; transition:transform .15s ease; }
+.lj-nav a:hover::after, .lj-nav a[aria-current]::after { transform:scaleY(1); }
 .lj-topo a:focus-visible, .lj-rodape a:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
 .trilha { font:600 14px/1.2 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; padding-block:4px 0; }
-.trilha .lj-w, .trilha .miolo { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; flex-wrap:wrap; gap:0 8px; align-items:center; opacity:.8; }
+.trilha .lj-w, .trilha .miolo { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; flex-wrap:wrap; gap:0 8px; align-items:center; }
 .trilha a { color:inherit; min-height:44px; display:inline-flex; align-items:center; }
 .trilha span[aria-current] { font-weight:700; }
-.lj-rodape { background:#17324A; color:#FBF7F1; padding-block:clamp(48px,7vw,96px) 120px; font-size:15px; line-height:1.5; }
-.lj-rodape .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); }
-.lj-rodape .marca { font:400 clamp(56px,13vw,200px)/.9 'Instrument Serif', Georgia, serif; letter-spacing:-.03em; margin:0 0 clamp(28px,5vw,56px); }
-.lj-rodape .marca em { font-style:italic; }
-.lj-rodape .lg { width:clamp(200px,24vw,300px); height:auto; margin:-40px 0 -20px -52px; display:block; }
-.lj-rodape .cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px 40px; border-top:1px solid rgba(251,247,241,.25); padding-top:28px; }
-.lj-rodape b { display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase; opacity:.7; margin-bottom:6px; font-weight:600; }
-.lj-rodape a { color:#FBF7F1; min-height:44px; display:flex; align-items:center; gap:8px; text-decoration:none; font-weight:500; }
-.lj-rodape a:hover { text-decoration:underline; text-underline-offset:4px; }
-.lj-rodape p { margin:0; opacity:.75; }
-.lj-rodape .marca { font-family:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; font-weight:900; font-size:clamp(34px, 6.4vw, 96px); line-height:.98; letter-spacing:-.035em; }
-.lj-rodape .marca em { font-family:'Instrument Serif', Georgia, serif; font-style:italic; font-weight:400; font-size:1.1em; letter-spacing:-.02em; line-height:.8; }
-@media (max-width:760px) { .lj-nav a { font-size:12px; letter-spacing:.05em; } }
-@media (max-width:350px) { .lj-nav a { font-size:11px; letter-spacing:.01em; } }
+.lj-rodape { background:#17324A; color:#FBF7F1; font-size:16px; line-height:1.5; }
+.lj-rodape::before { content:''; display:block; height:96px; background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22264%22 height=%22240%22 viewBox=%220 0 264 240%22%3E%3Crect width=%22264%22 height=%22240%22 fill=%22%2317324A%22/%3E%3Crect x=%2212%22 y=%224%22 width=%2240%22 height=%2240%22 fill=%22%23F15A24%22/%3E%3Crect x=%2261%22 y=%225%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22109%22 y=%225%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22157%22 y=%225%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22205%22 y=%225%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2213%22 y=%2253%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2261%22 y=%2253%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22108%22 y=%2252%22 width=%2240%22 height=%2240%22 fill=%22%23FBF7F1%22/%3E%3Crect x=%22157%22 y=%2253%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22205%22 y=%2253%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2213%22 y=%22101%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2261%22 y=%22101%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22109%22 y=%22101%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22157%22 y=%22101%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22204%22 y=%22100%22 width=%2240%22 height=%2240%22 fill=%22%23F15A24%22/%3E%3Crect x=%2213%22 y=%22149%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2260%22 y=%22148%22 width=%2240%22 height=%2240%22 fill=%22%23F15A24%22/%3E%3Crect x=%22109%22 y=%22149%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22157%22 y=%22149%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22205%22 y=%22149%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2213%22 y=%22197%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%2261%22 y=%22197%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22109%22 y=%22197%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3Crect x=%22156%22 y=%22196%22 width=%2240%22 height=%2240%22 fill=%22%23FBF7F1%22/%3E%3Crect x=%22205%22 y=%22197%22 width=%2238%22 height=%2238%22 fill=%22none%22 stroke=%22%233F566B%22 stroke-width=%222%22/%3E%3C/svg%3E") 0 0 / 264px 240px; }
+.lj-rodape .lj-w { max-width:1320px; margin:0 auto; padding:clamp(40px,6vw,72px) clamp(20px,4vw,56px) 120px; }
+.lj-rodape .lg { height:56px; width:auto; display:block; }
+.lj-rodape .marca { font-weight:900; font-size:clamp(28px, 4.2vw, 56px); line-height:1.02; letter-spacing:-.01em; text-transform:uppercase; margin:clamp(24px,3vw,40px) 0 clamp(32px,5vw,56px); color:#FFFFFF; }
+.lj-rodape .marca em { font-style:normal; color:#F15A24; display:block; }
+.lj-rodape .cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px 40px; border-top:2px solid #FBF7F1; padding-top:28px; }
+.lj-rodape b { display:block; font-size:14px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px; font-weight:700; }
+.lj-rodape a { color:#FBF7F1; min-height:44px; display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:600; }
+.lj-rodape a:hover { text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:4px; }
+.lj-rodape p { margin:0; color:#D9DEE3; }
+.lj-rodape svg { display:block; flex:none; }
 @media (max-width:760px) {
+  .lj-topo { position:relative; }
   .lj-topo .lj-w { flex-direction:column; align-items:stretch; }
-  .lj-topo .logo { min-height:46px; }
-  .lj-topo .logo img { height:36px; }
-  .lj-nav { justify-content:space-between; gap:0; }
-  .lj-nav a { font-size:12px; letter-spacing:.06em; min-height:44px; }
-  .lj-nav a::after { bottom:8px; }
-  .lj-rodape .cols { grid-template-columns:1fr; }
+  .lj-topo .logo { padding-block:14px 6px; }
+  .lj-topo .logo img { height:48px; }
+  .lj-nav { justify-content:space-between; gap:0 14px; overflow-x:auto; scrollbar-width:none; }
+  .lj-nav a { font-size:13px; letter-spacing:.03em; }
+  .lj-rodape::before { height:48px; }
+  .lj-rodape .lg { height:48px; }
+  .lj-rodape .cols { grid-template-columns:minmax(0,1fr); }
+  .lj-rodape .cols a { overflow-wrap:anywhere; }
 }
 
 .kits { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:28px; margin-top:28px; }
@@ -163,7 +166,7 @@ details p { padding:0 0 18px; color:var(--apoio); }
 <body>
 
 <header class="lj-topo"><div class="lj-w">
-  <a class="logo" href="../../../" aria-label="Bem Planejado Educacional, página inicial"><img src="../../../img/loja/logo.svg" alt="Bem Planejado Educacional" width="40" height="40"></a>
+  <a class="logo" href="../../../" aria-label="Bem Planejado Educacional, página inicial"><img src="../../../img/marca/logo-horizontal.svg" alt="Bem Planejado Educacional" width="221" height="60"></a>
   <nav class="lj-nav" aria-label="Menu"><a href="../../../planners/">Planners</a><a href="../../../cadernos/">Cadernos</a><a href="../../../kits/">Kits</a><a href="../../../kits/formatura/" aria-current="page">Formatura</a><a href="../../../gratis/">Grátis</a></nav>
 </div></header>
 
@@ -214,11 +217,11 @@ details p { padding:0 0 18px; color:var(--apoio); }
 </div></section>
 </main>
 <footer class="lj-rodape"><div class="lj-w">
-  <img class="lg" src="../../../img/marca/logo-negativo.svg" alt="Bem Planejado Educacional" width="300" height="260" loading="lazy">
+  <img class="lg" src="../../../img/marca/logo-horizontal-negativo.svg" alt="Bem Planejado Educacional" width="206" height="56" loading="lazy">
   <p class="marca">Menos correria, <em>mais sala de aula.</em></p>
   <div class="cols">
     <div><b>Loja</b><a href="../../../planners/">Planners</a><a href="../../../cadernos/">Cadernos</a><a href="../../../kits/">Kits</a><a href="../../../kits/formatura/">Formatura</a><a href="../../../gratis/">Grátis</a><a href="../../../produtos/">Todos os produtos</a></div>
-    <div><b>Fale com a gente</b><a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>@bemplanejadoeducacional</a><a href="mailto:bemplanejadoeducacional@gmail.com">bemplanejadoeducacional@gmail.com</a></div>
+    <div><b>Fale com a gente</b><a href="mailto:bemplanejadoeducacional@gmail.com"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" d="M3 5H21V19H3ZM4.5 6.5L12 12.5L19.5 6.5"/><rect x="15.5" y="13" width="3" height="3" fill="#F15A24"/></svg>bemplanejadoeducacional@gmail.com</a><a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3H21V21H3Z M8 8H16V16H8Z"/><rect x="16" y="5" width="3" height="3" fill="#F15A24" stroke="none"/></svg>@bemplanejadoeducacional</a></div>
     <div><b>Compra</b><p>Arquivos digitais para imprimir. Pagamento seguro pela Hotmart, acesso na hora e 7 dias de garantia.</p></div>
   </div>
 </div></footer>
