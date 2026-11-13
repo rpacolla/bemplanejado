@@ -11,13 +11,13 @@
 <meta property="og:image" content="https://bemplanejadoeducacional.com.br/img/zodiaco/banner.jpg">
 <meta property="og:url" content="https://bemplanejadoeducacional.com.br/produtos/">
 <link rel="canonical" href="https://bemplanejadoeducacional.com.br/produtos/">
-<meta name="theme-color" content="#F2EDE4">
+<meta name="theme-color" content="#FBF7F1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <script>document.documentElement.className = 'js'</script>
 <style>
-:root { --papel:#F2EDE4; --tinta:#16130F; --cinza:#5E574D; --linha:rgba(22,19,15,.16); --ac:#1D4A3A; --ac-t:#F2EDE4;
+:root { --papel:#FBF7F1; --tinta:#2A2420; --cinza:#756B62; --linha:rgba(42,36,32,.16); --brasa:#B8400F; --noite:#17324A; --pessego:#FDE4D8; --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F;
   --serif:'Instrument Serif', Georgia, 'Times New Roman', serif; --sans:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 * { box-sizing:border-box; }
 html { -webkit-text-size-adjust:100%; }
@@ -40,7 +40,7 @@ sec, section { display:block; }
 .bt { display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:56px; padding:0 30px; border-radius:999px; background:var(--tinta); color:var(--papel);
   font:600 16px/1 var(--sans); text-decoration:none; transition:transform .25s ease, box-shadow .25s ease; white-space:nowrap; }
 .bt::after { content:'→'; font-size:18px; transition:transform .25s ease; }
-.bt:hover { transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(22,19,15,.6); }
+.bt:hover { transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(42,36,32,.6); }
 .bt:hover::after { transform:translateX(4px); }
 .bt.cl { background:var(--papel); color:var(--tinta); }
 .bt.ac { background:var(--ac); color:var(--ac-t); }
@@ -50,7 +50,7 @@ sec, section { display:block; }
 .valor { font:400 clamp(44px, 5vw, 68px)/1 var(--serif); letter-spacing:-.02em; }
 .nota { font-size:14px; opacity:.8; }
 .escuro { background:var(--tinta); color:var(--papel); }
-.escuro .cz { color:rgba(242,237,228,.7); }
+.escuro .cz { color:rgba(251,247,241,.7); }
 .cor { background:var(--ac); color:var(--ac-t); }
 .js .rv { opacity:0; transform:translateY(34px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d, 0s); }
 .js .rv.on { opacity:1; transform:none; }
@@ -79,22 +79,22 @@ sec, section { display:block; }
 /* manifesto */
 .man { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,4fr); gap:clamp(28px,6vw,100px); align-items:center; }
 .man blockquote { margin:0; font:400 clamp(38px, 6vw, 96px)/.98 var(--serif); letter-spacing:-.025em; }
-.man blockquote em { font-style:italic; color:var(--ac); }
+.man blockquote em { font-style:italic; color:var(--ac-x); }
 .man figure { margin:0; }
-.man figure img { box-shadow:0 30px 60px -30px rgba(22,19,15,.5); border-radius:3px; transform:rotate(2deg); }
+.man figure img { box-shadow:0 30px 60px -30px rgba(42,36,32,.5); border-radius:3px; transform:rotate(2deg); }
 .man figcaption { font-size:13px; margin-top:16px; color:var(--cinza); }
 
 /* foto de ponta a ponta */
 .foto-cheia { position:relative; }
 .foto-cheia img { width:100%; max-height:92vh; object-fit:cover; }
-.foto-cheia p { position:absolute; left:clamp(20px,4vw,56px); bottom:clamp(18px,3vw,40px); color:#F2EDE4; text-shadow:0 2px 14px rgba(0,0,0,.6); max-width:20ch; font:italic 400 clamp(28px,4vw,60px)/1 var(--serif); }
+.foto-cheia p { position:absolute; left:clamp(20px,4vw,56px); bottom:clamp(18px,3vw,40px); color:#FBF7F1; text-shadow:0 2px 14px rgba(0,0,0,.6); max-width:20ch; font:italic 400 clamp(28px,4vw,60px)/1 var(--serif); }
 
 /* por dentro: trilho horizontal */
 .cab-sec { display:flex; justify-content:space-between; align-items:flex-end; gap:20px 40px; flex-wrap:wrap; margin-bottom:clamp(28px,4vw,56px); }
 .cab-sec .lead { max-width:34ch; }
 .trilho { display:flex; gap:clamp(16px,2.4vw,36px); overflow-x:auto; scroll-snap-type:x mandatory; padding:10px clamp(20px,4vw,56px) 34px; scrollbar-width:thin; scrollbar-color:var(--tinta) transparent; -webkit-overflow-scrolling:touch; }
 .pg { flex:0 0 min(74vw, 400px); scroll-snap-align:start; display:flex; flex-direction:column; gap:14px; }
-.pg a { display:block; background:#FFFDF8; padding:clamp(8px,1vw,14px); border-radius:3px; box-shadow:0 30px 50px -30px rgba(22,19,15,.55), 0 2px 6px rgba(22,19,15,.08); transition:transform .4s cubic-bezier(.2,.7,.2,1); }
+.pg a { display:block; background:#FFFDF8; padding:clamp(8px,1vw,14px); border-radius:3px; box-shadow:0 30px 50px -30px rgba(42,36,32,.55), 0 2px 6px rgba(42,36,32,.08); transition:transform .4s cubic-bezier(.2,.7,.2,1); }
 .pg a:hover { transform:translateY(-10px) rotate(-1deg); }
 .pg .n { font:400 15px/1 var(--sans); letter-spacing:.14em; color:var(--cinza); display:flex; gap:12px; align-items:center; margin-top:8px; }
 .pg .n::after { content:''; flex:1; height:1px; background:var(--linha); }
@@ -160,7 +160,7 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .comp > div + div { padding-left:clamp(16px,2vw,32px); border-left:1px solid var(--linha); }
 .comp ul { margin:0; padding-left:18px; color:var(--cinza); flex:1; }
 .comp li { margin-bottom:6px; }
-.comp .aqui { font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--ac); min-height:44px; display:flex; align-items:center; }
+.comp .aqui { font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--ac-x); min-height:44px; display:flex; align-items:center; }
 
 /* passos */
 .passos { list-style:none; margin:clamp(28px,4vw,56px) 0 0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(24px,4vw,64px); counter-reset:p; }
@@ -176,7 +176,7 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .fichas { display:flex; flex-wrap:wrap; gap:8px; }
 .fichas a { border:1px solid var(--linha); border-radius:999px; padding:0 18px; min-height:44px; display:inline-flex; align-items:center; text-decoration:none; font-weight:500; font-size:15px; transition:background .25s, color .25s; }
 .fichas a:hover, .fichas a[aria-current] { background:var(--tinta); color:var(--papel); border-color:var(--tinta); }
-.escuro .fichas a { border-color:rgba(242,237,228,.3); }
+.escuro .fichas a { border-color:rgba(251,247,241,.3); }
 .escuro .fichas a:hover { background:var(--papel); color:var(--tinta); }
 
 /* destaques grandes (home, kits) */
@@ -188,7 +188,7 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .dq .tx { display:flex; flex-direction:column; gap:18px; align-items:flex-start; }
 .dq + .dq { margin-top:clamp(56px,8vw,120px); }
 .capas { display:flex; gap:clamp(14px,2vw,30px); width:max-content; animation:mq 60s linear infinite; padding-block:30px 60px; }
-.capas img { height:clamp(240px, 34vw, 480px); width:auto; border-radius:2px 6px 6px 2px; box-shadow:0 34px 50px -26px rgba(22,19,15,.6); }
+.capas img { height:clamp(240px, 34vw, 480px); width:auto; border-radius:2px 6px 6px 2px; box-shadow:0 34px 50px -26px rgba(42,36,32,.6); }
 .capas a:nth-child(odd) img { transform:rotate(-2deg) translateY(10px); }
 .capas a:nth-child(even) img { transform:rotate(2deg); }
 .vitr { overflow:hidden; }
@@ -244,12 +244,12 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 
 .grade > *, .par > *, .duas > *, .dq > *, .man > *, .pal > *, .est > *, .grade4 > *, .comp > * { min-width:0; }
 .lj-topo, .lj-rodape { font-family:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-.lj-topo { position:sticky; top:0; z-index:20; background:rgba(242,237,228,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid rgba(22,19,15,.14); color:#16130F; }
+.lj-topo { position:sticky; top:0; z-index:20; background:rgba(251,247,241,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid rgba(42,36,32,.14); color:#2A2420; }
 .lj-topo .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; align-items:center; justify-content:space-between; gap:0 28px; }
 .lj-topo .logo { display:inline-flex; align-items:center; min-height:56px; }
-.lj-topo .logo img { height:34px; width:auto; }
+.lj-topo .logo img { height:40px; width:auto; }
 .lj-nav { display:flex; gap:0 clamp(14px,2.2vw,30px); }
-.lj-nav a { color:#16130F; text-decoration:none; font-weight:600; font-size:13px; letter-spacing:.1em; text-transform:uppercase; min-height:56px; display:inline-flex; align-items:center; position:relative; }
+.lj-nav a { color:#2A2420; text-decoration:none; font-weight:600; font-size:13px; letter-spacing:.1em; text-transform:uppercase; min-height:56px; display:inline-flex; align-items:center; position:relative; }
 .lj-nav a::after { content:''; position:absolute; left:0; right:0; bottom:14px; height:1.5px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
 .lj-nav a:hover::after, .lj-nav a[aria-current]::after { transform:scaleX(1); }
 .lj-topo a:focus-visible, .lj-rodape a:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
@@ -257,19 +257,19 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .trilha .lj-w, .trilha .miolo { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; flex-wrap:wrap; gap:0 8px; align-items:center; opacity:.8; }
 .trilha a { color:inherit; min-height:44px; display:inline-flex; align-items:center; }
 .trilha span[aria-current] { font-weight:700; }
-.lj-rodape { background:#16130F; color:#F2EDE4; padding-block:clamp(48px,7vw,96px) 120px; font-size:15px; line-height:1.5; }
+.lj-rodape { background:#17324A; color:#FBF7F1; padding-block:clamp(48px,7vw,96px) 120px; font-size:15px; line-height:1.5; }
 .lj-rodape .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); }
 .lj-rodape .marca { font:400 clamp(56px,13vw,200px)/.9 'Instrument Serif', Georgia, serif; letter-spacing:-.03em; margin:0 0 clamp(28px,5vw,56px); }
 .lj-rodape .marca em { font-style:italic; }
-.lj-rodape .cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px 40px; border-top:1px solid rgba(242,237,228,.25); padding-top:28px; }
+.lj-rodape .cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px 40px; border-top:1px solid rgba(251,247,241,.25); padding-top:28px; }
 .lj-rodape b { display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase; opacity:.7; margin-bottom:6px; font-weight:600; }
-.lj-rodape a { color:#F2EDE4; min-height:44px; display:flex; align-items:center; gap:8px; text-decoration:none; font-weight:500; }
+.lj-rodape a { color:#FBF7F1; min-height:44px; display:flex; align-items:center; gap:8px; text-decoration:none; font-weight:500; }
 .lj-rodape a:hover { text-decoration:underline; text-underline-offset:4px; }
 .lj-rodape p { margin:0; opacity:.75; }
 @media (max-width:760px) {
   .lj-topo .lj-w { flex-direction:column; align-items:stretch; }
   .lj-topo .logo { min-height:46px; }
-  .lj-topo .logo img { height:28px; }
+  .lj-topo .logo img { height:36px; }
   .lj-nav { justify-content:space-between; gap:0; }
   .lj-nav a { font-size:12px; letter-spacing:.06em; min-height:44px; }
   .lj-nav a::after { bottom:8px; }
@@ -294,13 +294,13 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .est .li { display:flex; justify-content:space-between; gap:16px; align-items:baseline; }
 @media (max-width:860px) { .est { grid-template-columns:minmax(0,1fr); } }
 
-:root { --ac:#1D4A3A; --ac-t:#F2EDE4; }</style>
+:root { --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F; }</style>
 <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
 <header class="lj-topo"><div class="lj-w">
-  <a class="logo" href="../" aria-label="Bem Planejado Educacional, página inicial"><img src="../img/loja/logo.png" alt="Bem Planejado Educacional" width="109" height="34"></a>
+  <a class="logo" href="../" aria-label="Bem Planejado Educacional, página inicial"><img src="../img/loja/logo.svg" alt="Bem Planejado Educacional" width="40" height="40"></a>
   <nav class="lj-nav" aria-label="Menu"><a href="../planners/">Planners</a><a href="../cadernos/">Cadernos</a><a href="../kits/">Kits</a><a href="../kits/formatura/">Formatura</a><a href="../gratis/">Grátis</a></nav>
 </div></header>
 
