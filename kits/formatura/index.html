@@ -4,21 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kits de Formatura · Bem Planejado Educacional</title>
-<meta name="description" content="Kits de formatura do 5º ano ao Ensino Médio em quatro estilos, e o Kit Missão Cumprida para o 1º ao 5º ano. Peças editáveis no Google Apresentações.">
+<meta name="description" content="Material de formatura em cinco temas: Missão Cumprida, Clássica, Editorial, Cor e Radiante. Peças editáveis no Google Apresentações.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kits de Formatura · Bem Planejado Educacional">
-<meta property="og:description" content="Kits de formatura do 5º ano ao Ensino Médio em quatro estilos, e o Kit Missão Cumprida para o 1º ao 5º ano. Peças editáveis no Google Apresentações.">
+<meta property="og:description" content="Material de formatura em cinco temas: Missão Cumprida, Clássica, Editorial, Cor e Radiante. Peças editáveis no Google Apresentações.">
 <meta property="og:image" content="https://bemplanejadoeducacional.com.br/kits/formatura/4-estilos/img/capa.jpg">
 <meta property="og:url" content="https://bemplanejadoeducacional.com.br/kits/formatura/">
 <link rel="canonical" href="https://bemplanejadoeducacional.com.br/kits/formatura/">
 <meta name="theme-color" content="#FBF7F1">
+<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="/img/marca/favicon-32.png"><link rel="apple-touch-icon" href="/img/marca/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap">
 <script>document.documentElement.className = 'js'</script>
 <style>
 :root { --papel:#FBF7F1; --tinta:#2A2420; --cinza:#756B62; --linha:rgba(42,36,32,.16); --brasa:#B8400F; --noite:#17324A; --pessego:#FDE4D8; --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F;
-  --serif:'Instrument Serif', Georgia, 'Times New Roman', serif; --sans:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  --serif:'Instrument Serif', Georgia, 'Times New Roman', serif; --sans:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; --tit:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 * { box-sizing:border-box; }
 html { -webkit-text-size-adjust:100%; }
 body { margin:0; background:var(--papel); color:var(--tinta); font:400 17px/1.55 var(--sans); -webkit-font-smoothing:antialiased; }
@@ -242,8 +243,31 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
   .bt, .pg a, .ab .obj img, .dq .im img, .cart img { transition:none; }
 }
 
+/* tipografia da marca (MARCA.md): Source Sans 3 Black nos títulos, Regular/Semibold no texto; Instrument Serif itálica só nos destaques */
+body { font-size:17px; line-height:1.55; }
+.eti { font-size:12.5px; letter-spacing:.16em; font-weight:700; }
+h1, h2, h3 { font-family:var(--tit); font-weight:900; letter-spacing:-.025em; line-height:1; }
+h1 em, h2 em, h3 em, .lj-rodape .marca em { font-family:var(--serif); font-style:italic; font-weight:400; font-size:1.1em; letter-spacing:-.02em; line-height:.8; }
+.gg { font-size:clamp(52px, 14vw, 200px); letter-spacing:-.04em; line-height:.92; }
+.ab h1 { line-height:1.1; margin-bottom:.1em; }
+.g { font-size:clamp(38px, 7vw, 108px); letter-spacing:-.03em; }
+.m { font-size:clamp(30px, 4.4vw, 62px); }
+.p { font-size:clamp(23px, 2.6vw, 36px); }
+.lead { font-size:clamp(18px, 1.55vw, 21px); line-height:1.5; }
+.bt { font-size:16px; font-weight:700; }
+@media (max-width:430px) { .bt { white-space:normal; text-align:center; line-height:1.25; padding:12px 24px; max-width:100%; } }
+.valor { font-family:var(--tit); font-weight:900; font-size:clamp(36px, 4.2vw, 58px); letter-spacing:-.03em; font-variant-numeric:tabular-nums lining-nums; }
+.nums b { font-family:var(--tit); font-weight:900; font-size:clamp(64px, 10vw, 170px); letter-spacing:-.04em; font-variant-numeric:lining-nums; }
+.rol .nome { font-family:var(--tit); font-weight:900; font-size:clamp(34px, 5.6vw, 88px); line-height:1; letter-spacing:-.035em; }
+.cat a .nome { font-size:clamp(36px, 6.8vw, 110px); }
+.pg h3 { font-size:clamp(21px, 2vw, 28px); line-height:1.12; letter-spacing:-.015em; }
+.cart h3 { font-size:clamp(19px, 1.7vw, 25px); line-height:1.12; letter-spacing:-.015em; }
+summary::after { font-family:var(--tit); font-weight:400; }
+.prox .g { font-family:var(--tit); font-weight:900; }
+.barra b { font-family:var(--tit); font-weight:900; font-size:24px; letter-spacing:-.02em; }
+
 .grade > *, .par > *, .duas > *, .dq > *, .man > *, .pal > *, .est > *, .grade4 > *, .comp > * { min-width:0; }
-.lj-topo, .lj-rodape { font-family:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.lj-topo, .lj-rodape { font-family:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .lj-topo { position:sticky; top:0; z-index:20; background:rgba(251,247,241,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid rgba(42,36,32,.14); color:#2A2420; }
 .lj-topo .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; align-items:center; justify-content:space-between; gap:0 28px; }
 .lj-topo .logo { display:inline-flex; align-items:center; min-height:56px; }
@@ -253,7 +277,7 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .lj-nav a::after { content:''; position:absolute; left:0; right:0; bottom:14px; height:1.5px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
 .lj-nav a:hover::after, .lj-nav a[aria-current]::after { transform:scaleX(1); }
 .lj-topo a:focus-visible, .lj-rodape a:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
-.trilha { font:500 13px/1.2 'Instrument Sans', system-ui, sans-serif; padding-block:4px 0; }
+.trilha { font:600 14px/1.2 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; padding-block:4px 0; }
 .trilha .lj-w, .trilha .miolo { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; flex-wrap:wrap; gap:0 8px; align-items:center; opacity:.8; }
 .trilha a { color:inherit; min-height:44px; display:inline-flex; align-items:center; }
 .trilha span[aria-current] { font-weight:700; }
@@ -261,11 +285,16 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .lj-rodape .lj-w { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); }
 .lj-rodape .marca { font:400 clamp(56px,13vw,200px)/.9 'Instrument Serif', Georgia, serif; letter-spacing:-.03em; margin:0 0 clamp(28px,5vw,56px); }
 .lj-rodape .marca em { font-style:italic; }
+.lj-rodape .lg { width:clamp(200px,24vw,300px); height:auto; margin:-40px 0 -20px -52px; display:block; }
 .lj-rodape .cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px 40px; border-top:1px solid rgba(251,247,241,.25); padding-top:28px; }
 .lj-rodape b { display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase; opacity:.7; margin-bottom:6px; font-weight:600; }
 .lj-rodape a { color:#FBF7F1; min-height:44px; display:flex; align-items:center; gap:8px; text-decoration:none; font-weight:500; }
 .lj-rodape a:hover { text-decoration:underline; text-underline-offset:4px; }
 .lj-rodape p { margin:0; opacity:.75; }
+.lj-rodape .marca { font-family:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; font-weight:900; font-size:clamp(34px, 6.4vw, 96px); line-height:.98; letter-spacing:-.035em; }
+.lj-rodape .marca em { font-family:'Instrument Serif', Georgia, serif; font-style:italic; font-weight:400; font-size:1.1em; letter-spacing:-.02em; line-height:.8; }
+@media (max-width:760px) { .lj-nav a { font-size:12px; letter-spacing:.05em; } }
+@media (max-width:350px) { .lj-nav a { font-size:11px; letter-spacing:.01em; } }
 @media (max-width:760px) {
   .lj-topo .lj-w { flex-direction:column; align-items:stretch; }
   .lj-topo .logo { min-height:46px; }
@@ -281,7 +310,6 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 .home-ab h1 { max-width:9.5ch; }
 .home-ab .sob { display:flex; justify-content:space-between; align-items:flex-end; gap:24px 48px; flex-wrap:wrap; margin-top:clamp(24px,3vw,44px); }
 .home-ab .acoes { display:flex; gap:12px; flex-wrap:wrap; }
-.cat a .nome { font-size:clamp(44px, 8vw, 132px); }
 .mc-pecas .pg { flex-basis:min(78vw, 460px); }
 .mc-pecas .pg a { padding:0; background:none; box-shadow:none; overflow:hidden; border-radius:6px; }
 .mc-pecas .pg img { aspect-ratio:4/3; object-fit:cover; width:100%; }
@@ -305,18 +333,21 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
 </div></header>
 
 <main>
-<nav class="trilha" aria-label="Você está aqui"><div class="lj-w"><a href="../../">Início</a><span aria-hidden="true">/</span><a href="../../kits/">Kits</a><span aria-hidden="true">/</span><span aria-current="page">Formatura</span></div></nav>
+<nav class="trilha" aria-label="Você está aqui"><div class="lj-w"><a href="../../">Início</a><span aria-hidden="true">/</span><span aria-current="page">Formatura</span></div></nav>
 <section style="padding-block:clamp(24px,5vw,70px) clamp(40px,6vw,90px)"><div class="w">
-  <p class="eti rv">Do 1º ano ao Ensino Médio · peças editáveis no Google Apresentações</p>
+  <p class="eti rv">Material de formatura · peças editáveis no Google Apresentações</p>
   <h1 class="gg rv" style="--d:.08s;margin-top:18px">Formatura</h1>
-  <p class="lead rv" style="--d:.16s;margin-top:clamp(20px,3vw,40px)">A festa inteira no mesmo estilo: certificado, convite, cartas, documentos da cerimônia, placas e mesa. Você troca os nomes e imprime.</p>
+  <p class="lead rv" style="--d:.16s;margin-top:clamp(20px,3vw,40px)">A festa inteira no mesmo tema: certificado, convite, cartas, documentos da cerimônia, placas e mesa. Você troca os nomes e imprime.</p>
 </div></section>
 
 <div class="mq" aria-hidden="true"><div><span>Certificados</span><i aria-hidden="true">✦</i><span>Convites</span><i aria-hidden="true">✦</i><span>Cartas</span><i aria-hidden="true">✦</i><span>Roteiro da cerimônia</span><i aria-hidden="true">✦</i><span>Placas</span><i aria-hidden="true">✦</i><span>Tags e toppers</span><i aria-hidden="true">✦</i><span>Álbum da turma</span><i aria-hidden="true">✦</i><span>Certificados</span><i aria-hidden="true">✦</i><span>Convites</span><i aria-hidden="true">✦</i><span>Cartas</span><i aria-hidden="true">✦</i><span>Roteiro da cerimônia</span><i aria-hidden="true">✦</i><span>Placas</span><i aria-hidden="true">✦</i><span>Tags e toppers</span><i aria-hidden="true">✦</i><span>Álbum da turma</span><i aria-hidden="true">✦</i><span>Certificados</span><i aria-hidden="true">✦</i><span>Convites</span><i aria-hidden="true">✦</i><span>Cartas</span><i aria-hidden="true">✦</i><span>Roteiro da cerimônia</span><i aria-hidden="true">✦</i><span>Placas</span><i aria-hidden="true">✦</i><span>Tags e toppers</span><i aria-hidden="true">✦</i><span>Álbum da turma</span><i aria-hidden="true">✦</i></div></div>
 
-<section class="bl"><div class="w">
-  <div class="cab-sec"><h2 class="m rv">Do 5º ano ao Ensino Médio: <em>escolha o estilo</em></h2><p class="lead cz rv">Os quatro kits têm as mesmas 33 peças. Muda o visual. Cada um por R$ 29,90.</p></div>
-  <div class="est"><a class="rv" href="../../kits/formatura/classica/">
+<section class="bl" id="temas"><div class="w">
+  <div class="cab-sec"><h2 class="m rv">Escolha <em>o tema</em></h2><p class="lead cz rv">Cada tema tem a sua página, com todas as peças por dentro. Novos temas chegam em breve.</p></div>
+  <div class="est"><a class="rv" href="../../kits/missao-cumprida/">
+  <div class="im"><img src="../../img/loja/hero-missao.jpg" alt="Todas as peças do Kit Missão Cumprida sobre a mesa" loading="lazy"></div>
+  <div class="li"><h3 class="m">Missão Cumprida</h3><span class="lk">R$ 29,90 →</span></div>
+  <p class="cz">Tema de espaço: a turma vira uma tripulação de astronautas. É o tema com mais peças, com insígnia, lembrancinha e festa.</p></a><a class="rv" href="../../kits/formatura/classica/">
   <div class="im"><img src="../../kits/formatura/classica/img/certificado.jpg" alt="Certificado do Kit Formatura Clássica sobre a mesa" loading="lazy"></div>
   <div class="li"><h3 class="m">Clássica</h3><span class="lk">R$ 29,90 →</span></div>
   <p class="cz">Azul-marinho e dourado, moldura fina de diploma e capelo em gravura, para uma cerimônia solene.</p></a><a class="rv" href="../../kits/formatura/editorial/">
@@ -329,24 +360,6 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
   <div class="im"><img src="../../kits/formatura/radiante/img/certificado.jpg" alt="Certificado do Kit Formatura Radiante sobre a mesa" loading="lazy"></div>
   <div class="li"><h3 class="m">Radiante</h3><span class="lk">R$ 29,90 →</span></div>
   <p class="cz">Verde, raios de luz e letras calorosas, sofisticado sem ser sério demais.</p></a></div>
-  <a class="dq inv" href="../../kits/formatura/4-estilos/" style="margin-top:clamp(56px,8vw,120px)">
-  <div class="im rv"><img src="../../img/loja/combo.jpg" alt="Os certificados dos quatro estilos" loading="lazy" width="1200" height="760"></div>
-  <div class="tx rv" style="--d:.1s"><p class="eti">Os 4 estilos juntos</p>
-    <h3 class="m">Quatro kits por menos que <em>o preço de dois</em></h3>
-    <p class="lead cz">Clássica, Editorial, Cor e Radiante. Um estilo para cada turma, ou o que combinar mais com a escola.</p>
-    <p><s class="cz">R$ 119,60</s> <span class="valor" style="margin-left:12px">R$ 49,90</span></p>
-    <span class="bt">Ver os 4 estilos</span></div></a>
-</div></section>
-
-<section class="bl" id="missao-cumprida" style="padding-top:0"><div class="w">
-  <div class="cab-sec"><h2 class="m rv">Para os pequenos, <em>astronautas</em></h2><p class="lead cz rv">A formatura do 5º ano e o encerramento das turmas menores, com tema de espaço no lugar do capelo.</p></div>
-  <a class="dq" href="../../kits/missao-cumprida/" style="--ac:#4A2C82;--ac-t:#FBF7F1">
-  <div class="im rv"><img src="../../img/loja/hero-missao.jpg" alt="Todas as peças do Kit Missão Cumprida sobre a mesa" loading="lazy"></div>
-  <div class="tx rv" style="--d:.1s"><p class="eti">Formatura e encerramento · 1º ao 5º ano</p>
-    <h3 class="g">Missão <em>Cumprida</em></h3>
-    <p class="lead cz">A turma vira uma tripulação de astronautas que passou o ano explorando. Certificado, insígnia, convite, cartinha, lembrancinha e festa contam a mesma história.</p>
-    <span class="valor">R$ 29,90</span>
-    <span class="bt ac">Ver o kit por dentro</span></div></a>
 </div></section>
 
 <section class="bl escuro"><div class="w">
@@ -356,11 +369,12 @@ details p { padding:0 0 20px; color:var(--cinza); max-width:56ch; }
     <li><h3 class="p">Sem Canva, sem programa pago</h3><p>Os arquivos abrem no Google Apresentações, que é gratuito. Você faz uma cópia e troca os nomes.</p></li>
     <li><h3 class="p">Acesso na hora</h3><p>Compra pela Hotmart, com 7 dias de garantia. Depois da festa, o planner de 2027 já pode estar na mesa.</p></li>
   </ol>
-  <p style="margin-top:clamp(28px,4vw,48px)"><a class="bt cl" href="../../planners/">Conhecer o Planner 2027</a></p>
+  <p style="margin-top:clamp(28px,4vw,48px)"><a class="bt cl" href="../../planners/zodiaco/">Conhecer o Planner 2027</a></p>
 </div></section>
 </main>
 <footer class="lj-rodape"><div class="lj-w">
-  <p class="marca">Bem <em>Planejado</em></p>
+  <img class="lg" src="../../img/marca/logo-negativo.svg" alt="Bem Planejado Educacional" width="300" height="260" loading="lazy">
+  <p class="marca">Menos correria, <em>mais sala de aula.</em></p>
   <div class="cols">
     <div><b>Loja</b><a href="../../planners/">Planners</a><a href="../../cadernos/">Cadernos</a><a href="../../kits/">Kits</a><a href="../../kits/formatura/">Formatura</a><a href="../../gratis/">Grátis</a><a href="../../produtos/">Todos os produtos</a></div>
     <div><b>Fale com a gente</b><a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>@bemplanejadoeducacional</a><a href="mailto:bemplanejadoeducacional@gmail.com">bemplanejadoeducacional@gmail.com</a></div>
