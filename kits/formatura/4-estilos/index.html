@@ -122,7 +122,7 @@ details p { padding:0 0 18px; color:var(--apoio); }
 .lj-nav a { color:#2A2420; text-decoration:none; font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase; min-height:44px; display:flex; align-items:center; position:relative; white-space:nowrap; }
 .lj-nav a::after { content:''; position:absolute; left:0; right:0; bottom:0; height:4px; background:#F15A24; transform:scaleY(0); transform-origin:bottom; transition:transform .15s ease; }
 .lj-nav a:hover::after, .lj-nav a[aria-current]::after { transform:scaleY(1); }
-.lj-topo a:focus-visible, .lj-rodape a:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+.lj-topo a:focus-visible, .lj-rodape a:focus-visible { outline:1px solid currentColor; outline-offset:3px; }
 .trilha { font:600 14px/1.2 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; padding-block:4px 0; }
 .trilha .lj-w, .trilha .miolo { max-width:1320px; margin:0 auto; padding-inline:clamp(20px,4vw,56px); display:flex; flex-wrap:wrap; gap:0 8px; align-items:center; }
 .trilha a { color:inherit; min-height:44px; display:inline-flex; align-items:center; }
@@ -152,6 +152,34 @@ details p { padding:0 0 18px; color:var(--apoio); }
   .lj-rodape .cols a { overflow-wrap:anywhere; }
 }
 
+/* quinta versão (13/11/2026), suave: cabeçalho de vidro, fio leve, menu de três riscos no celular */
+.lj-topo { background:rgba(251,247,241,.8); -webkit-backdrop-filter:saturate(1.4) blur(14px); backdrop-filter:saturate(1.4) blur(14px); border-bottom:1px solid rgba(42,36,32,.1); }
+.lj-topo .lj-w { align-items:center; position:relative; }
+.lj-nav a { transition:color .2s ease; }
+.lj-nav a::after { height:3px; border-radius:3px; bottom:4px; transform:scaleX(0); transform-origin:left; transition:transform .3s cubic-bezier(.22,1,.36,1); }
+.lj-nav a:hover::after, .lj-nav a[aria-current]::after { transform:scaleX(1); }
+.lj-m { position:absolute; opacity:0; width:1px; height:1px; pointer-events:none; }
+.lj-ham { display:none; }
+.lj-rodape::before { display:none; }
+.lj-rodape .cols { border-top:1px solid rgba(251,247,241,.22); }
+@media (max-width:760px) {
+  .lj-topo { position:sticky; }
+  .lj-topo .lj-w { flex-direction:row; flex-wrap:wrap; align-items:center; }
+  .lj-topo .logo, .lj-topo.rolou .logo { padding-block:10px; }
+  .lj-topo .logo img, .lj-topo.rolou .logo img { height:44px; }
+  .lj-ham { display:grid; place-items:center; width:48px; height:48px; border-radius:14px; border:1px solid rgba(42,36,32,.14); background:rgba(255,255,255,.75); cursor:pointer; }
+  .lj-ham i { display:block; position:relative; width:20px; height:2px; background:#2A2420; border-radius:2px; box-shadow:0 6px 0 #2A2420, 0 -6px 0 #2A2420; transition:transform .25s ease, box-shadow .15s ease; }
+  .lj-ham i::before { content:''; position:absolute; inset:0; background:#2A2420; border-radius:2px; transform:rotate(90deg); opacity:0; transition:opacity .15s ease; }
+  .lj-m:checked + .lj-ham i { box-shadow:none; transform:rotate(45deg); }
+  .lj-m:checked + .lj-ham i::before { opacity:1; }
+  .lj-m:focus-visible + .lj-ham { outline:2px solid #2A2420; outline-offset:3px; }
+  .lj-nav { display:none; flex:0 0 100%; flex-direction:column; gap:0; overflow:visible; padding-bottom:12px; }
+  .lj-m:checked ~ .lj-nav { display:flex; }
+  .lj-nav a { font-size:17px; letter-spacing:.04em; min-height:52px; border-top:1px solid rgba(42,36,32,.1); }
+  .lj-nav a::after { display:none; }
+  .lj-nav a[aria-current]::before { content:''; width:8px; height:8px; border-radius:50%; background:#F15A24; margin-right:10px; }
+}
+
 .kits { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:28px; margin-top:28px; }
 .kit { display:flex; flex-direction:column; gap:10px; }
 .kit img { border-radius:4px; }
@@ -167,6 +195,7 @@ details p { padding:0 0 18px; color:var(--apoio); }
 
 <header class="lj-topo"><div class="lj-w">
   <a class="logo" href="../../../" aria-label="Bem Planejado Educacional, página inicial"><img src="../../../img/marca/logo-horizontal.svg" alt="Bem Planejado Educacional" width="221" height="60"></a>
+  <input class="lj-m" type="checkbox" id="lj-m" aria-label="Abrir o menu"><label class="lj-ham" for="lj-m" aria-hidden="true"><i></i></label>
   <nav class="lj-nav" aria-label="Menu"><a href="../../../planners/">Planners</a><a href="../../../cadernos/">Cadernos</a><a href="../../../kits/">Kits</a><a href="../../../kits/formatura/" aria-current="page">Formatura</a><a href="../../../gratis/">Grátis</a></nav>
 </div></header>
 
