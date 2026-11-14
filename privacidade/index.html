@@ -586,6 +586,23 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .politica th { background:#FFFFFF; font-weight:700; }
 @media (prefers-reduced-motion:reduce) { .conta button.bt[aria-busy=true]::after { animation:none; } }
 
+.prods { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:clamp(14px,2vw,22px); }
+.prods li { background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); display:flex; flex-direction:column; overflow:hidden; }
+.prods img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; background:#FBF7F1; }
+.prods .tx { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.prods b { font:900 20px/1.1 var(--tit); text-transform:uppercase; }
+.prods span { font-size:15px; color:#5E554D; }
+.prods em { font-style:normal; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#8A3410; }
+.prods .bt { margin-top:auto; align-self:flex-start; width:auto; min-height:48px; padding:0 22px; }
+.lks { list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+.lks a { display:flex; gap:12px 18px; align-items:center; justify-content:space-between; flex-wrap:wrap; background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:16px 18px; color:var(--tinta); text-decoration:none; min-height:48px; }
+.lks a:hover { border-color:var(--tinta); }
+.lks a:focus-visible { outline:3px solid var(--lar); outline-offset:1px; }
+.lks .nm { font-weight:700; font-size:17px; flex:1 1 220px; min-width:0; overflow-wrap:anywhere; }
+.lks .nm small { display:block; font-weight:400; font-size:14px; color:#5E554D; margin-top:2px; }
+.lks .ir { font-weight:700; font-size:15px; white-space:nowrap; }
+.lks .ir::after { content:' ↗'; }
+
 :root { --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F; }</style>
 <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>

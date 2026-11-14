@@ -586,6 +586,23 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .politica th { background:#FFFFFF; font-weight:700; }
 @media (prefers-reduced-motion:reduce) { .conta button.bt[aria-busy=true]::after { animation:none; } }
 
+.prods { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:clamp(14px,2vw,22px); }
+.prods li { background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); display:flex; flex-direction:column; overflow:hidden; }
+.prods img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; background:#FBF7F1; }
+.prods .tx { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.prods b { font:900 20px/1.1 var(--tit); text-transform:uppercase; }
+.prods span { font-size:15px; color:#5E554D; }
+.prods em { font-style:normal; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#8A3410; }
+.prods .bt { margin-top:auto; align-self:flex-start; width:auto; min-height:48px; padding:0 22px; }
+.lks { list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+.lks a { display:flex; gap:12px 18px; align-items:center; justify-content:space-between; flex-wrap:wrap; background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:16px 18px; color:var(--tinta); text-decoration:none; min-height:48px; }
+.lks a:hover { border-color:var(--tinta); }
+.lks a:focus-visible { outline:3px solid var(--lar); outline-offset:1px; }
+.lks .nm { font-weight:700; font-size:17px; flex:1 1 220px; min-width:0; overflow-wrap:anywhere; }
+.lks .nm small { display:block; font-weight:400; font-size:14px; color:#5E554D; margin-top:2px; }
+.lks .ir { font-weight:700; font-size:15px; white-space:nowrap; }
+.lks .ir::after { content:' ↗'; }
+
 :root { --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F; }</style>
 <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -602,6 +619,10 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   <p class="eti">Para imprimir e usar em sala</p>
   <h1 class="gg" style="margin-top:18px">Grátis</h1>
   <p id="erro-link" class="aviso info" role="status" hidden style="margin-top:18px;max-width:60ch"></p>
+  <div id="bloco-prods" hidden style="margin-top:clamp(24px,3vw,40px)">
+    <p id="erro-prods" class="aviso erro" role="alert" hidden></p>
+    <ul id="prods-gratis" class="prods"></ul>
+  </div>
 
   <div id="convite" style="margin-top:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:clamp(24px,3vw,36px)">
     <div class="fcard" style="max-width:640px;display:flex;flex-direction:column;gap:16px">
@@ -611,13 +632,13 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         <a class="bt" href="../criar-conta/">Criar conta</a><a class="bt li" href="../entrar/">Entrar</a>
       </div>
     </div>
-    <p class="peq cz" style="font-size:14px">Estamos preparando os primeiros materiais. O aviso sai no Instagram, em <a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener" style="color:inherit;font-weight:600">@bemplanejadoeducacional</a>.</p>
+    <p id="sem-material" class="peq cz" style="font-size:14px">Estamos preparando os primeiros materiais. O aviso sai no Instagram, em <a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener" style="color:inherit;font-weight:600">@bemplanejadoeducacional</a>.</p>
   </div>
 
   <div id="area" hidden style="margin-top:clamp(20px,3vw,36px);display:flex;flex-direction:column;gap:20px;max-width:760px">
     <div class="ar-topo">
       <h2 id="saudacao" class="m" tabindex="-1"></h2>
-      <button id="btn-sair" class="bt li" type="button">Sair</button>
+      <span style="display:flex;gap:10px;flex-wrap:wrap"><a class="bt li" href="../conta/">Meus produtos</a><button id="btn-sair" class="bt li" type="button">Sair</button></span>
     </div>
     <div id="news-card" class="fcard" hidden>
       <div class="marca"><input id="news-g" type="checkbox"><label for="news-g">Quero receber por e-mail materiais e novidades da Bem Planejado Educacional. Posso sair quando quiser pelo link no fim de cada e-mail.</label></div>
@@ -890,7 +911,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         var r = await sb.storage.from(BUCKET).list('', { limit: 100, sortBy: { column: 'name', order: 'asc' } });
         if (r.error) { aviso(er, 'Não foi possível carregar a lista agora. Atualize a página em instantes.'); return; }
         var itens = (r.data || []).filter(function (a) { return a.id && a.name && a.name.charAt(0) !== '.'; });
-        if (!itens.length) { vazio.hidden = false; return; }
+        if (!itens.length) { vazio.hidden = !$('bloco-prods').hidden; return; }
         itens.forEach(function (a) {
           var li = document.createElement('li'), nm = document.createElement('span'), sm = document.createElement('small'), bt = document.createElement('button');
           nm.className = 'nm'; nm.textContent = titulo(a.name);
@@ -937,6 +958,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       });
     }
     async function mostrar(sessao) {
+      catalogoGratis(sessao);
       if (!sessao) { convite.hidden = false; area.hidden = true; return; }
       convite.hidden = true; area.hidden = false;
       var user = sessao.user, nome = (user.user_metadata && user.user_metadata.nome) || '';
@@ -962,10 +984,126 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     sb.auth.getSession().then(function (r) { mostrar(r.data && r.data.session); }).catch(function () { mostrar(null); });
   }
 
+
+  // ---------- Meus produtos
+  function el(tag, cls, txt) { var x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; }
+  function cartao(prod, pref, rotulo, acao) {
+    var li = el('li'), tx = el('div', 'tx');
+    if (prod.capa) { var im = el('img'); im.src = pref + prod.capa; im.alt = ''; im.loading = 'lazy'; im.width = 800; im.height = 600; li.appendChild(im); }
+    if (prod.gratis) tx.appendChild(el('em', null, 'Grátis'));
+    tx.appendChild(el('b', null, prod.titulo));
+    if (prod.descricao) tx.appendChild(el('span', null, prod.descricao));
+    var bt;
+    if (typeof acao === 'string') { bt = el('a', 'bt', rotulo); bt.href = acao; }
+    else { bt = el('button', 'bt', rotulo); bt.type = 'button'; bt.addEventListener('click', function () { acao(bt); }); }
+    tx.appendChild(bt); li.appendChild(tx); return li;
+  }
+  function urlProduto(pref, slug) { return pref + 'conta/produto/?p=' + encodeURIComponent(slug); }
+  async function meusSlugs() {
+    var r = await sb.from('acessos').select('produto');
+    if (r.error) throw r.error;
+    return (r.data || []).map(function (a) { return a.produto; });
+  }
+  async function resgatar(slug, bt, er, pref) {
+    if (bt.disabled) return;
+    aviso(er, ''); ocupar(bt, true, 'Liberando…');
+    try {
+      var r = await sb.rpc('resgatar_gratis', { p_slug: slug });
+      if (r.error) { aviso(er, 'Não foi possível liberar agora. Tente de novo em instantes.'); ocupar(bt, false); return; }
+      location.assign(urlProduto(pref, slug));
+    } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(bt, false); }
+  }
+  // Catálogo grátis em /gratis/: público; com sessão, o botão libera e abre.
+  async function catalogoGratis(sessao) {
+    var ul = $('prods-gratis'), er = $('erro-prods');
+    if (!ul || !sb) return;
+    ul.textContent = ''; aviso(er, '');
+    try {
+      var r = await sb.from('produtos').select('slug,titulo,descricao,capa,gratis').eq('gratis', true).order('ordem');
+      if (r.error) { aviso(er, 'Não foi possível carregar os materiais agora.'); return; }
+      var tem = sessao ? await meusSlugs() : [];
+      (r.data || []).forEach(function (p) {
+        if (!sessao) ul.appendChild(cartao(p, '../', 'Criar conta e pegar', '../criar-conta/'));
+        else if (tem.indexOf(p.slug) >= 0) ul.appendChild(cartao(p, '../', 'Abrir', urlProduto('../', p.slug)));
+        else ul.appendChild(cartao(p, '../', 'Pegar grátis', function (bt) { resgatar(p.slug, bt, er, '../'); }));
+      });
+      var ha = (r.data || []).length > 0;
+      $('bloco-prods').hidden = !ha;
+      if (ha && $('vazio')) $('vazio').hidden = true;
+      if (ha && $('sem-material')) $('sem-material').hidden = true;
+    } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+  }
+  function exigirSessao(cb) {
+    if (!sb) { semBiblioteca(); return; }
+    sb.auth.getSession().then(function (r) {
+      var s = r.data && r.data.session;
+      if (!s) { $('sem-sessao').hidden = false; return; }
+      cb(s);
+    }).catch(function () { $('sem-sessao').hidden = false; });
+  }
+  function minhaConta() {
+    exigirSessao(async function (sessao) {
+      var ul = $('meus'), er = $('erro-meus');
+      $('area').hidden = false;
+      try {
+        var p = await sb.from('profiles').select('nome').eq('id', sessao.user.id).maybeSingle();
+        var nome = (p.data && p.data.nome) || (sessao.user.user_metadata && sessao.user.user_metadata.nome) || '';
+        $('saudacao').textContent = nome ? 'Olá, ' + nome + '.' : 'Olá.';
+        var r = await sb.from('acessos').select('origem,criado_em,produtos(slug,titulo,descricao,capa,gratis)').order('criado_em', { ascending: false });
+        if (r.error) { aviso(er, 'Não foi possível carregar seus produtos agora. Atualize a página em instantes.'); return; }
+        var itens = (r.data || []).filter(function (a) { return a.produtos; });
+        if (!itens.length) { $('vazio').hidden = false; return; }
+        itens.forEach(function (a) { ul.appendChild(cartao(a.produtos, '../', 'Abrir', urlProduto('../', a.produtos.slug))); });
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+    });
+    var b = $('btn-sair');
+    if (b) b.addEventListener('click', async function () {
+      ocupar(b, true, 'Saindo…');
+      try { await sb.auth.signOut(); } catch (x) { /* a sessão local cai de qualquer jeito */ }
+      location.assign('../');
+    });
+  }
+  function paginaProduto() {
+    var slug = new URLSearchParams(location.search).get('p') || '';
+    exigirSessao(async function () {
+      var er = $('erro-prod');
+      try {
+        var p = await sb.from('produtos').select('slug,titulo,descricao,gratis').eq('slug', slug).maybeSingle();
+        if (p.error || !p.data) { aviso(er, 'Produto não encontrado. Volte para Meus produtos.'); return; }
+        document.title = p.data.titulo + ' | Bem Planejado';
+        $('titulo-prod').textContent = p.data.titulo;
+        $('desc-prod').textContent = p.data.descricao || '';
+        var l = await sb.from('produto_links').select('grupo,rotulo,url,detalhe,ordem').eq('produto', slug).order('ordem');
+        if (l.error) { aviso(er, 'Não foi possível carregar os links agora. Atualize a página em instantes.'); return; }
+        var links = l.data || [];
+        if (!links.length) {
+          if (p.data.gratis) {
+            $('pegar').hidden = false;
+            $('btn-pegar').addEventListener('click', function () { resgatar(slug, $('btn-pegar'), er, '../../'); });
+          } else aviso(er, 'Este produto ainda não está na sua conta. Se você comprou na Hotmart, entre com o mesmo e-mail da compra.', 'info');
+          return;
+        }
+        var cx = $('links'), grupo, ul = null;
+        links.forEach(function (k) {
+          if (!/^https:\/\//.test(k.url)) return;
+          if (!ul || k.grupo !== grupo) { grupo = k.grupo; if (grupo) cx.appendChild(el('h2', 'p', grupo)); ul = el('ul', 'lks'); cx.appendChild(ul); }
+          var li = el('li'), a = el('a'), nm = el('span', 'nm', k.rotulo);
+          a.href = k.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          if (k.detalhe) nm.appendChild(el('small', null, k.detalhe));
+          a.appendChild(nm); a.appendChild(el('span', 'ir', 'Abrir no Drive'));
+          li.appendChild(a); ul.appendChild(li);
+        });
+        $('dica').hidden = false;
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+    });
+  }
+
   if (pag === 'criar') { if (!sb) semBiblioteca(); captcha(); google(); criarConta(); }
   else if (pag === 'entrar') { if (!sb) semBiblioteca(); captcha(); google(); entrar(); }
   else if (pag === 'definir') { definirSenha(); }
   else if (pag === 'gratis') { gratis(); }
+  else if (pag === 'conta') { minhaConta(); }
+  else if (pag === 'produto') { paginaProduto(); }
 })();
 </script>
 <script>
