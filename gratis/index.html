@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Material grátis para professora | Bem Planejado</title>
-<meta name="description" content="Materiais gratuitos da Bem Planejado Educacional para imprimir e usar em sala de aula.">
+<meta name="description" content="Crie uma conta gratuita e baixe materiais da Bem Planejado Educacional para imprimir e usar em sala de aula.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bem Planejado Educacional">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Material grátis para professora | Bem Planejado">
-<meta property="og:description" content="Materiais gratuitos da Bem Planejado Educacional para imprimir e usar em sala de aula.">
+<meta property="og:description" content="Crie uma conta gratuita e baixe materiais da Bem Planejado Educacional para imprimir e usar em sala de aula.">
 <meta property="og:url" content="https://bemplanejadoeducacional.com.br/gratis/">
 <meta property="og:image" content="https://bemplanejadoeducacional.com.br/img/og/loja.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Material grátis para professora | Bem Planejado">
-<meta name="twitter:description" content="Materiais gratuitos da Bem Planejado Educacional para imprimir e usar em sala de aula.">
+<meta name="twitter:description" content="Crie uma conta gratuita e baixe materiais da Bem Planejado Educacional para imprimir e usar em sala de aula.">
 <meta name="twitter:image" content="https://bemplanejadoeducacional.com.br/img/og/loja.jpg">
 <link rel="canonical" href="https://bemplanejadoeducacional.com.br/gratis/">
 <meta name="p:domain_verify" content="0d93d4d32beeddd7a68bbead8c4de82b"/>
@@ -525,63 +525,360 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   .lj-nav a::after { display:none; }
   .lj-nav a[aria-current]::before { content:''; width:8px; height:8px; border-radius:50%; background:#F15A24; margin-right:10px; }
 }
+/* Entrar: link discreto no fim do menu (13/11/2026) */
+.lj-nav a.entrar { font-weight:600; color:#4A4038; }
+@media (min-width:761px) { .lj-nav a.entrar { margin-left:clamp(0px,1vw,14px); padding-left:clamp(14px,1.6vw,24px); border-left:1px solid rgba(42,36,32,.18); } .lj-nav a.entrar::after { left:clamp(14px,1.6vw,24px); } }
 
-.home-ab { overflow:hidden; padding-block:clamp(28px,4vw,64px) clamp(40px,6vw,80px); }
-.home-ab .w { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.08fr); gap:clamp(28px,5vw,72px); align-items:center; }
-.home-ab .tx { display:flex; flex-direction:column; gap:clamp(18px,2vw,26px); align-items:flex-start; }
-.home-ab .acoes { display:flex; gap:12px; flex-wrap:wrap; }
-@media (max-width:900px) { .home-ab .w { grid-template-columns:minmax(0,1fr); } }
-.mc-pecas .pg { flex-basis:min(78vw, 460px); }
-.mc-pecas .pg a { overflow:hidden; }
-.mc-pecas .pg img { aspect-ratio:4/3; object-fit:cover; width:100%; }
-.ab.mc .obj img { width:min(100%, 640px); }
-.est { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:clamp(40px,6vw,80px) clamp(20px,4vw,56px); }
-.est a { text-decoration:none; display:flex; flex-direction:column; gap:14px; }
-.est .im { overflow:hidden; border-radius:20px; box-shadow:var(--somb); }
-.est img { width:100%; aspect-ratio:3/2; object-fit:cover; }
-.est .li { display:flex; justify-content:space-between; gap:16px; align-items:baseline; }
-@media (max-width:860px) { .est { grid-template-columns:minmax(0,1fr); } }
+.conta { padding-block:clamp(20px,4vw,48px) clamp(56px,8vw,112px); }
+.conta .col { max-width:560px; margin-inline:auto; display:flex; flex-direction:column; gap:20px; }
+.conta h1 { font-size:clamp(34px,6vw,56px); line-height:.98; }
+.conta .lead { max-width:46ch; }
+.fcard { background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:clamp(20px,4vw,32px); }
+.fcard form { display:flex; flex-direction:column; gap:18px; margin:0; }
+.fcard label.rot { display:block; font:700 15px/1.3 var(--sans); margin-bottom:6px; }
+.fcard input[type=text], .fcard input[type=email], .fcard input[type=password] { display:block; width:100%; box-sizing:border-box; min-height:48px; padding:0 14px;
+  font:400 16px/1.2 var(--sans); color:var(--tinta); background:#FFFFFF; border:1px solid #8C8176; border-radius:12px; }
+.fcard input:focus-visible { outline:3px solid var(--lar); outline-offset:1px; border-color:var(--tinta); }
+.fcard .ajuda { font-size:14px; color:#5E554D; margin:6px 0 0; }
+.fcard .marca { display:flex; gap:12px; align-items:flex-start; }
+.fcard .marca input { flex:none; width:24px; height:24px; margin:10px 0 0; accent-color:#D4470F; }
+.fcard .marca label { font-size:15px; line-height:1.45; min-height:44px; display:flex; align-items:center; padding-block:4px; cursor:pointer; }
+.fcard .peq { font-size:14px; line-height:1.5; color:#5E554D; margin:0; }
+.fcard .peq a, .conta .links a, .politica a, .aviso a { color:var(--tinta); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px; font-weight:600; }
+.conta button.bt { font-family:inherit; cursor:pointer; width:100%; }
+.conta button.bt[disabled] { cursor:progress; opacity:.7; transform:none; }
+.conta button.bt[aria-busy=true]::after { content:''; width:16px; height:16px; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; animation:gira .8s linear infinite; }
+@keyframes gira { to { transform:rotate(360deg); } }
+.conta button.tx-bt { background:none; border:0; padding:0 4px; min-height:44px; font:600 15px/1.2 var(--sans); color:var(--tinta); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.conta .links { display:flex; flex-wrap:wrap; gap:0 18px; font-size:15px; }
+.conta .links a, .conta .links button { min-height:44px; display:inline-flex; align-items:center; }
+.aviso { border-radius:12px; padding:12px 14px; font-size:15px; line-height:1.45; margin:0; border:1px solid; }
+.aviso.erro { background:#FDECE6; border-color:#A8310F; color:#6E1D07; }
+.aviso.ok { background:#E8F3EA; border-color:#2E6B3A; color:#16391D; }
+.aviso.info { background:#FFFFFF; border-color:#8C8176; color:var(--tinta); }
+.aviso[hidden], .conta [hidden] { display:none !important; }
+.ar-topo { display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; justify-content:space-between; }
+.ar-topo .bt { width:auto; min-height:48px; padding:0 20px; }
+.ar-topo .bt::after { display:none; }
+.arq { list-style:none; margin:0; padding:0; display:grid; gap:14px; }
+.arq li { background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:16px 18px; display:flex; gap:12px 18px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.arq .nm { font-weight:700; font-size:17px; overflow-wrap:anywhere; flex:1 1 220px; min-width:0; }
+.arq .nm small { display:block; font-weight:400; font-size:14px; color:#5E554D; margin-top:2px; }
+.arq .bt { width:auto; min-height:48px; padding:0 22px; }
+.arq .bt::after { content:'↓'; }
+.prev { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(12px,2vw,20px); }
+.prev li { background:#FFFFFF; border:1px dashed #8C8176; border-radius:var(--r); padding:18px; display:flex; flex-direction:column; gap:8px; }
+.prev b { font:900 20px/1.1 var(--tit); text-transform:uppercase; }
+.prev span { font-size:15px; color:#5E554D; }
+.prev em { font-style:normal; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#8A3410; }
+@media (max-width:760px) { .prev { grid-template-columns:minmax(0,1fr); } }
+.politica { max-width:68ch; margin-inline:auto; }
+.politica h2 { font-size:clamp(22px,3vw,30px); margin:36px 0 10px; text-transform:none; letter-spacing:0; line-height:1.1; }
+.politica p, .politica li { font-size:17px; line-height:1.6; }
+.politica ul { padding-left:22px; margin:8px 0; }
+.politica li { margin-bottom:6px; }
+.politica table { width:100%; border-collapse:collapse; font-size:15px; margin:10px 0; display:block; overflow-x:auto; }
+.politica th, .politica td { text-align:left; vertical-align:top; padding:10px 12px; border:1px solid var(--fio); min-width:120px; }
+.politica th { background:#FFFFFF; font-weight:700; }
+@media (prefers-reduced-motion:reduce) { .conta button.bt[aria-busy=true]::after { animation:none; } }
 
 :root { --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F; }</style>
 <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-
 <header class="lj-topo"><div class="lj-w">
   <a class="logo" href="../" aria-label="Bem Planejado Educacional, página inicial"><picture><source media="(max-width:760px)" srcset="../img/marca/logo-celular.svg"><img src="../img/marca/logo-horizontal.svg" alt="Bem Planejado Educacional" width="194" height="60"></picture></a>
   <input class="lj-m" type="checkbox" id="lj-m" aria-label="Abrir o menu"><label class="lj-ham" for="lj-m" aria-hidden="true"><i></i></label>
-  <nav class="lj-nav" aria-label="Menu"><a href="../planners/">Planners</a><a href="../cadernos/">Cadernos</a><a href="../kits/">Kits</a><a href="../kits/formatura/">Formatura</a><a href="../gratis/" aria-current="page">Grátis</a></nav>
+  <nav class="lj-nav" aria-label="Menu"><a href="../planners/">Planners</a><a href="../cadernos/">Cadernos</a><a href="../kits/">Kits</a><a href="../kits/formatura/">Formatura</a><a href="../gratis/">Grátis</a><a class="entrar" href="../entrar/">Entrar</a></nav>
 </div></header>
 
-<main>
+<main id="conta" data-pag="gratis">
 <nav class="trilha" aria-label="Você está aqui"><div class="lj-w"><a href="../">Início</a><span aria-hidden="true">/</span><span aria-current="page">Grátis</span></div></nav>
-<section style="padding-block:clamp(24px,5vw,70px) clamp(40px,6vw,90px)"><div class="w">
-  <p class="eti rv">Para imprimir e usar em sala</p>
-  <h1 class="gg rv" style="--d:.08s;margin-top:18px">Grátis</h1>
-</div></section>
-<section class="bl" style="padding-top:0"><div class="w par">
-  <div class="tx rv"><h2 class="m">A primeira leva está <em>em preparação.</em></h2></div>
-  <div class="tx rv" style="--d:.1s"><p class="lead cz">Esta página vai reunir materiais para baixar sem pagar: um pouco de tudo o que a loja faz. Ainda não há nada publicado aqui.</p>
-    <p class="lead cz">O aviso de cada material novo sai primeiro no Instagram.</p>
-    <a class="bt" href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener">Seguir @bemplanejadoeducacional</a></div>
-</div></section>
-<section class="bl escuro"><div class="w par">
-  <div class="tx rv"><p class="eti">Enquanto isso</p><h2 class="m">O Planner 2027 <em>do seu signo</em></h2>
-    <p class="lead cz">110 páginas em A4 por R$ 19,90.</p><a class="bt cl" href="../planners/zodiaco/">Escolher meu signo</a></div>
-  <div class="tx rv" style="--d:.1s"><p class="eti">Fim de ano</p><h2 class="m">Formatura e <em>encerramento</em></h2>
-    <p class="lead cz">Kits editáveis a partir de R$ 29,90.</p><a class="bt cl" href="../kits/formatura/">Ver os kits</a></div>
+<section class="conta"><div class="w">
+  <p class="eti">Para imprimir e usar em sala</p>
+  <h1 class="gg" style="margin-top:18px">Grátis</h1>
+  <p id="erro-link" class="aviso info" role="status" hidden style="margin-top:18px;max-width:60ch"></p>
+
+  <div id="convite" style="margin-top:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:clamp(24px,3vw,36px)">
+    <div class="fcard" style="max-width:640px;display:flex;flex-direction:column;gap:16px">
+      <h2 class="m">Crie uma conta <em>e baixe de graça</em></h2>
+      <p class="lead cz" style="max-width:52ch">A Área Grátis reúne materiais para professoras baixarem sem pagar. Basta ter uma conta, com nome, e-mail e senha. Nada de cartão.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="bt" href="../criar-conta/">Criar conta</a><a class="bt li" href="../entrar/">Entrar</a>
+      </div>
+    </div>
+    <div>
+      <h2 class="p" style="margin-bottom:14px">O que está sendo preparado</h2>
+      <ul class="prev"><li><em>Em breve</em><b>Uma amostra de planner</b><span>Algumas páginas do Planner Pedagógico para você testar antes de comprar.</span></li><li><em>Em breve</em><b>Uma atividade de fim de ano</b><span>Um material simples de encerramento para a turma.</span></li><li><em>Em breve</em><b>Um modelo de certificado</b><span>Para você ver como funcionam os arquivos editáveis dos kits.</span></li></ul>
+      <p class="peq cz" style="margin-top:12px;font-size:14px">Ainda sem data. O aviso de cada material novo sai no Instagram, em <a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener" style="color:inherit;font-weight:600">@bemplanejadoeducacional</a>.</p>
+    </div>
+  </div>
+
+  <div id="area" hidden style="margin-top:clamp(20px,3vw,36px);display:flex;flex-direction:column;gap:20px;max-width:760px">
+    <div class="ar-topo">
+      <h2 id="saudacao" class="m" tabindex="-1"></h2>
+      <button id="btn-sair" class="bt li" type="button">Sair</button>
+    </div>
+    <p id="erro-lista" class="aviso erro" role="alert" hidden></p>
+    <ul id="lista" class="arq"></ul>
+    <p id="vazio" class="fcard" hidden><b>Estamos preparando os primeiros materiais.</b><br>Quando eles chegarem, vão aparecer aqui para você baixar.</p>
+  </div>
 </div></section>
 </main>
 <footer class="lj-rodape"><div class="lj-w">
   <img class="lg" src="../img/marca/logo-horizontal-negativo.svg" alt="Bem Planejado Educacional" width="180" height="56" loading="lazy">
   <p class="marca">Menos correria, <em>mais sala de aula.</em></p>
   <div class="cols">
-    <div><b>Loja</b><a href="../planners/">Planners</a><a href="../cadernos/">Cadernos</a><a href="../kits/">Kits</a><a href="../kits/formatura/">Formatura</a><a href="../gratis/">Grátis</a><a href="../produtos/">Todos os produtos</a></div>
+    <div><b>Loja</b><a href="../planners/">Planners</a><a href="../cadernos/">Cadernos</a><a href="../kits/">Kits</a><a href="../kits/formatura/">Formatura</a><a href="../gratis/">Grátis</a><a href="../produtos/">Todos os produtos</a><a href="../privacidade/">Privacidade</a></div>
     <div><b>Fale com a gente</b><a href="mailto:bemplanejadoeducacional@gmail.com"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" d="M3 5H21V19H3ZM4.5 6.5L12 12.5L19.5 6.5"/><rect x="15.5" y="13" width="3" height="3" fill="#F15A24"/></svg>bemplanejadoeducacional@gmail.com</a><a href="https://www.instagram.com/bemplanejadoeducacional/" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3H21V21H3Z M8 8H16V16H8Z"/><rect x="16" y="5" width="3" height="3" fill="#F15A24" stroke="none"/></svg>@bemplanejadoeducacional</a></div>
     <div><b>Compra</b><p>Arquivos digitais para imprimir. Pagamento seguro pela Hotmart, acesso na hora e 7 dias de garantia.</p></div>
   </div>
 </div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js" integrity="sha384-rwykjmWNwVxboyFmvK9OXN0wj9hnMHA2aAHtits54DuACyCq0M2PrSNxhRb+hvXT" crossorigin="anonymous"></script><script>
+(function () {
+  'use strict';
+  var URL_SB = 'https://qxifpzopgcqmmvvttodq.supabase.co', CHAVE = 'sb_publishable_cclQ3UM8ZVMrto7oxwgU9g_GqcNSklm', SITE = 'https://bemplanejadoeducacional.com.br', VERSAO = 'newsletter-v1', BUCKET = 'gratis';
+  var raiz = document.getElementById('conta');
+  if (!raiz) return;
+  var pag = raiz.getAttribute('data-pag');
+  var $ = function (id) { return document.getElementById(id); };
+  var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(URL_SB, CHAVE) : null;
+
+  function origem() {
+    var h = location.hostname;
+    return (h === 'localhost' || h === '127.0.0.1' || h === '[::1]') ? location.origin : SITE;
+  }
+  function aviso(el, texto, tipo) {
+    if (!el) return;
+    el.textContent = texto || '';
+    el.className = 'aviso ' + (tipo || 'erro');
+    el.hidden = !texto;
+  }
+  function ocupar(btn, ligado, rotulo) {
+    if (!btn) return;
+    if (ligado) { btn.dataset.rot = btn.textContent; btn.textContent = rotulo || 'Aguarde…'; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); }
+    else { if (btn.dataset.rot) btn.textContent = btn.dataset.rot; btn.disabled = false; btn.removeAttribute('aria-busy'); }
+  }
+  function codigo(err) { return String((err && (err.code || err.error_code)) || '').toLowerCase(); }
+  function limite(err) { return (err && err.status === 429) || /rate_limit/.test(codigo(err)); }
+  function emailValido(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function destino() {
+    var v = new URLSearchParams(location.search).get('voltar');
+    // só caminho interno: começa com uma barra, e a segunda letra não é barra nem contrabarra nem controle
+    if (v && v.length < 300 && /^\/[^\/\\\u0000-\u001f]/.test(v)) return v;
+    return '/gratis/';
+  }
+  function semBiblioteca() {
+    var el = $('erro-geral');
+    aviso(el, 'Não foi possível carregar o serviço de contas agora. Atualize a página ou tente de novo em alguns minutos.', 'erro');
+    raiz.querySelectorAll('form button[type=submit]').forEach(function (b) { b.disabled = true; });
+  }
+  function validarSenhas(senha, conf) {
+    if (senha.length < 8) return 'A senha precisa ter pelo menos 8 caracteres.';
+    if (senha.length > 72) return 'A senha pode ter no máximo 72 caracteres.';
+    if (senha !== conf) return 'As duas senhas não são iguais.';
+    return '';
+  }
+  function msgSenhaServidor(err) {
+    var c = codigo(err);
+    if (limite(err)) return 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.';
+    if (c === 'same_password') return 'Escolha uma senha diferente da anterior.';
+    if (c === 'weak_password') return 'Essa senha é fraca demais. Use pelo menos 8 caracteres, misturando letras e números.';
+    return 'Não foi possível salvar a senha agora. Tente de novo em instantes.';
+  }
+
+  // ---------- criar conta
+  function criarConta() {
+    var f = $('f-cadastro');
+    f.addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      var btn = f.querySelector('button[type=submit]'), er = $('erro-form');
+      if (btn.disabled) return;
+      var nome = $('nome').value.trim(), email = $('email').value.trim(), senha = $('senha').value, conf = $('senha2').value, news = $('news').checked;
+      if (!nome) return aviso(er, 'Escreva seu nome.');
+      if (!emailValido(email)) return aviso(er, 'Confira o e-mail: ele parece incompleto.');
+      var s = validarSenhas(senha, conf); if (s) return aviso(er, s);
+      if (!sb) return semBiblioteca();
+      aviso(er, ''); ocupar(btn, true, 'Criando…');
+      var dados = { nome: nome, newsletter_aceite: news };
+      if (news) dados.newsletter_texto = VERSAO;
+      try {
+        var r = await sb.auth.signUp({ email: email, password: senha, options: { data: dados, emailRedirectTo: origem() + '/gratis/' } });
+        if (r.error) {
+          var c = codigo(r.error);
+          if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+          else if (c === 'weak_password') aviso(er, 'Essa senha é fraca demais. Use pelo menos 8 caracteres, misturando letras e números.');
+          else if (c === 'signup_disabled') aviso(er, 'O cadastro está fechado no momento. Tente mais tarde.');
+          else aviso(er, 'Não foi possível criar a conta agora. Confira os dados e tente de novo em instantes.');
+          ocupar(btn, false); return;
+        }
+        // sucesso igual exista ou não conta com esse e-mail: a tela não revela nada
+        f.hidden = true; $('sucesso').hidden = false; $('sucesso-email').textContent = email;
+        var t = $('sucesso').querySelector('h2'); if (t) t.focus();
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
+    });
+  }
+
+  // ---------- entrar e esqueci minha senha
+  function entrar() {
+    var f = $('f-entrar'), modo = 'entrar';
+    function trocar(m) {
+      modo = m;
+      var rec = m === 'recuperar';
+      $('campo-senha').hidden = rec; $('senha').required = !rec;
+      $('titulo-form').textContent = rec ? 'Receber link para criar nova senha' : 'Entrar';
+      f.querySelector('button[type=submit]').textContent = rec ? 'Enviar link' : 'Entrar';
+      $('ir-recuperar').hidden = rec; $('ir-entrar').hidden = !rec;
+      aviso($('erro-form'), ''); aviso($('ok-form'), '', 'ok');
+    }
+    $('ir-recuperar').addEventListener('click', function () { trocar('recuperar'); $('email').focus(); });
+    $('ir-entrar').addEventListener('click', function () { trocar('entrar'); $('email').focus(); });
+    if (new URLSearchParams(location.search).get('esqueci')) trocar('recuperar');
+    if (sb) sb.auth.getSession().then(function (r) { if (r.data && r.data.session) location.replace(destino()); }).catch(function () {});
+    f.addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      var btn = f.querySelector('button[type=submit]'), er = $('erro-form'), ok = $('ok-form');
+      if (btn.disabled) return;
+      var email = $('email').value.trim(), senha = $('senha').value;
+      aviso(er, ''); aviso(ok, '', 'ok');
+      if (!emailValido(email)) return aviso(er, 'Confira o e-mail: ele parece incompleto.');
+      if (!sb) return semBiblioteca();
+      if (modo === 'recuperar') {
+        ocupar(btn, true, 'Enviando…');
+        try {
+          var rr = await sb.auth.resetPasswordForEmail(email, { redirectTo: origem() + '/definir-senha/' });
+          if (rr.error && limite(rr.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+          else aviso(ok, 'Se houver uma conta com esse e-mail, enviamos um link para criar uma nova senha. Olhe também a caixa de spam.', 'ok');
+        } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+        ocupar(btn, false); return;
+      }
+      if (!senha) return aviso(er, 'Digite a senha.');
+      ocupar(btn, true, 'Entrando…');
+      try {
+        var r = await sb.auth.signInWithPassword({ email: email, password: senha });
+        if (r.error) {
+          var c = codigo(r.error);
+          if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+          else if (c === 'email_not_confirmed') aviso(er, 'Falta confirmar seu e-mail. Abra a mensagem que enviamos no cadastro e clique no link.');
+          else aviso(er, 'E-mail ou senha incorretos.');
+          ocupar(btn, false); return;
+        }
+        location.assign(destino());
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
+    });
+  }
+
+  // ---------- definir senha (contrato: nada acontece sozinho ao carregar; verifyOtp só no clique)
+  function definirSenha() {
+    var q = new URLSearchParams(location.search), hash = q.get('token_hash'), tipo = q.get('type');
+    if (hash || tipo) history.replaceState(null, '', location.pathname);   // tira o token da barra de endereço e do histórico
+    var etapa1 = $('etapa-1'), etapa2 = $('etapa-2'), invalido = $('sem-token');
+    if (!hash || tipo !== 'recovery') { invalido.hidden = false; return; }
+    etapa1.hidden = false;
+    var b1 = $('btn-verificar');
+    b1.addEventListener('click', async function () {
+      if (b1.disabled) return;
+      if (!sb) return semBiblioteca();
+      var er = $('erro-1'); aviso(er, ''); ocupar(b1, true, 'Verificando…');
+      try {
+        var r = await sb.auth.verifyOtp({ token_hash: hash, type: 'recovery' });
+        if (r.error || !r.data || !r.data.session) {
+          etapa1.hidden = true; invalido.hidden = false; return;
+        }
+        etapa1.hidden = true; etapa2.hidden = false; $('senha').focus();
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(b1, false); }
+    });
+    var f = $('f-senha');
+    f.addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      var btn = f.querySelector('button[type=submit]'), er = $('erro-2');
+      if (btn.disabled) return;
+      var s = validarSenhas($('senha').value, $('senha2').value); if (s) return aviso(er, s);
+      aviso(er, ''); ocupar(btn, true, 'Salvando…');
+      try {
+        var r = await sb.auth.updateUser({ password: $('senha').value });
+        if (r.error) { aviso(er, msgSenhaServidor(r.error)); ocupar(btn, false); return; }
+        f.hidden = true; aviso($('ok-2'), 'Senha definida. Levando você para a Área Grátis…', 'ok');
+        setTimeout(function () { location.assign('/gratis/'); }, 1400);
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
+    });
+  }
+
+  // ---------- Área Grátis
+  function tamanho(n) {
+    if (!n || n < 0) return '';
+    if (n < 1024 * 1024) return Math.max(1, Math.round(n / 1024)) + ' KB';
+    return (n / 1048576).toFixed(1).replace('.', ',') + ' MB';
+  }
+  function titulo(nome) { return nome.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim() || nome; }
+
+  function gratis() {
+    var convite = $('convite'), area = $('area');
+    if (/error_code|error_description/.test(location.hash)) {
+      aviso($('erro-link'), 'O link de confirmação venceu ou já foi usado. Entre com seu e-mail e senha; se não conseguir, use "Esqueci minha senha".', 'info');
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+    if (!sb) return;
+    async function arquivos() {
+      var lista = $('lista'), vazio = $('vazio'), er = $('erro-lista');
+      lista.textContent = ''; vazio.hidden = true; aviso(er, '');
+      try {
+        var r = await sb.storage.from(BUCKET).list('', { limit: 100, sortBy: { column: 'name', order: 'asc' } });
+        if (r.error) { aviso(er, 'Não foi possível carregar a lista agora. Atualize a página em instantes.'); return; }
+        var itens = (r.data || []).filter(function (a) { return a.id && a.name && a.name.charAt(0) !== '.'; });
+        if (!itens.length) { vazio.hidden = false; return; }
+        itens.forEach(function (a) {
+          var li = document.createElement('li'), nm = document.createElement('span'), sm = document.createElement('small'), bt = document.createElement('button');
+          nm.className = 'nm'; nm.textContent = titulo(a.name);
+          var tam = tamanho(a.metadata && a.metadata.size); sm.textContent = (a.name.split('.').pop() || '').toUpperCase() + (tam ? ' · ' + tam : '');
+          nm.appendChild(sm);
+          bt.type = 'button'; bt.className = 'bt'; bt.textContent = 'Baixar'; bt.setAttribute('aria-label', 'Baixar ' + titulo(a.name));
+          bt.addEventListener('click', async function () {
+            if (bt.disabled) return;
+            aviso(er, ''); ocupar(bt, true, 'Gerando…');
+            try {
+              var u = await sb.storage.from(BUCKET).createSignedUrl(a.name, 60, { download: true });
+              if (u.error || !u.data || !u.data.signedUrl) aviso(er, 'Não foi possível gerar o download agora. Tente de novo.');
+              else location.assign(u.data.signedUrl);
+            } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+            ocupar(bt, false);
+          });
+          li.appendChild(nm); li.appendChild(bt); lista.appendChild(li);
+        });
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+    }
+    async function mostrar(sessao) {
+      if (!sessao) { convite.hidden = false; area.hidden = true; return; }
+      convite.hidden = true; area.hidden = false;
+      var user = sessao.user, nome = (user.user_metadata && user.user_metadata.nome) || '';
+      var perfil = null;
+      try {
+        var p = await sb.from('profiles').select('nome,newsletter_aceite,newsletter_sincronizado_em').eq('id', user.id).maybeSingle();
+        perfil = p.data || null;
+      } catch (x) { perfil = null; }
+      if (perfil && perfil.nome) nome = perfil.nome;
+      $('saudacao').textContent = nome ? 'Olá, ' + nome + '.' : 'Olá.';
+      arquivos();
+      if (perfil && perfil.newsletter_aceite === true && !perfil.newsletter_sincronizado_em) {
+        try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) { /* falha silenciosa de propósito */ }
+      }
+    }
+    $('btn-sair').addEventListener('click', async function () {
+      var b = $('btn-sair'); if (b.disabled) return;
+      ocupar(b, true, 'Saindo…');
+      try { await sb.auth.signOut(); } catch (x) { /* a sessão local cai de qualquer jeito */ }
+      ocupar(b, false); mostrar(null);
+    });
+    sb.auth.getSession().then(function (r) { mostrar(r.data && r.data.session); }).catch(function () { mostrar(null); });
+  }
+
+  if (pag === 'criar') { if (!sb) semBiblioteca(); criarConta(); }
+  else if (pag === 'entrar') { if (!sb) semBiblioteca(); entrar(); }
+  else if (pag === 'definir') { definirSenha(); }
+  else if (pag === 'gratis') { gratis(); }
+})();
+</script>
 <script>
 (function () {
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {

@@ -3,5 +3,6 @@ Allow: /
 Disallow: /entrar/
 Disallow: /criar-conta/
 Disallow: /conta/
+Disallow: /definir-senha/
 
 Sitemap: https://bemplanejadoeducacional.com.br/sitemap.xml
