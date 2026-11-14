@@ -820,6 +820,16 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     var q = new URLSearchParams(location.search), hash = q.get('token_hash'), tipo = q.get('type');
     if (hash || tipo) history.replaceState(null, '', location.pathname);   // tira o token da barra de endereço e do histórico
     var etapa1 = $('etapa-1'), etapa2 = $('etapa-2'), invalido = $('sem-token');
+    // Link padrão do Supabase (/verify): volta com a sessão no fragmento da URL (#access_token=...&type=recovery).
+    var viaFragmento = /(^|[#&])type=recovery(&|$)/.test(location.hash) && /access_token=/.test(location.hash);
+    if (viaFragmento && sb) {
+      var feito = false;
+      var mostrar2 = function () { if (feito) return; feito = true; history.replaceState(null, '', location.pathname); etapa2.hidden = false; $('senha').focus(); };
+      sb.auth.onAuthStateChange(function (ev, ses) { if (ses && (ev === 'PASSWORD_RECOVERY' || ev === 'SIGNED_IN')) mostrar2(); });
+      setTimeout(function () { if (!feito) { history.replaceState(null, '', location.pathname); invalido.hidden = false; } }, 6000);
+      bindSenha();
+      return;
+    }
     if (!hash || tipo !== 'recovery') { invalido.hidden = false; return; }
     etapa1.hidden = false;
     var b1 = $('btn-verificar');
@@ -835,6 +845,8 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         etapa1.hidden = true; etapa2.hidden = false; $('senha').focus();
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(b1, false); }
     });
+    bindSenha();
+    function bindSenha() {
     var f = $('f-senha');
     f.addEventListener('submit', async function (ev) {
       ev.preventDefault();
@@ -849,6 +861,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         setTimeout(function () { location.assign('/gratis/'); }, 1400);
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
     });
+    }
   }
 
   // ---------- Área Grátis
