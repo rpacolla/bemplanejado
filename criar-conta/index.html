@@ -543,6 +543,10 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .fcard .marca { display:flex; gap:12px; align-items:flex-start; }
 .fcard .marca input { flex:none; width:24px; height:24px; margin:10px 0 0; accent-color:#D4470F; }
 .fcard .marca label { font-size:15px; line-height:1.45; min-height:44px; display:flex; align-items:center; padding-block:4px; cursor:pointer; }
+.fcard .ou { display:flex; align-items:center; gap:12px; margin:0; font-size:14px; color:#5E554D; }
+.fcard .ou::before, .fcard .ou::after { content:''; flex:1; height:1px; background:var(--fio); }
+.conta .bt.li.google { display:flex; align-items:center; justify-content:center; gap:10px; }
+.cap { min-height:0; }
 .fcard .peq { font-size:14px; line-height:1.5; color:#5E554D; margin:0; }
 .fcard .peq a, .conta .links a, .politica a, .aviso a { color:var(--tinta); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px; font-weight:600; }
 .conta button.bt { font-family:inherit; cursor:pointer; width:100%; }
@@ -601,11 +605,14 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   <p id="erro-geral" class="aviso erro" role="alert" hidden></p>
   <div class="fcard">
     <form id="f-cadastro" novalidate>
-      <div><label class="rot" for="nome">Seu nome</label><input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required></div>
+      <button id="btn-google" class="bt li google" type="button">Continuar com o Google</button>
+      <p class="ou">ou</p>
+            <div><label class="rot" for="nome">Seu nome</label><input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required></div>
       <div><label class="rot" for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div>
       <div><label class="rot" for="senha">Senha</label><input id="senha" name="senha" type="password" autocomplete="new-password" minlength="8" maxlength="72" required aria-describedby="senha-d"><p class="ajuda" id="senha-d">Pelo menos 8 caracteres.</p></div>
       <div><label class="rot" for="senha2">Repita a senha</label><input id="senha2" name="senha2" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></div>
       <div class="marca"><input id="news" type="checkbox"><label for="news">Quero receber por e-mail materiais e novidades da Bem Planejado Educacional. Posso sair quando quiser pelo link no fim de cada e-mail.</label></div>
+      <div id="captcha" class="cap"></div>
       <p id="erro-form" class="aviso erro" role="alert" hidden></p>
       <button class="bt" type="submit">Criar minha conta</button>
       <p class="peq">Ao criar a conta, seus dados são tratados como descrito na <a href="../privacidade/">política de privacidade</a>.</p>
@@ -631,7 +638,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js" integrity="sha384-rwykjmWNwVxboyFmvK9OXN0wj9hnMHA2aAHtits54DuACyCq0M2PrSNxhRb+hvXT" crossorigin="anonymous"></script><script>
 (function () {
   'use strict';
-  var URL_SB = 'https://qxifpzopgcqmmvvttodq.supabase.co', CHAVE = 'sb_publishable_cclQ3UM8ZVMrto7oxwgU9g_GqcNSklm', SITE = 'https://bemplanejadoeducacional.com.br', VERSAO = 'newsletter-v1', BUCKET = 'gratis';
+  var URL_SB = 'https://qxifpzopgcqmmvvttodq.supabase.co', CHAVE = 'sb_publishable_cclQ3UM8ZVMrto7oxwgU9g_GqcNSklm', SITE = 'https://bemplanejadoeducacional.com.br', VERSAO = 'newsletter-v1', BUCKET = 'gratis', TS_KEY = '0x4AAAAAAGAwKEsGiBWKAEor';
   var raiz = document.getElementById('conta');
   if (!raiz) return;
   var pag = raiz.getAttribute('data-pag');
@@ -655,6 +662,41 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     if (ligado) { btn.dataset.rot = btn.textContent; btn.textContent = rotulo || 'Aguarde…'; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); }
     else { if (btn.dataset.rot) btn.textContent = btn.dataset.rot; btn.disabled = false; btn.removeAttribute('aria-busy'); }
   }
+  // ---------- captcha (Cloudflare Turnstile). Sem chave no gerador, o site funciona sem ele.
+  var capToken = '', capId = null;
+  function captcha() {
+    var box = $('captcha');
+    if (!TS_KEY || !box) return;
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; s.async = true; s.defer = true;
+    s.onload = function () {
+      capId = window.turnstile.render(box, { sitekey: TS_KEY, language: 'pt-br', callback: function (t) { capToken = t; },
+        'expired-callback': function () { capToken = ''; }, 'error-callback': function () { capToken = ''; } });
+    };
+    document.head.appendChild(s);
+  }
+  function capOpts() { return capToken ? { captchaToken: capToken } : {}; }
+  function capPronto(er) {
+    if (!TS_KEY || capToken) return true;
+    aviso(er, 'Aguarde a verificação de segurança terminar e tente de novo.'); return false;
+  }
+  function capNovo() { capToken = ''; try { if (capId !== null && window.turnstile) window.turnstile.reset(capId); } catch (x) {} }
+  function msgCaptcha(err) { return /captcha/.test(codigo(err)) || /captcha/i.test(String((err && err.message) || '')); }
+  function google() {
+    var b = $('btn-google');
+    if (!b) return;
+    b.addEventListener('click', async function () {
+      if (b.disabled) return;
+      var er = $('erro-form');
+      if (!sb) return semBiblioteca();
+      aviso(er, ''); ocupar(b, true, 'Abrindo o Google…');
+      try {
+        var r = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: origem() + '/gratis/' } });
+        if (r.error) { aviso(er, 'Não foi possível entrar com o Google agora. Tente de novo em instantes.'); ocupar(b, false); }
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(b, false); }
+    });
+  }
+
   function codigo(err) { return String((err && (err.code || err.error_code)) || '').toLowerCase(); }
   function limite(err) { return (err && err.status === 429) || /rate_limit/.test(codigo(err)); }
   function emailValido(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
@@ -695,14 +737,17 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       if (!emailValido(email)) return aviso(er, 'Confira o e-mail: ele parece incompleto.');
       var s = validarSenhas(senha, conf); if (s) return aviso(er, s);
       if (!sb) return semBiblioteca();
+      if (!capPronto(er)) return;
       aviso(er, ''); ocupar(btn, true, 'Criando…');
       var dados = { nome: nome, newsletter_aceite: news };
       if (news) dados.newsletter_texto = VERSAO;
       try {
-        var r = await sb.auth.signUp({ email: email, password: senha, options: { data: dados, emailRedirectTo: origem() + '/gratis/' } });
+        var r = await sb.auth.signUp({ email: email, password: senha, options: Object.assign({ data: dados, emailRedirectTo: origem() + '/gratis/' }, capOpts()) });
         if (r.error) {
           var c = codigo(r.error);
-          if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+          capNovo();
+          if (msgCaptcha(r.error)) aviso(er, 'A verificação de segurança falhou. Tente de novo.');
+          else if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
           else if (c === 'weak_password') aviso(er, 'Essa senha é fraca demais. Use pelo menos 8 caracteres, misturando letras e números.');
           else if (c === 'signup_disabled') aviso(er, 'O cadastro está fechado no momento. Tente mais tarde.');
           else aviso(er, 'Não foi possível criar a conta agora. Confira os dados e tente de novo em instantes.');
@@ -711,7 +756,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         // sucesso igual exista ou não conta com esse e-mail: a tela não revela nada
         f.hidden = true; $('sucesso').hidden = false; $('sucesso-email').textContent = email;
         var t = $('sucesso').querySelector('h2'); if (t) t.focus();
-      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
+      } catch (x) { capNovo(); aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
     });
   }
 
@@ -721,7 +766,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     function trocar(m) {
       modo = m;
       var rec = m === 'recuperar';
-      $('campo-senha').hidden = rec; $('senha').required = !rec;
+      $('campo-senha').hidden = rec; $('bloco-google').hidden = rec; $('senha').required = !rec;
       $('titulo-form').textContent = rec ? 'Receber link para criar nova senha' : 'Entrar';
       f.querySelector('button[type=submit]').textContent = rec ? 'Enviar link' : 'Entrar';
       $('ir-recuperar').hidden = rec; $('ir-entrar').hidden = !rec;
@@ -740,21 +785,26 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       if (!emailValido(email)) return aviso(er, 'Confira o e-mail: ele parece incompleto.');
       if (!sb) return semBiblioteca();
       if (modo === 'recuperar') {
+        if (!capPronto(er)) return;
         ocupar(btn, true, 'Enviando…');
         try {
-          var rr = await sb.auth.resetPasswordForEmail(email, { redirectTo: origem() + '/definir-senha/' });
-          if (rr.error && limite(rr.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+          var rr = await sb.auth.resetPasswordForEmail(email, Object.assign({ redirectTo: origem() + '/definir-senha/' }, capOpts()));
+          capNovo();
+          if (rr.error && msgCaptcha(rr.error)) aviso(er, 'A verificação de segurança falhou. Tente de novo.');
+          else if (rr.error && limite(rr.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
           else aviso(ok, 'Se houver uma conta com esse e-mail, enviamos um link para criar uma nova senha. Olhe também a caixa de spam.', 'ok');
         } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
         ocupar(btn, false); return;
       }
       if (!senha) return aviso(er, 'Digite a senha.');
+      if (!capPronto(er)) return;
       ocupar(btn, true, 'Entrando…');
       try {
-        var r = await sb.auth.signInWithPassword({ email: email, password: senha });
+        var r = await sb.auth.signInWithPassword({ email: email, password: senha, options: capOpts() });
         if (r.error) {
-          var c = codigo(r.error);
-          if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+          var c = codigo(r.error); capNovo();
+          if (msgCaptcha(r.error)) aviso(er, 'A verificação de segurança falhou. Tente de novo.');
+          else if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
           else if (c === 'email_not_confirmed') aviso(er, 'Falta confirmar seu e-mail. Abra a mensagem que enviamos no cadastro e clique no link.');
           else aviso(er, 'E-mail ou senha incorretos.');
           ocupar(btn, false); return;
@@ -843,6 +893,31 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         });
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
     }
+    // Quem entrou pelo Google não viu a caixa do cadastro: pergunta uma vez, sem pré-marcar.
+    function perguntarNews(user, perfil) {
+      var card = $('news-card');
+      var viaGoogle = (user.identities || []).some(function (i) { return i.provider === 'google'; });
+      var jaViu = user.user_metadata && user.user_metadata.news_perguntado === VERSAO;
+      if (!card || !perfil || !viaGoogle || jaViu || perfil.newsletter_aceite === true) return;
+      card.hidden = false;
+      var b = $('news-salvar');
+      if (b.dataset.pronto) return;
+      b.dataset.pronto = '1';
+      b.addEventListener('click', async function () {
+        if (b.disabled) return;
+        var er = $('erro-news'); aviso(er, ''); ocupar(b, true, 'Salvando…');
+        try {
+          if ($('news-g').checked) {
+            var u = await sb.from('profiles').update({ newsletter_aceite: true, newsletter_texto: VERSAO }).eq('id', user.id);
+            if (u.error) { aviso(er, 'Não foi possível salvar agora. Tente de novo em instantes.'); ocupar(b, false); return; }
+            try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) { /* o próximo acesso tenta de novo */ }
+          }
+          await sb.auth.updateUser({ data: { news_perguntado: VERSAO } });
+          card.hidden = true;
+        } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+        ocupar(b, false);
+      });
+    }
     async function mostrar(sessao) {
       if (!sessao) { convite.hidden = false; area.hidden = true; return; }
       convite.hidden = true; area.hidden = false;
@@ -853,6 +928,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         perfil = p.data || null;
       } catch (x) { perfil = null; }
       if (perfil && perfil.nome) nome = perfil.nome;
+      perguntarNews(user, perfil);
       $('saudacao').textContent = nome ? 'Olá, ' + nome + '.' : 'Olá.';
       arquivos();
       if (perfil && perfil.newsletter_aceite === true && !perfil.newsletter_sincronizado_em) {
@@ -868,8 +944,8 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     sb.auth.getSession().then(function (r) { mostrar(r.data && r.data.session); }).catch(function () { mostrar(null); });
   }
 
-  if (pag === 'criar') { if (!sb) semBiblioteca(); criarConta(); }
-  else if (pag === 'entrar') { if (!sb) semBiblioteca(); entrar(); }
+  if (pag === 'criar') { if (!sb) semBiblioteca(); captcha(); google(); criarConta(); }
+  else if (pag === 'entrar') { if (!sb) semBiblioteca(); captcha(); google(); entrar(); }
   else if (pag === 'definir') { definirSenha(); }
   else if (pag === 'gratis') { gratis(); }
 })();
