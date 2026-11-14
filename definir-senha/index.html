@@ -644,7 +644,9 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 
   function origem() {
     var h = location.hostname;
-    return (h === 'localhost' || h === '127.0.0.1' || h === '[::1]') ? location.origin : SITE;
+    // Prévia do Netlify (previa--bemplanejado-previa.netlify.app) volta para ela mesma; o resto, para o site.
+    var local = (h === 'localhost' || h === '127.0.0.1' || h === '[::1]' || h === 'previa--bemplanejado-previa.netlify.app');
+    return local ? location.origin : SITE;
   }
   function aviso(el, texto, tipo) {
     if (!el) return;
