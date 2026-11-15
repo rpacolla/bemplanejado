@@ -603,6 +603,46 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .lks .ir { font-weight:700; font-size:15px; white-space:nowrap; }
 .lks .ir::after { content:' ↗'; }
 
+/* Área do cliente (15/11/2026): menu, avatar, perfil, segurança, ajuda */
+.mconta { display:flex; gap:6px; overflow-x:auto; margin:18px 0 0; padding:4px 0 6px; scrollbar-width:none; }
+.mconta::-webkit-scrollbar { display:none; }
+.mconta a { flex:none; display:inline-flex; align-items:center; min-height:44px; padding:0 16px; border-radius:999px; border:1px solid var(--fio);
+  background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); text-decoration:none; white-space:nowrap; }
+.mconta a[aria-current=page] { background:var(--tinta); border-color:var(--tinta); color:#FFFFFF; }
+.mconta a:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.conta .ar-topo button.bt { width:auto; min-height:44px; padding:0 18px; }
+.ar-topo { flex-wrap:nowrap; }
+.ola { display:flex; gap:14px; align-items:center; min-width:0; }
+.ola h2 { min-width:0; overflow-wrap:anywhere; }
+.av { width:56px; height:56px; border-radius:50%; overflow:hidden; flex:none; display:grid; place-items:center; background:#F15A24; color:#2A2420; font:900 24px/1 var(--tit); }
+.av.g { width:112px; height:112px; font-size:46px; }
+.av img, .av svg { width:100%; height:100%; object-fit:cover; display:block; }
+.seg { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; padding:4px; border-radius:14px; background:#F1E9DE; }
+.seg button { border:0; background:none; min-height:44px; padding:0 6px; border-radius:10px; font:600 15px/1.1 var(--sans); color:#5E554D; cursor:pointer; }
+.seg button[aria-selected=true] { background:#FFFFFF; color:var(--tinta); box-shadow:0 1px 3px rgba(42,36,32,.15); }
+.seg button:disabled { opacity:.45; cursor:not-allowed; }
+.gal { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.gal button { aspect-ratio:1; max-width:100%; border-radius:50%; border:3px solid transparent; padding:0; overflow:hidden; cursor:pointer; background:none; }
+.gal button[aria-pressed=true] { border-color:#D4470F; }
+.gal button:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.gal svg { width:100%; height:100%; display:block; }
+.subir { display:flex; flex-direction:column; align-items:center; gap:10px; padding:22px; border:2px dashed #8C8176; border-radius:14px; text-align:center; cursor:pointer; }
+.subir input { position:absolute; opacity:0; width:1px; height:1px; }
+.subir:focus-within { outline:3px solid var(--lar); outline-offset:2px; }
+.lin { display:flex; justify-content:space-between; align-items:center; gap:12px 18px; flex-wrap:wrap; padding-block:14px; border-top:1px solid var(--fio); }
+.lin:first-child { border-top:0; padding-top:0; }
+.lin > div { flex:1 1 220px; min-width:0; }
+.lin b { display:block; }
+.lin span { color:#5E554D; font-size:15px; }
+.conta .lin .bt { width:auto; min-height:46px; padding:0 20px; }
+.faq details { border-top:1px solid var(--fio); padding-block:14px; }
+.faq details:first-child { border-top:0; padding-top:0; }
+.faq summary { font-weight:700; cursor:pointer; min-height:32px; }
+.faq details p { margin:8px 0 0; color:#5E554D; line-height:1.55; }
+.copia { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.copia code { font:600 17px/1.3 var(--sans); overflow-wrap:anywhere; user-select:all; }
+.conta .copia .bt { width:auto; min-height:44px; padding:0 18px; }
+
 :root { --ac:#F15A24; --ac-t:#2A2420; --ac-x:#B8400F; }</style>
 <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script><meta name="robots" content="noindex, nofollow">
 </head>
@@ -1027,21 +1067,13 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       var ul = $('meus'), er = $('erro-meus');
       $('area').hidden = false;
       try {
-        var p = await sb.from('profiles').select('nome').eq('id', sessao.user.id).maybeSingle();
-        var nome = (p.data && p.data.nome) || (sessao.user.user_metadata && sessao.user.user_metadata.nome) || '';
-        $('saudacao').textContent = nome ? 'Olá, ' + nome + '.' : 'Olá.';
+        await cabecalhoConta(sessao);
         var r = await sb.from('acessos').select('origem,criado_em,produtos(slug,titulo,descricao,capa,gratis)').order('criado_em', { ascending: false });
         if (r.error) { aviso(er, 'Não foi possível carregar seus produtos agora. Atualize a página em instantes.'); return; }
         var itens = (r.data || []).filter(function (a) { return a.produtos; });
         if (!itens.length) { $('vazio').hidden = false; return; }
         itens.forEach(function (a) { ul.appendChild(cartao(a.produtos, '../', 'Abrir', urlProduto('../', a.produtos.slug))); });
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
-    });
-    var b = $('btn-sair');
-    if (b) b.addEventListener('click', async function () {
-      ocupar(b, true, 'Saindo…');
-      try { await sb.auth.signOut(); } catch (x) { /* a sessão local cai de qualquer jeito */ }
-      location.assign('../');
     });
   }
   function paginaProduto() {
@@ -1079,12 +1111,262 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     });
   }
 
+  // ---------- Avatar (15/11/2026). Galeria: 12 desenhos da marca, sem rosto de pessoa. Strings fixas, nunca dado de usuário.
+  var AV_CORES = [['#F15A24','#FDE4D8'],['#17324A','#FFCB47'],['#FFCB47','#B8400F'],['#B8400F','#FBF7F1'],['#FDE4D8','#F15A24'],['#17324A','#F15A24']];
+  var AV_FORMAS = [
+    '<rect x="44" y="18" width="12" height="54" rx="2" fill="F"/><path d="M44 72h12l-6 12z" fill="F"/>',
+    '<rect x="20" y="42" width="60" height="16" rx="3" fill="F"/><path d="M30 42v7M40 42v5M50 42v7M60 42v5M70 42v7" stroke="B" stroke-width="3"/>',
+    '<path d="M50 20l8 18 20 2-15 13 5 20-18-11-18 11 5-20-15-13 20-2z" fill="F"/>',
+    '<rect x="26" y="26" width="48" height="48" rx="6" fill="F"/><path d="M26 40h48M42 26v48M58 26v48M26 57h48" stroke="B" stroke-width="3"/>',
+    '<path d="M24 34l26-10 26 10v34l-26 10-26-10z" fill="F"/><path d="M50 24v54" stroke="B" stroke-width="3"/>',
+    '<circle cx="50" cy="50" r="24" fill="F"/><path d="M50 26v48M26 50h48" stroke="B" stroke-width="3"/>',
+    '<path d="M50 22c16 0 26 12 26 24 0 10-8 14-14 16v10H38V62c-6-2-14-6-14-16 0-12 10-24 26-24z" fill="F"/>',
+    '<path d="M22 66l28-40 28 40z" fill="F"/><circle cx="50" cy="56" r="6" fill="B"/>',
+    '<path d="M28 70V40l22-14 22 14v30z" fill="F"/><rect x="44" y="52" width="12" height="18" fill="B"/>',
+    '<circle cx="38" cy="44" r="14" fill="F"/><circle cx="62" cy="56" r="14" fill="F" opacity=".7"/>',
+    '<path d="M30 64c10-28 30-28 40 0" stroke="F" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="50" cy="34" r="6" fill="F"/>',
+    '<path d="M50 24l6 20h20l-16 12 6 20-16-12-16 12 6-20-16-12h20z" fill="F" transform="rotate(12 50 50)"/>'
+  ];
+  function avSvg(i) {
+    var c = AV_CORES[i % AV_CORES.length];
+    return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="' + c[1] + '"/>' +
+      AV_FORMAS[i].split('"F"').join('"' + c[0] + '"').split('"B"').join('"' + c[1] + '"') + '</svg>';
+  }
+  function fotoGoogle(user) {
+    var m = (user && user.user_metadata) || {}, u = m.avatar_url || m.picture || '';
+    try { var x = new URL(u); if (x.protocol === 'https:' && (x.hostname === 'googleusercontent.com' || x.hostname.slice(-22) === '.googleusercontent.com')) return x.href; } catch (e) {}
+    return '';
+  }
+  function temGoogle(user) { return (user.identities || []).some(function (i) { return i.provider === 'google'; }); }
+  var AV_BUCKET = 'avatares';
+  async function urlUpload(uid) {
+    try { var r = await sb.storage.from(AV_BUCKET).createSignedUrl(uid + '/avatar.webp', 3600); return (r.data && r.data.signedUrl) || ''; } catch (e) { return ''; }
+  }
+  async function pintarAvatar(box, user, perfil) {
+    if (!box) return;
+    var tipo = perfil && perfil.avatar_tipo, nome = (perfil && perfil.nome) || (user.user_metadata && user.user_metadata.nome) || user.email || '';
+    box.textContent = '';
+    if (tipo === 'galeria' && perfil.avatar_ref) { box.innerHTML = avSvg(parseInt(perfil.avatar_ref, 10) - 1); return; }
+    var src = '';
+    if (tipo === 'google') src = fotoGoogle(user);
+    else if (tipo === 'upload') src = await urlUpload(user.id);
+    if (src) { var im = el('img'); im.alt = ''; im.referrerPolicy = 'no-referrer'; im.src = src; box.appendChild(im); return; }
+    box.textContent = (nome.trim().charAt(0) || '?').toUpperCase();
+  }
+  async function cabecalhoConta(sessao) {
+    var user = sessao.user, perfil = null;
+    try { var p = await sb.from('profiles').select('nome,email,avatar_tipo,avatar_ref,newsletter_aceite').eq('id', user.id).maybeSingle(); perfil = p.data || null; } catch (x) {}
+    var nome = (perfil && perfil.nome) || (user.user_metadata && user.user_metadata.nome) || '';
+    if ($('saudacao')) $('saudacao').textContent = nome ? 'Olá, ' + nome.split(' ')[0] + '.' : 'Olá.';
+    pintarAvatar($('av'), user, perfil);
+    var b = $('btn-sair');
+    if (b && !b.dataset.pronto) { b.dataset.pronto = '1'; b.addEventListener('click', async function () {
+      ocupar(b, true, 'Saindo…'); try { await sb.auth.signOut(); } catch (x) {} location.assign('/'); }); }
+    return perfil;
+  }
+  function reduzir(arq) {
+    // Recorta em quadrado e reduz para 256 px em WebP. Tira de quebra os metadados da foto (localização, aparelho).
+    return new Promise(function (ok, falha) {
+      var u = URL.createObjectURL(arq), im = new Image();
+      im.onload = function () {
+        var l = Math.min(im.naturalWidth, im.naturalHeight), cv = document.createElement('canvas'); cv.width = cv.height = 256;
+        cv.getContext('2d').drawImage(im, (im.naturalWidth - l) / 2, (im.naturalHeight - l) / 2, l, l, 0, 0, 256, 256);
+        URL.revokeObjectURL(u);
+        cv.toBlob(function (b) { b ? ok(b) : falha(new Error('conversao')); }, 'image/webp', 0.85);
+      };
+      im.onerror = function () { URL.revokeObjectURL(u); falha(new Error('imagem')); };
+      im.src = u;
+    });
+  }
+
+  // ---------- Perfil e avatar
+  function perfilPag() {
+    exigirSessao(async function (sessao) {
+      $('area').hidden = false;
+      var user = sessao.user, perfil = await cabecalhoConta(sessao) || {};
+      var grande = $('av-grande'), painel = $('painel'), er = $('erro-av'), ok = $('ok-av');
+      var aba = perfil.avatar_tipo === 'upload' ? 'upload' : perfil.avatar_tipo === 'google' ? 'google' : 'galeria';
+      var gBtn = raiz.querySelector('.seg [data-t=google]');
+      if (!temGoogle(user) || !fotoGoogle(user)) { gBtn.disabled = true; gBtn.title = 'Disponível para quem entra com o Google'; }
+      function repintar() { pintarAvatar(grande, user, perfil); pintarAvatar($('av'), user, perfil); }
+      async function salvarAv(tipo, ref) {
+        aviso(er, ''); aviso(ok, '', 'ok');
+        var r = await sb.from('profiles').update({ avatar_tipo: tipo, avatar_ref: ref }).eq('id', user.id);
+        if (r.error) { aviso(er, 'Não foi possível salvar o avatar agora. Tente de novo em instantes.'); return false; }
+        perfil.avatar_tipo = tipo; perfil.avatar_ref = ref; repintar(); aviso(ok, 'Avatar salvo.', 'ok'); return true;
+      }
+      function mostrarAba() {
+        raiz.querySelectorAll('.seg button').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.t === aba)); });
+        painel.textContent = '';
+        if (aba === 'galeria') {
+          var g = el('div', 'gal');
+          AV_FORMAS.forEach(function (_, i) {
+            var ref = (i < 9 ? '0' : '') + (i + 1), b = el('button'); b.type = 'button';
+            b.setAttribute('aria-label', 'Avatar ' + (i + 1)); b.setAttribute('aria-pressed', String(perfil.avatar_tipo === 'galeria' && perfil.avatar_ref === ref));
+            b.innerHTML = avSvg(i);
+            b.addEventListener('click', async function () { if (await salvarAv('galeria', ref)) mostrarAba(); });
+            g.appendChild(b);
+          });
+          painel.appendChild(g);
+        } else if (aba === 'upload') {
+          var lb = el('label', 'subir'), inp = el('input');
+          lb.appendChild(el('b', null, 'Escolher uma foto'));
+          lb.appendChild(el('span', 'ajuda', 'JPG, PNG ou WebP. A foto é recortada em quadrado e reduzida antes de enviar.'));
+          lb.appendChild(el('span', 'bt li', 'Abrir fotos'));
+          inp.type = 'file'; inp.accept = 'image/jpeg,image/png,image/webp'; inp.id = 'arq'; lb.appendChild(inp);
+          inp.addEventListener('change', async function () {
+            var f = inp.files && inp.files[0]; if (!f) return;
+            aviso(er, ''); aviso(ok, '', 'ok');
+            if (!/^image[/](jpeg|png|webp)$/.test(f.type)) { aviso(er, 'Esse arquivo não é uma foto em JPG, PNG ou WebP.'); return; }
+            if (f.size > 15 * 1048576) { aviso(er, 'A foto é grande demais. Escolha uma de até 15 MB.'); return; }
+            aviso(ok, 'Enviando a foto…', 'info');
+            try {
+              var blob = await reduzir(f);
+              var up = await sb.storage.from(AV_BUCKET).upload(user.id + '/avatar.webp', blob, { upsert: true, contentType: 'image/webp', cacheControl: '60' });
+              if (up.error) { aviso(ok, '', 'ok'); aviso(er, 'Não foi possível enviar a foto agora. Tente de novo em instantes.'); return; }
+              await salvarAv('upload', null);
+            } catch (x) { aviso(ok, '', 'ok'); aviso(er, 'Não foi possível ler essa foto. Tente outra.'); }
+          });
+          painel.appendChild(lb);
+        } else {
+          painel.appendChild(el('p', 'ajuda', 'Usa a foto da sua conta Google. Se você trocar a foto lá, ela muda aqui também.'));
+          var bg = el('button', 'bt li', 'Usar foto do Google'); bg.type = 'button'; bg.style.marginTop = '12px';
+          bg.addEventListener('click', function () { salvarAv('google', null); });
+          painel.appendChild(bg);
+        }
+        if (perfil.avatar_tipo) {
+          var tira = el('button', 'tx-bt', 'Voltar para a inicial do nome'); tira.type = 'button'; tira.style.marginTop = '8px';
+          tira.addEventListener('click', async function () { if (await salvarAv(null, null)) mostrarAba(); });
+          painel.appendChild(tira);
+        }
+      }
+      raiz.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { if (!b.disabled) { aba = b.dataset.t; mostrarAba(); } }); });
+      repintar(); mostrarAba();
+
+      $('nome').value = perfil.nome || '';
+      $('news').checked = perfil.newsletter_aceite === true;
+      var f = $('f-perfil');
+      f.addEventListener('submit', async function (ev) {
+        ev.preventDefault();
+        var btn = f.querySelector('button[type=submit]'), e2 = $('erro-perfil'), o2 = $('ok-perfil');
+        if (btn.disabled) return;
+        var nome = $('nome').value.trim(), news = $('news').checked;
+        aviso(e2, ''); aviso(o2, '', 'ok');
+        if (!nome) return aviso(e2, 'Escreva seu nome para salvar.');
+        ocupar(btn, true, 'Salvando…');
+        var dados = { nome: nome };
+        var mudouNews = news !== (perfil.newsletter_aceite === true);
+        if (mudouNews) { dados.newsletter_aceite = news; if (news) dados.newsletter_texto = VERSAO; }
+        try {
+          var r = await sb.from('profiles').update(dados).eq('id', user.id);
+          if (r.error) { aviso(e2, 'Não foi possível salvar agora. Tente de novo em instantes.'); ocupar(btn, false); return; }
+          perfil.nome = nome; perfil.newsletter_aceite = news;
+          // A função cuida das duas mãos: inscreve quem aceitou e tira da lista quem saiu.
+          if (mudouNews) { try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) {} }
+          $('saudacao').textContent = 'Olá, ' + nome.split(' ')[0] + '.'; repintar();
+          aviso(o2, 'Perfil salvo.', 'ok');
+        } catch (x) { aviso(e2, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+        ocupar(btn, false);
+      });
+    });
+  }
+
+  // ---------- E-mail e senha
+  function segurancaPag() {
+    exigirSessao(async function (sessao) {
+      $('area').hidden = false;
+      var user = sessao.user;
+      await cabecalhoConta(sessao);
+      $('email-atual').textContent = user.email || '';
+      var fe = $('f-email');
+      fe.addEventListener('submit', async function (ev) {
+        ev.preventDefault();
+        var btn = fe.querySelector('button[type=submit]'), er = $('erro-email'), ok = $('ok-email');
+        if (btn.disabled) return;
+        var novo = $('novo-email').value.trim();
+        aviso(er, ''); aviso(ok, '', 'ok');
+        if (!emailValido(novo)) return aviso(er, 'Confira o e-mail: ele parece incompleto.');
+        if (novo.toLowerCase() === String(user.email || '').toLowerCase()) return aviso(er, 'Esse já é o e-mail da sua conta.');
+        ocupar(btn, true, 'Enviando…');
+        try {
+          var r = await sb.auth.updateUser({ email: novo }, { emailRedirectTo: origem() + '/gratis/' });
+          if (r.error) {
+            if (limite(r.error)) aviso(er, 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.');
+            else if (codigo(r.error) === 'email_exists') aviso(er, 'Esse e-mail já está em outra conta. Se for sua, fale com a gente pela Ajuda.');
+            else aviso(er, 'Não foi possível pedir a troca agora. Tente de novo em instantes.');
+          } else {
+            aviso(ok, 'Mandamos um link de confirmação para o e-mail atual e outro para ' + novo + '. A troca só vale depois de confirmar nos dois.', 'ok');
+            fe.reset();
+          }
+        } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+        ocupar(btn, false);
+      });
+
+      // Senha em dois passos: código no e-mail (reautenticação), depois a senha nova. Serve também para quem só usa o Google.
+      var b1 = $('btn-codigo'), fs = $('f-senha');
+      b1.addEventListener('click', async function () {
+        if (b1.disabled) return;
+        var er = $('erro-senha'); aviso(er, ''); ocupar(b1, true, 'Enviando…');
+        try {
+          var r = await sb.auth.reauthenticate();
+          if (r.error) { aviso(er, limite(r.error) ? 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.' : 'Não foi possível enviar o código agora. Tente de novo em instantes.'); ocupar(b1, false); return; }
+          $('passo-1').hidden = true; fs.hidden = false; $('codigo').focus();
+        } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(b1, false); }
+      });
+      fs.addEventListener('submit', async function (ev) {
+        ev.preventDefault();
+        var btn = fs.querySelector('button[type=submit]'), er = $('erro-senha'), ok = $('ok-senha');
+        if (btn.disabled) return;
+        var cod = $('codigo').value.replace(/[^0-9]/g, '');
+        aviso(er, ''); aviso(ok, '', 'ok');
+        if (cod.length < 6) return aviso(er, 'Digite o código de 6 números que chegou no seu e-mail.');
+        var s = validarSenhas($('senha').value, $('senha2').value); if (s) return aviso(er, s);
+        ocupar(btn, true, 'Salvando…');
+        try {
+          var r = await sb.auth.updateUser({ password: $('senha').value, nonce: cod });
+          if (r.error) {
+            var c = codigo(r.error);
+            if (/nonce|reauth|otp/.test(c) || /nonce|reauth/i.test(String(r.error.message || ''))) aviso(er, 'O código está errado ou venceu. Peça outro e tente de novo.');
+            else aviso(er, msgSenhaServidor(r.error));
+            ocupar(btn, false); return;
+          }
+          fs.reset(); fs.hidden = true; $('passo-1').hidden = false; ocupar(b1, false);
+          aviso(ok, 'Senha salva. Use a nova senha na próxima vez que entrar.', 'ok');
+        } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+        ocupar(btn, false);
+      });
+
+      var bt = $('btn-sair-tudo');
+      bt.addEventListener('click', async function () {
+        if (bt.disabled) return;
+        ocupar(bt, true, 'Saindo…');
+        try { await sb.auth.signOut({ scope: 'global' }); } catch (x) {}
+        location.assign('../../entrar/');
+      });
+    });
+  }
+
+  // ---------- Ajuda
+  function ajudaPag() {
+    if (sb) sb.auth.getSession().then(function (r) { var s = r.data && r.data.session; if (s) cabecalhoConta(s); }).catch(function () {});
+    var b = $('btn-copiar'), ok = $('ok-copia');
+    if (b) b.addEventListener('click', function () {
+      var t = $('email-loja').textContent;
+      Promise.resolve().then(function () { return navigator.clipboard.writeText(t); })
+        .then(function () { aviso(ok, 'E-mail copiado.', 'ok'); })
+        .catch(function () { var r = document.createRange(); r.selectNodeContents($('email-loja')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); aviso(ok, 'Selecionado. Copie com o menu do aparelho.', 'info'); });
+    });
+  }
+
   if (pag === 'criar') { if (!sb) semBiblioteca(); captcha(); google(); criarConta(); }
   else if (pag === 'entrar') { if (!sb) semBiblioteca(); captcha(); google(); entrar(); }
   else if (pag === 'definir') { definirSenha(); }
   else if (pag === 'gratis') { gratis(); }
   else if (pag === 'conta') { minhaConta(); }
   else if (pag === 'produto') { paginaProduto(); }
+  else if (pag === 'perfil') { perfilPag(); }
+  else if (pag === 'seguranca') { segurancaPag(); }
+  else if (pag === 'ajuda') { ajudaPag(); }
 })();
 </script>
 <script>
