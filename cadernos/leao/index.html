@@ -527,6 +527,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 }
 /* Entrar: link discreto no fim do menu (13/11/2026) */
 .lj-nav a.entrar { font-weight:600; color:#4A4038; }
+.lj-nav a.entrar .ini { display:inline-grid; place-items:center; width:30px; height:30px; margin-right:8px; border-radius:50%; background:#F15A24; color:#2A2420; font:900 15px/1 var(--sans); letter-spacing:0; flex:none; }
 @media (min-width:761px) { .lj-nav a.entrar { margin-left:clamp(0px,1vw,14px); padding-left:clamp(14px,1.6vw,24px); border-left:1px solid rgba(42,36,32,.18); } .lj-nav a.entrar::after { left:clamp(14px,1.6vw,24px); } }
 .vh { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }.trilha { background:var(--ac); color:var(--ac-t); }
 :root { --ac:#D9902F; --ac-t:#2A2420; --ac-x:#D9902F; }</style>
@@ -658,6 +659,18 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       });
     });
   }
+  // Logado (15/11/2026): "Entrar" vira "Minha conta" com a inicial. Só lê se existe sessão salva pelo supabase-js; não valida nada.
+  var ent = document.querySelector('.lj-nav a.entrar');
+  if (ent) { try {
+    var ses = JSON.parse(localStorage.getItem('sb-qxifpzopgcqmmvvttodq-auth-token') || 'null'), u = ses && ses.user;
+    if (u) {
+      var m = u.user_metadata || {}, ini = String(m.nome || m.full_name || u.email || '?').trim().charAt(0).toUpperCase() || '?';
+      ent.href = ent.getAttribute('href').replace(/entrar\/$/, 'conta/');
+      ent.textContent = ''; var bo = document.createElement('span'); bo.className = 'ini'; bo.textContent = ini; bo.setAttribute('aria-hidden', 'true');
+      ent.appendChild(bo); ent.appendChild(document.createTextNode('Minha conta'));
+      if (/\/conta\//.test(location.pathname)) ent.setAttribute('aria-current', 'page');
+    }
+  } catch (x) {} }
   var barra = document.querySelector('.barra'), ab = document.querySelector('.ab');
   if (barra && ab && io) new IntersectionObserver(function (es) { barra.classList.toggle('on', !es[0].isIntersecting); }).observe(ab);
   else if (barra) barra.classList.add('on');

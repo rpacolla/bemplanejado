@@ -527,6 +527,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 }
 /* Entrar: link discreto no fim do menu (13/11/2026) */
 .lj-nav a.entrar { font-weight:600; color:#4A4038; }
+.lj-nav a.entrar .ini { display:inline-grid; place-items:center; width:30px; height:30px; margin-right:8px; border-radius:50%; background:#F15A24; color:#2A2420; font:900 15px/1 var(--sans); letter-spacing:0; flex:none; }
 @media (min-width:761px) { .lj-nav a.entrar { margin-left:clamp(0px,1vw,14px); padding-left:clamp(14px,1.6vw,24px); border-left:1px solid rgba(42,36,32,.18); } .lj-nav a.entrar::after { left:clamp(14px,1.6vw,24px); } }
 
 .conta { padding-block:clamp(20px,4vw,48px) clamp(56px,8vw,112px); }
@@ -602,6 +603,22 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .lks .nm small { display:block; font-weight:400; font-size:14px; color:#5E554D; margin-top:2px; }
 .lks .ir { font-weight:700; font-size:15px; white-space:nowrap; }
 .lks .ir::after { content:' ↗'; }
+.voltar { display:inline-flex; align-items:center; min-height:44px; font:700 16px/1 var(--sans); color:var(--tinta); text-decoration:none; }
+.voltar:hover { text-decoration:underline; text-underline-offset:3px; }
+.filtro { display:flex; flex-wrap:wrap; gap:8px; }
+.filtro button { min-height:44px; padding:0 18px; border-radius:999px; border:1px solid var(--fio); background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); cursor:pointer; }
+.filtro button[aria-pressed=true] { background:var(--tinta); border-color:var(--tinta); color:#FFFFFF; }
+.filtro button:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.pecas { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:clamp(12px,2vw,20px); }
+.pecas a { display:flex; flex-direction:column; gap:8px; height:100%; background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:10px 10px 14px; color:var(--tinta); text-decoration:none; }
+.pecas a:hover { border-color:var(--tinta); }
+.pecas a:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.pecas .mini { display:grid; place-items:center; aspect-ratio:1; background:#F1E9DE; border-radius:8px; overflow:hidden; }
+.pecas .mini img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+.pecas .nm { font-weight:700; font-size:16px; line-height:1.25; overflow-wrap:anywhere; }
+.pecas .ir { margin-top:auto; font-weight:600; font-size:14px; color:#8A3410; }
+.pecas .ir::after { content:' ↗'; }
+@media (max-width:420px) { .pecas { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
 /* Área do cliente (15/11/2026): menu, avatar, perfil, segurança, ajuda */
 .mconta { display:flex; gap:6px; overflow-x:auto; margin:18px 0 0; padding:4px 0 6px; scrollbar-width:none; }
@@ -610,6 +627,10 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); text-decoration:none; white-space:nowrap; }
 .mconta a[aria-current=page] { background:var(--tinta); border-color:var(--tinta); color:#FFFFFF; }
 .mconta a:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.mconta .sair { flex:none; margin-left:auto; min-height:44px; padding:0 16px; border:0; background:none; color:#5E554D; font:600 15px/1 var(--sans); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.ola.cab { margin-top:clamp(8px,2vw,20px); }
+.ola.cab h1 { font-size:clamp(28px,5vw,44px); line-height:1.05; margin:0; overflow-wrap:anywhere; }
+.ola.cab .peq { margin:4px 0 0; font-size:15px; color:#5E554D; overflow-wrap:anywhere; }
 .conta .ar-topo button.bt { width:auto; min-height:44px; padding:0 18px; }
 .ar-topo { flex-wrap:nowrap; }
 .ola { display:flex; gap:14px; align-items:center; min-width:0; }
@@ -656,19 +677,22 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 <main id="conta" data-pag="conta">
 <nav class="trilha" aria-label="Você está aqui"><div class="lj-w"><a href="../">Início</a><span aria-hidden="true">/</span><span aria-current="page">Meus produtos</span></div></nav>
 <section class="conta"><div class="w">
-  <p class="eti">Sua conta</p>
-  <h1 class="gg" style="margin-top:18px">Meus produtos</h1>
-  <nav class="mconta" aria-label="Menu da conta"><a href="../conta/" aria-current="page">Meus produtos</a><a href="../conta/perfil/">Perfil e avatar</a><a href="../conta/seguranca/">E-mail e senha</a><a href="../conta/ajuda/">Ajuda</a></nav>
+  <div class="ola cab"><span id="av" class="av" aria-hidden="true"></span>
+    <div><h1 id="saudacao" class="m" tabindex="-1">Sua conta</h1><p id="email-cab" class="peq"></p></div></div>
+  <nav class="mconta" aria-label="Menu da conta"><a href="../conta/" aria-current="page">Meus produtos</a><a href="../conta/perfil/">Perfil</a><a href="../conta/seguranca/">E-mail e senha</a><a href="../conta/ajuda/">Ajuda</a><button id="btn-sair" class="sair" type="button" hidden>Sair</button></nav>
+  <p id="erro-link" class="aviso info" role="status" hidden style="margin-top:18px;max-width:60ch"></p>
   <div id="sem-sessao" class="fcard" hidden style="margin-top:clamp(24px,3vw,40px);max-width:640px;display:flex;flex-direction:column;gap:16px">
     <h2 class="m">Entre para ver <em>seus produtos</em></h2>
     <p class="lead cz" style="max-width:52ch">Aqui ficam os materiais grátis que você pegou e o que comprou na Hotmart. Quem comprou entra com o mesmo e-mail da compra.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="bt" href="../entrar/">Entrar</a><a class="bt li" href="../criar-conta/">Criar conta</a></div>
   </div>
   <div id="area" hidden style="margin-top:clamp(20px,3vw,36px);display:flex;flex-direction:column;gap:20px">
-    <div class="ar-topo">
-      <div class="ola"><span id="av" class="av" aria-hidden="true"></span><h2 id="saudacao" class="m" tabindex="-1"></h2></div>
-      <button id="btn-sair" class="bt li" type="button">Sair</button>
+    <div id="news-card" class="fcard" hidden style="max-width:640px">
+      <div class="marca"><input id="news-g" type="checkbox"><label for="news-g">Quero receber por e-mail materiais e novidades da Bem Planejado Educacional. Posso sair quando quiser pelo link no fim de cada e-mail.</label></div>
+      <p id="erro-news" class="aviso erro" role="alert" hidden></p>
+      <button id="news-salvar" class="bt" type="button" style="margin-top:14px">Continuar</button>
     </div>
+    <h2 class="p" style="margin:0">Meus produtos</h2>
     <p id="erro-meus" class="aviso erro" role="alert" hidden></p>
     <ul id="meus" class="prods"></ul>
     <div id="vazio" class="fcard" hidden style="max-width:640px"><b>Você ainda não tem produtos aqui.</b><br>Os materiais grátis ficam na <a href="../gratis/" style="color:inherit;font-weight:600">Área Grátis</a>. Se comprou na Hotmart, confira se entrou com o mesmo e-mail da compra.</div>
@@ -754,7 +778,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     var v = new URLSearchParams(location.search).get('voltar');
     // só caminho interno: começa com uma barra, e a segunda letra não é barra nem contrabarra nem controle
     if (v && v.length < 300 && /^\/[^\/\\\u0000-\u001f]/.test(v)) return v;
-    return '/gratis/';
+    return '/conta/';
   }
   function semBiblioteca() {
     var el = $('erro-geral');
@@ -906,8 +930,8 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       try {
         var r = await sb.auth.updateUser({ password: $('senha').value });
         if (r.error) { aviso(er, msgSenhaServidor(r.error)); ocupar(btn, false); return; }
-        f.hidden = true; aviso($('ok-2'), 'Senha definida. Levando você para a Área Grátis…', 'ok');
-        setTimeout(function () { location.assign('/gratis/'); }, 1400);
+        f.hidden = true; aviso($('ok-2'), 'Senha definida. Levando você para a sua conta…', 'ok');
+        setTimeout(function () { location.assign('/conta/'); }, 1400);
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); ocupar(btn, false); }
     });
     }
@@ -923,6 +947,8 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 
   function gratis() {
     var convite = $('convite'), area = $('area');
+    // Volta do Google ou do link de confirmação: a casa de quem está logado é /conta/ (o Auth só aceita URLs exatas e /gratis/ já está liberada).
+    var vemDoLogin = /access_token=|[?&]code=/.test(location.hash + location.search);
     if (/error_code|error_description/.test(location.hash)) {
       aviso($('erro-link'), 'O link de confirmação venceu ou já foi usado. Entre com seu e-mail e senha; se não conseguir, use "Esqueci minha senha".', 'info');
       history.replaceState(null, '', location.pathname + location.search);
@@ -956,34 +982,10 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         });
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
     }
-    // Quem entrou pelo Google não viu a caixa do cadastro: pergunta uma vez, sem pré-marcar.
-    function perguntarNews(user, perfil) {
-      var card = $('news-card');
-      var viaGoogle = (user.identities || []).some(function (i) { return i.provider === 'google'; });
-      var jaViu = user.user_metadata && user.user_metadata.news_perguntado === VERSAO;
-      if (!card || !perfil || !viaGoogle || jaViu || perfil.newsletter_aceite === true) return;
-      card.hidden = false;
-      var b = $('news-salvar');
-      if (b.dataset.pronto) return;
-      b.dataset.pronto = '1';
-      b.addEventListener('click', async function () {
-        if (b.disabled) return;
-        var er = $('erro-news'); aviso(er, ''); ocupar(b, true, 'Salvando…');
-        try {
-          if ($('news-g').checked) {
-            var u = await sb.from('profiles').update({ newsletter_aceite: true, newsletter_texto: VERSAO }).eq('id', user.id);
-            if (u.error) { aviso(er, 'Não foi possível salvar agora. Tente de novo em instantes.'); ocupar(b, false); return; }
-            try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) { /* o próximo acesso tenta de novo */ }
-          }
-          await sb.auth.updateUser({ data: { news_perguntado: VERSAO } });
-          card.hidden = true;
-        } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
-        ocupar(b, false);
-      });
-    }
     async function mostrar(sessao) {
       catalogoGratis(sessao);
       if (!sessao) { convite.hidden = false; area.hidden = true; return; }
+      if (vemDoLogin) { location.replace('../conta/'); return; }
       convite.hidden = true; area.hidden = false;
       var user = sessao.user, nome = (user.user_metadata && user.user_metadata.nome) || '';
       var perfil = null;
@@ -999,15 +1001,35 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) { /* falha silenciosa de propósito */ }
       }
     }
-    $('btn-sair').addEventListener('click', async function () {
-      var b = $('btn-sair'); if (b.disabled) return;
-      ocupar(b, true, 'Saindo…');
-      try { await sb.auth.signOut(); } catch (x) { /* a sessão local cai de qualquer jeito */ }
-      ocupar(b, false); mostrar(null);
-    });
     sb.auth.getSession().then(function (r) { mostrar(r.data && r.data.session); }).catch(function () { mostrar(null); });
   }
 
+
+  // Quem entrou pelo Google não viu a caixa do cadastro: pergunta uma vez, sem pré-marcar.
+  function perguntarNews(user, perfil) {
+    var card = $('news-card');
+    var viaGoogle = (user.identities || []).some(function (i) { return i.provider === 'google'; });
+    var jaViu = user.user_metadata && user.user_metadata.news_perguntado === VERSAO;
+    if (!card || !perfil || !viaGoogle || jaViu || perfil.newsletter_aceite === true) return;
+    card.hidden = false;
+    var b = $('news-salvar');
+    if (b.dataset.pronto) return;
+    b.dataset.pronto = '1';
+    b.addEventListener('click', async function () {
+      if (b.disabled) return;
+      var er = $('erro-news'); aviso(er, ''); ocupar(b, true, 'Salvando…');
+      try {
+        if ($('news-g').checked) {
+          var u = await sb.from('profiles').update({ newsletter_aceite: true, newsletter_texto: VERSAO }).eq('id', user.id);
+          if (u.error) { aviso(er, 'Não foi possível salvar agora. Tente de novo em instantes.'); ocupar(b, false); return; }
+          try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) { /* o próximo acesso tenta de novo */ }
+        }
+        await sb.auth.updateUser({ data: { news_perguntado: VERSAO } });
+        card.hidden = true;
+      } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
+      ocupar(b, false);
+    });
+  }
 
   // ---------- Meus produtos
   function el(tag, cls, txt) { var x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; }
@@ -1066,11 +1088,19 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     }).catch(function () { $('sem-sessao').hidden = false; });
   }
   function minhaConta() {
+    if (/error_code|error_description/.test(location.hash)) {
+      aviso($('erro-link'), 'O link venceu ou já foi usado. Entre com seu e-mail e senha; se não conseguir, use "Esqueci minha senha".', 'info');
+      history.replaceState(null, '', location.pathname + location.search);
+    }
     exigirSessao(async function (sessao) {
       var ul = $('meus'), er = $('erro-meus');
       $('area').hidden = false;
       try {
-        await cabecalhoConta(sessao);
+        var perfil = await cabecalhoConta(sessao);
+        perguntarNews(sessao.user, perfil);
+        if (perfil && perfil.newsletter_aceite === true && !perfil.newsletter_sincronizado_em) {
+          try { Promise.resolve(sb.functions.invoke('newsletter-subscribe')).catch(function () {}); } catch (x) {}
+        }
         var r = await sb.from('acessos').select('origem,criado_em,produtos(slug,titulo,descricao,capa,gratis)').order('criado_em', { ascending: false });
         if (r.error) { aviso(er, 'Não foi possível carregar seus produtos agora. Atualize a página em instantes.'); return; }
         var itens = (r.data || []).filter(function (a) { return a.produtos; });
@@ -1099,16 +1129,48 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
           } else aviso(er, 'Este produto ainda não está na sua conta. Se você comprou na Hotmart, entre com o mesmo e-mail da compra.', 'info');
           return;
         }
-        var cx = $('links'), grupo, ul = null;
-        links.forEach(function (k) {
-          if (!/^https:\/\//.test(k.url)) return;
-          if (!ul || k.grupo !== grupo) { grupo = k.grupo; if (grupo) cx.appendChild(el('h2', 'p', grupo)); ul = el('ul', 'lks'); cx.appendChild(ul); }
-          var li = el('li'), a = el('a'), nm = el('span', 'nm', k.rotulo);
-          a.href = k.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-          if (k.detalhe) nm.appendChild(el('small', null, k.detalhe));
-          a.appendChild(nm); a.appendChild(el('span', 'ir', 'Abrir no Drive'));
-          li.appendChild(a); ul.appendChild(li);
+        var mapa = {};
+        try { var rm = await fetch('../../img/entregas/mapa.json', { cache: 'no-cache' }); if (rm.ok) mapa = await rm.json(); } catch (x) {}
+        var cx = $('links'), validos = links.filter(function (k) { return /^https:\/\//.test(k.url); });
+        function idDe(u) { var m = /\/d\/([A-Za-z0-9_-]{20,})/.exec(u); return m ? m[1] : ''; }
+        function acao(u) { return /\/copy(\?|$)/.test(u) ? 'Fazer minha cópia' : /\/folders\//.test(u) ? 'Abrir pasta' : 'Abrir'; }
+        var comImg = validos.some(function (k) { return mapa[idDe(k.url)]; });
+        var grupos = [];
+        validos.forEach(function (k) { var g = k.grupo || ''; if (grupos.indexOf(g) < 0) grupos.push(g); });
+        // Filtro por estilo/grupo quando há mais de um (o combo 4 estilos tem 132 peças).
+        if (grupos.length > 1) {
+          var fl = el('div', 'filtro'); fl.setAttribute('role', 'group'); fl.setAttribute('aria-label', 'Mostrar');
+          grupos.forEach(function (g, i) {
+            var b = el('button', null, g || 'Outros'); b.type = 'button'; b.setAttribute('aria-pressed', String(i === 0));
+            b.addEventListener('click', function () {
+              fl.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+              cx.querySelectorAll('[data-g]').forEach(function (s) { s.hidden = s.getAttribute('data-g') !== g; });
+            });
+            fl.appendChild(b);
+          });
+          cx.appendChild(fl);
+        }
+        grupos.forEach(function (g, i) {
+          var sec = el('div'); sec.setAttribute('data-g', g); sec.hidden = grupos.length > 1 && i > 0;
+          if (g && grupos.length === 1) sec.appendChild(el('h2', 'p', g));
+          var ul = el('ul', comImg ? 'pecas' : 'lks');
+          validos.filter(function (k) { return (k.grupo || '') === g; }).forEach(function (k) {
+            var li = el('li'), a = el('a'), mini = mapa[idDe(k.url)];
+            a.href = k.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            if (comImg) {
+              var fig = el('span', 'mini');
+              if (mini) { var im = el('img'); im.src = '../../' + mini; im.alt = ''; im.loading = 'lazy'; fig.appendChild(im); }
+              a.appendChild(fig); a.appendChild(el('span', 'nm', k.rotulo)); a.appendChild(el('span', 'ir', acao(k.url)));
+            } else {
+              var nm = el('span', 'nm', k.rotulo);
+              if (k.detalhe) nm.appendChild(el('small', null, k.detalhe));
+              a.appendChild(nm); a.appendChild(el('span', 'ir', acao(k.url)));
+            }
+            li.appendChild(a); ul.appendChild(li);
+          });
+          sec.appendChild(ul); cx.appendChild(sec);
         });
+        if (validos.some(function (k) { return /\/copy(\?|$)/.test(k.url); })) $('dica-copia').hidden = false;
         $('dica').hidden = false;
       } catch (x) { aviso(er, 'Sem conexão com o servidor. Confira a internet e tente de novo.'); }
     });
@@ -1158,11 +1220,13 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   }
   async function cabecalhoConta(sessao) {
     var user = sessao.user, perfil = null;
-    try { var p = await sb.from('profiles').select('nome,email,avatar_tipo,avatar_ref,newsletter_aceite').eq('id', user.id).maybeSingle(); perfil = p.data || null; } catch (x) {}
+    try { var p = await sb.from('profiles').select('nome,email,avatar_tipo,avatar_ref,newsletter_aceite,newsletter_sincronizado_em').eq('id', user.id).maybeSingle(); perfil = p.data || null; } catch (x) {}
     var nome = (perfil && perfil.nome) || (user.user_metadata && user.user_metadata.nome) || '';
     if ($('saudacao')) $('saudacao').textContent = nome ? 'Olá, ' + nome.split(' ')[0] + '.' : 'Olá.';
+    if ($('email-cab')) $('email-cab').textContent = user.email || '';
     pintarAvatar($('av'), user, perfil);
     var b = $('btn-sair');
+    if (b) b.hidden = false;
     if (b && !b.dataset.pronto) { b.dataset.pronto = '1'; b.addEventListener('click', async function () {
       ocupar(b, true, 'Saindo…'); try { await sb.auth.signOut(); } catch (x) {} location.assign('/'); }); }
     return perfil;
@@ -1410,6 +1474,18 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       });
     });
   }
+  // Logado (15/11/2026): "Entrar" vira "Minha conta" com a inicial. Só lê se existe sessão salva pelo supabase-js; não valida nada.
+  var ent = document.querySelector('.lj-nav a.entrar');
+  if (ent) { try {
+    var ses = JSON.parse(localStorage.getItem('sb-qxifpzopgcqmmvvttodq-auth-token') || 'null'), u = ses && ses.user;
+    if (u) {
+      var m = u.user_metadata || {}, ini = String(m.nome || m.full_name || u.email || '?').trim().charAt(0).toUpperCase() || '?';
+      ent.href = ent.getAttribute('href').replace(/entrar\/$/, 'conta/');
+      ent.textContent = ''; var bo = document.createElement('span'); bo.className = 'ini'; bo.textContent = ini; bo.setAttribute('aria-hidden', 'true');
+      ent.appendChild(bo); ent.appendChild(document.createTextNode('Minha conta'));
+      if (/\/conta\//.test(location.pathname)) ent.setAttribute('aria-current', 'page');
+    }
+  } catch (x) {} }
   var barra = document.querySelector('.barra'), ab = document.querySelector('.ab');
   if (barra && ab && io) new IntersectionObserver(function (es) { barra.classList.toggle('on', !es[0].isIntersecting); }).observe(ab);
   else if (barra) barra.classList.add('on');

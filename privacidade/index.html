@@ -527,6 +527,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 }
 /* Entrar: link discreto no fim do menu (13/11/2026) */
 .lj-nav a.entrar { font-weight:600; color:#4A4038; }
+.lj-nav a.entrar .ini { display:inline-grid; place-items:center; width:30px; height:30px; margin-right:8px; border-radius:50%; background:#F15A24; color:#2A2420; font:900 15px/1 var(--sans); letter-spacing:0; flex:none; }
 @media (min-width:761px) { .lj-nav a.entrar { margin-left:clamp(0px,1vw,14px); padding-left:clamp(14px,1.6vw,24px); border-left:1px solid rgba(42,36,32,.18); } .lj-nav a.entrar::after { left:clamp(14px,1.6vw,24px); } }
 
 .conta { padding-block:clamp(20px,4vw,48px) clamp(56px,8vw,112px); }
@@ -602,6 +603,22 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .lks .nm small { display:block; font-weight:400; font-size:14px; color:#5E554D; margin-top:2px; }
 .lks .ir { font-weight:700; font-size:15px; white-space:nowrap; }
 .lks .ir::after { content:' ↗'; }
+.voltar { display:inline-flex; align-items:center; min-height:44px; font:700 16px/1 var(--sans); color:var(--tinta); text-decoration:none; }
+.voltar:hover { text-decoration:underline; text-underline-offset:3px; }
+.filtro { display:flex; flex-wrap:wrap; gap:8px; }
+.filtro button { min-height:44px; padding:0 18px; border-radius:999px; border:1px solid var(--fio); background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); cursor:pointer; }
+.filtro button[aria-pressed=true] { background:var(--tinta); border-color:var(--tinta); color:#FFFFFF; }
+.filtro button:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.pecas { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:clamp(12px,2vw,20px); }
+.pecas a { display:flex; flex-direction:column; gap:8px; height:100%; background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:10px 10px 14px; color:var(--tinta); text-decoration:none; }
+.pecas a:hover { border-color:var(--tinta); }
+.pecas a:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.pecas .mini { display:grid; place-items:center; aspect-ratio:1; background:#F1E9DE; border-radius:8px; overflow:hidden; }
+.pecas .mini img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+.pecas .nm { font-weight:700; font-size:16px; line-height:1.25; overflow-wrap:anywhere; }
+.pecas .ir { margin-top:auto; font-weight:600; font-size:14px; color:#8A3410; }
+.pecas .ir::after { content:' ↗'; }
+@media (max-width:420px) { .pecas { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
 /* Área do cliente (15/11/2026): menu, avatar, perfil, segurança, ajuda */
 .mconta { display:flex; gap:6px; overflow-x:auto; margin:18px 0 0; padding:4px 0 6px; scrollbar-width:none; }
@@ -610,6 +627,10 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); text-decoration:none; white-space:nowrap; }
 .mconta a[aria-current=page] { background:var(--tinta); border-color:var(--tinta); color:#FFFFFF; }
 .mconta a:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
+.mconta .sair { flex:none; margin-left:auto; min-height:44px; padding:0 16px; border:0; background:none; color:#5E554D; font:600 15px/1 var(--sans); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.ola.cab { margin-top:clamp(8px,2vw,20px); }
+.ola.cab h1 { font-size:clamp(28px,5vw,44px); line-height:1.05; margin:0; overflow-wrap:anywhere; }
+.ola.cab .peq { margin:4px 0 0; font-size:15px; color:#5E554D; overflow-wrap:anywhere; }
 .conta .ar-topo button.bt { width:auto; min-height:44px; padding:0 18px; }
 .ar-topo { flex-wrap:nowrap; }
 .ola { display:flex; gap:14px; align-items:center; min-width:0; }
@@ -759,6 +780,18 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       });
     });
   }
+  // Logado (15/11/2026): "Entrar" vira "Minha conta" com a inicial. Só lê se existe sessão salva pelo supabase-js; não valida nada.
+  var ent = document.querySelector('.lj-nav a.entrar');
+  if (ent) { try {
+    var ses = JSON.parse(localStorage.getItem('sb-qxifpzopgcqmmvvttodq-auth-token') || 'null'), u = ses && ses.user;
+    if (u) {
+      var m = u.user_metadata || {}, ini = String(m.nome || m.full_name || u.email || '?').trim().charAt(0).toUpperCase() || '?';
+      ent.href = ent.getAttribute('href').replace(/entrar\/$/, 'conta/');
+      ent.textContent = ''; var bo = document.createElement('span'); bo.className = 'ini'; bo.textContent = ini; bo.setAttribute('aria-hidden', 'true');
+      ent.appendChild(bo); ent.appendChild(document.createTextNode('Minha conta'));
+      if (/\/conta\//.test(location.pathname)) ent.setAttribute('aria-current', 'page');
+    }
+  } catch (x) {} }
   var barra = document.querySelector('.barra'), ab = document.querySelector('.ab');
   if (barra && ab && io) new IntersectionObserver(function (es) { barra.classList.toggle('on', !es[0].isIntersecting); }).observe(ab);
   else if (barra) barra.classList.add('on');
