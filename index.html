@@ -558,7 +558,16 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 </div></header>
 
 <main>
-<section class="home-ab"><div class="w">
+<section class="home-ab rot" aria-roledescription="carrossel" aria-label="Destaques"><style>
+.rot .sl{display:none}.rot .sl.on{display:grid;animation:rotIn .6s ease}
+.rot .w.sl.on{display:grid}
+@keyframes rotIn{from{opacity:0}to{opacity:1}}
+.rot .pts{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.rot .pts button{width:12px;height:12px;border-radius:50%;border:2px solid var(--tinta,#26201c);background:transparent;padding:0;cursor:pointer}
+.rot .pts button[aria-current=true]{background:var(--tinta,#26201c)}
+@media (prefers-reduced-motion:reduce){.rot .sl.on{animation:none}}
+</style>
+<div class="w sl on" role="group" aria-roledescription="slide" aria-label="Planner 2027">
   <div class="tx">
     <p class="eti">Lançamento · Planner Pedagógico 2027</p>
     <h1 class="gg">A professora de cada <em>signo</em></h1>
@@ -566,7 +575,23 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     <div class="acoes"><a class="bt" href="planners/zodiaco/">Escolher meu signo</a><a class="bt li" href="kits/signo/">Ver o kit com caderno</a></div>
   </div>
   <div class="leque"><a href="planners/aries/" aria-label="Planner de Áries"><img src="img/zodiaco/aries/t-planner.jpg" alt="" width="420" height="594"></a><a href="planners/peixes/" aria-label="Planner de Peixes"><img src="img/zodiaco/peixes/t-planner.jpg" alt="" width="420" height="594"></a><a href="planners/leao/" aria-label="Planner de Leão"><img src="img/zodiaco/leao/t-planner.jpg" alt="" width="420" height="594"></a><p class="selo"><span>Planner 2027 · doze signos</span><span class="valor"><span class="vh">R$ 19,90</span><small aria-hidden="true">R$</small><b aria-hidden="true">19</b><sup aria-hidden="true">,90</sup></span></p></div>
-</div></section>
+</div>
+<div class="w sl" role="group" aria-roledescription="slide" aria-label="Mural Consciência Negra">
+  <div class="tx">
+    <p class="eti">Grátis · 20 de Novembro</p>
+    <h1 class="gg">Mural da <em>Consciência Negra</em></h1>
+    <p class="lead">32 personalidades negras brasileiras, Baobá, símbolos Adinkra e linha do tempo. Cem folhas A4 em estilo giz pastel, com caderno histórico e guia BNCC. Um 20 de Novembro sem estereótipo.</p>
+    <div class="acoes"><a class="bt" href="gratis/">Baixar grátis</a></div>
+  </div>
+  <div class="leque"><a href="gratis/" aria-label="Retrato de Enedina Alves Marques"><img src="img/loja/cn-capa-1.jpg" alt="" width="420" height="594" loading="lazy"></a><a href="gratis/" aria-label="Letra C do letreiro"><img src="img/loja/cn-capa-2.jpg" alt="" width="420" height="594" loading="lazy"></a><a href="gratis/" aria-label="Baobá e Ubuntu"><img src="img/loja/cn-capa-3.jpg" alt="" width="420" height="594" loading="lazy"></a><p class="selo"><span>Kit Mural · 100 folhas A4</span><span class="valor"><span class="vh">Grátis</span><small aria-hidden="true">R$</small><b aria-hidden="true">Grátis</b><sup aria-hidden="true">,</sup></span></p></div>
+</div>
+<div class="pts" role="tablist" aria-label="Escolher destaque"><button type="button" aria-label="Planner 2027" aria-current="true"></button><button type="button" aria-label="Mural Consciência Negra" aria-current="false"></button></div>
+<script>(function(){var r=document.querySelector('.rot'),s=r.querySelectorAll('.sl'),b=r.querySelectorAll('.pts button'),i=0,t;
+function ir(n){s[i].classList.remove('on');b[i].setAttribute('aria-current','false');i=n;s[i].classList.add('on');b[i].setAttribute('aria-current','true');}
+function play(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;clearInterval(t);t=setInterval(function(){ir((i+1)%s.length)},7000);}
+b.forEach(function(x,n){x.addEventListener('click',function(){ir(n);play();});});
+r.addEventListener('mouseenter',function(){clearInterval(t)});r.addEventListener('mouseleave',play);r.addEventListener('focusin',function(){clearInterval(t)});play();})();</script>
+</section>
 
 <div class="mq" aria-hidden="true"><div><span>Planner R$ 19,90</span><i></i><span>Caderno R$ 19,90</span><i></i><span>Kit com brindes R$ 29,90</span><i></i><span>PDF para imprimir</span><i></i><span>Acesso na hora</span><i></i><span>7 dias de garantia</span><i></i><span>Planner R$ 19,90</span><i></i><span>Caderno R$ 19,90</span><i></i><span>Kit com brindes R$ 29,90</span><i></i><span>PDF para imprimir</span><i></i><span>Acesso na hora</span><i></i><span>7 dias de garantia</span><i></i><span>Planner R$ 19,90</span><i></i><span>Caderno R$ 19,90</span><i></i><span>Kit com brindes R$ 29,90</span><i></i><span>PDF para imprimir</span><i></i><span>Acesso na hora</span><i></i><span>7 dias de garantia</span><i></i><span>Planner R$ 19,90</span><i></i><span>Caderno R$ 19,90</span><i></i><span>Kit com brindes R$ 29,90</span><i></i><span>PDF para imprimir</span><i></i><span>Acesso na hora</span><i></i><span>7 dias de garantia</span><i></i></div></div>
 
