@@ -565,9 +565,19 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .rot .pts{display:flex;gap:10px;justify-content:center;margin-top:18px}
 .rot .pts button{width:12px;height:12px;border-radius:50%;border:2px solid var(--tinta,#26201c);background:transparent;padding:0;cursor:pointer}
 .rot .pts button[aria-current=true]{background:var(--tinta,#26201c)}
+.rot .cn-ban{display:block;align-self:center}.rot .cn-ban img{width:100%;height:auto;border-radius:18px;box-shadow:var(--somb-f)}
 @media (prefers-reduced-motion:reduce){.rot .sl.on{animation:none}}
 </style>
-<div class="w sl on" role="group" aria-roledescription="slide" aria-label="Planner 2027">
+<div class="w sl on" role="group" aria-roledescription="slide" aria-label="Mural Consciência Negra">
+  <div class="tx">
+    <p class="eti">Grátis · 20 de Novembro</p>
+    <h2 class="gg">Mural da <em>Consciência Negra</em></h2>
+    <p class="lead">32 personalidades negras brasileiras, Baobá, símbolos Adinkra e linha do tempo. Cem folhas A4 em estilo giz pastel, com caderno histórico e guia BNCC. Um 20 de Novembro sem estereótipo.</p>
+    <div class="acoes"><a class="bt" href="gratis/">Baixar grátis</a></div>
+  </div>
+  <a class="cn-ban" href="gratis/"><img src="img/loja/cn-banner.jpg" alt="Detalhes da arte do Kit Mural Consciência Negra: Enedina Alves Marques, letra C do letreiro e o Baobá" width="1080" height="760" fetchpriority="high"></a>
+</div>
+<div class="w sl" role="group" aria-roledescription="slide" aria-label="Planner 2027">
   <div class="tx">
     <p class="eti">Lançamento · Planner Pedagógico 2027</p>
     <h1 class="gg">A professora de cada <em>signo</em></h1>
@@ -576,16 +586,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   </div>
   <div class="leque"><a href="planners/aries/" aria-label="Planner de Áries"><img src="img/zodiaco/aries/t-planner.jpg" alt="" width="420" height="594"></a><a href="planners/peixes/" aria-label="Planner de Peixes"><img src="img/zodiaco/peixes/t-planner.jpg" alt="" width="420" height="594"></a><a href="planners/leao/" aria-label="Planner de Leão"><img src="img/zodiaco/leao/t-planner.jpg" alt="" width="420" height="594"></a><p class="selo"><span>Planner 2027 · doze signos</span><span class="valor"><span class="vh">R$ 19,90</span><small aria-hidden="true">R$</small><b aria-hidden="true">19</b><sup aria-hidden="true">,90</sup></span></p></div>
 </div>
-<div class="w sl" role="group" aria-roledescription="slide" aria-label="Mural Consciência Negra">
-  <div class="tx">
-    <p class="eti">Grátis · 20 de Novembro</p>
-    <h1 class="gg">Mural da <em>Consciência Negra</em></h1>
-    <p class="lead">32 personalidades negras brasileiras, Baobá, símbolos Adinkra e linha do tempo. Cem folhas A4 em estilo giz pastel, com caderno histórico e guia BNCC. Um 20 de Novembro sem estereótipo.</p>
-    <div class="acoes"><a class="bt" href="gratis/">Baixar grátis</a></div>
-  </div>
-  <div class="leque"><a href="gratis/" aria-label="Retrato de Enedina Alves Marques"><img src="img/loja/cn-capa-1.jpg" alt="" width="420" height="594" loading="lazy"></a><a href="gratis/" aria-label="Letra C do letreiro"><img src="img/loja/cn-capa-2.jpg" alt="" width="420" height="594" loading="lazy"></a><a href="gratis/" aria-label="Baobá e Ubuntu"><img src="img/loja/cn-capa-3.jpg" alt="" width="420" height="594" loading="lazy"></a><p class="selo"><span>Kit Mural · 100 folhas A4</span><span class="valor"><span class="vh">Grátis</span><small aria-hidden="true">R$</small><b aria-hidden="true">Grátis</b><sup aria-hidden="true">,</sup></span></p></div>
-</div>
-<div class="pts" role="tablist" aria-label="Escolher destaque"><button type="button" aria-label="Planner 2027" aria-current="true"></button><button type="button" aria-label="Mural Consciência Negra" aria-current="false"></button></div>
+<div class="pts" role="tablist" aria-label="Escolher destaque"><button type="button" aria-label="Mural Consciência Negra" aria-current="true"></button><button type="button" aria-label="Planner 2027" aria-current="false"></button></div>
 <script>(function(){var r=document.querySelector('.rot'),s=r.querySelectorAll('.sl'),b=r.querySelectorAll('.pts button'),i=0,t;
 function ir(n){s[i].classList.remove('on');b[i].setAttribute('aria-current','false');i=n;s[i].classList.add('on');b[i].setAttribute('aria-current','true');}
 function play(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;clearInterval(t);t=setInterval(function(){ir((i+1)%s.length)},7000);}
