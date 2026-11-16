@@ -675,6 +675,12 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .adm-rol{overflow-x:auto}.adm-t{border-collapse:collapse;width:100%;font-size:14px}
 .adm-t th,.adm-t td{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(0,0,0,.1);white-space:nowrap}
 .adm-sec{margin-top:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px}
+.adm-linha{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.adm-linha input,.adm-linha select{flex:1;min-width:200px;padding:10px 12px;border:1px solid rgba(0,0,0,.25);border-radius:10px;font:inherit}
+.adm-dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;font-size:15px}.adm-dl dt{opacity:.7}.adm-dl dd{margin:0;word-break:break-all}
+.adm-ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.adm-ul li{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.adm-h4{margin:8px 0 0;font-size:16px}
+.adm-ficha{border:1px solid rgba(0,0,0,.15);border-radius:14px;padding:clamp(16px,3vw,24px);display:flex;flex-direction:column;gap:12px}
 </style>
 </head>
 <body>
@@ -696,6 +702,13 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     <div class="adm-sec"><h2 class="m">Acessos por produto</h2><div id="adm-acessos"></div></div>
     <div class="adm-sec"><h2 class="m">Avisos da Hotmart (20 últimos)</h2><div id="adm-hotmart"></div></div>
     <div class="adm-sec"><h2 class="m">Contas recentes</h2><div id="adm-recentes"></div></div>
+    <div class="adm-sec"><h2 class="m">Buscar e cuidar de uma conta</h2>
+      <form id="adm-busca" class="adm-linha"><input id="adm-q" type="search" maxlength="120" placeholder="E-mail ou nome" aria-label="Buscar conta"><button class="bt" type="submit" style="width:auto">Buscar</button><button id="adm-csv" class="bt li" type="button" style="width:auto">Baixar planilha</button></form>
+      <p id="adm-fmsg" class="aviso info" role="status" hidden></p>
+      <div id="adm-ficha" class="adm-ficha" hidden></div>
+      <div id="adm-lista"></div>
+      <div id="adm-cap"></div>
+    </div>
     <div class="adm-sec"><h2 class="m">Visitas</h2><p><a class="bt li" href="https://bemplanejadoeducacional.goatcounter.com" target="_blank" rel="noopener">Abrir o GoatCounter</a></p></div>
   </div>
 </div></section><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js" integrity="sha384-rwykjmWNwVxboyFmvK9OXN0wj9hnMHA2aAHtits54DuACyCq0M2PrSNxhRb+hvXT" crossorigin="anonymous"></script><script>
@@ -727,8 +740,126 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
       tabela('adm-recentes', ['E-mail', 'Nome', 'Origem', 'Criada', 'Último login', 'Produtos'], d.recentes.map(function (u) { return [u.email, u.nome || '—', u.origem, dt(u.criada), dt(u.ultimo_login), u.produtos.join(', ') || '—']; }));
       $('adm-gerado').textContent = 'Atualizado em ' + dt(d.gerado_em);
       $('adm-corpo').hidden = false;
+      contas();
     });
   });
+
+  // ---------- Contas: busca, ficha e ações (versão 2)
+  var TS_KEY = '0x4AAAAAAGAwKEsGiBWKAEor', capToken = '', capId = null, prods = [], atual = null;
+  function captcha() {
+    if (!TS_KEY) return;
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; s.async = true;
+    s.onload = function () { capId = window.turnstile.render($('adm-cap'), { sitekey: TS_KEY, language: 'pt-br', theme: 'light', size: 'flexible', appearance: 'interaction-only',
+      callback: function (t) { capToken = t; }, 'expired-callback': function () { capToken = ''; }, 'error-callback': function () { capToken = ''; } }); };
+    document.head.appendChild(s);
+  }
+  function capNovo() { capToken = ''; try { if (capId !== null && window.turnstile) window.turnstile.reset(capId); } catch (x) {} }
+  function msg(txt, erro) { var m = $('adm-fmsg'); m.textContent = txt; m.className = 'aviso ' + (erro ? 'erro' : 'info'); m.hidden = !txt; }
+  function erroTxt(e) { return (e && e.message) ? e.message.replace(/^.*?:\s*/, '') : 'erro'; }
+  function bt(txt, fn, li) { var b = el('button', txt, 'bt' + (li ? ' li' : '')); b.type = 'button'; b.style.width = 'auto'; b.onclick = fn; return b; }
+
+  function contas() {
+    captcha();
+    sb.rpc('admin_produtos').then(function (r) { prods = r.data || []; });
+    $('adm-busca').onsubmit = function (ev) { ev.preventDefault(); buscar(); };
+    $('adm-csv').onclick = exportar;
+    buscar();
+  }
+  function buscar() {
+    sb.rpc('admin_buscar', { q: $('adm-q').value }).then(function (r) {
+      var alvo = $('adm-lista'); alvo.textContent = '';
+      if (r.error) { alvo.appendChild(el('p', 'Erro na busca: ' + erroTxt(r.error), 'aviso erro')); return; }
+      var t = el('table', null, 'adm-t'), tr = el('tr');
+      ['E-mail', 'Nome', 'Origem', 'Criada', ''].forEach(function (c) { tr.appendChild(el('th', c)); }); t.appendChild(tr);
+      if (!r.data.length) { var v = el('tr'), td = el('td', 'Nenhuma conta encontrada.'); td.colSpan = 5; v.appendChild(td); t.appendChild(v); }
+      r.data.forEach(function (u) {
+        var l = el('tr'); [u.email, u.nome || '—', u.origem + (u.bloqueada ? ' · bloqueada' : ''), dt(u.criada)].forEach(function (c) { l.appendChild(el('td', c)); });
+        var td = el('td'); td.appendChild(bt('Abrir', function () { ficha(u.id); }, true)); l.appendChild(td); t.appendChild(l);
+      });
+      var w = el('div', null, 'adm-rol'); w.appendChild(t); alvo.appendChild(w);
+    });
+  }
+  function ficha(id) {
+    msg('');
+    sb.rpc('admin_ficha', { uid: id }).then(function (r) {
+      var f = $('adm-ficha'); f.textContent = ''; f.hidden = false;
+      if (r.error) { f.appendChild(el('p', erroTxt(r.error), 'aviso erro')); return; }
+      var u = r.data; atual = u;
+      f.appendChild(el('h3', u.nome || u.email, 'p'));
+      var dl = el('dl', null, 'adm-dl');
+      [['E-mail', u.email], ['Origem', u.origem], ['Criada', dt(u.criada)], ['E-mail confirmado', u.confirmada ? dt(u.confirmada) : 'não'],
+       ['Último login', dt(u.ultimo_login)], ['Entra com', [u.entra_senha ? 'senha' : '', u.entra_google ? 'Google' : ''].filter(Boolean).join(' e ') || '—'],
+       ['Newsletter', u.newsletter ? 'sim' : 'não'], ['Situação', u.bloqueada ? 'BLOQUEADA' : 'ativa']]
+        .forEach(function (k) { dl.appendChild(el('dt', k[0])); dl.appendChild(el('dd', k[1])); });
+      f.appendChild(dl);
+
+      f.appendChild(el('h4', 'Produtos', 'adm-h4'));
+      var ul = el('ul', null, 'adm-ul');
+      if (!u.acessos.length) ul.appendChild(el('li', 'Nenhum produto.'));
+      u.acessos.forEach(function (a) {
+        var li = el('li'); li.appendChild(el('span', a.titulo + ' (' + a.origem + ', ' + dt(a.quando) + ') '));
+        li.appendChild(bt('Retirar', function () {
+          var aviso = a.origem === 'hotmart' ? '\n\nEsta é uma compra da Hotmart. Retire só em caso de reembolso.' : '';
+          if (confirm('Retirar "' + a.titulo + '" de ' + u.email + '?' + aviso)) acao('admin_retirar', { uid: u.id, prod: a.produto }, 'Produto retirado.');
+        }, true));
+        ul.appendChild(li);
+      });
+      f.appendChild(ul);
+      var tem = u.acessos.map(function (a) { return a.produto; });
+      var sel = el('select'); sel.id = 'adm-sel';
+      prods.filter(function (p) { return tem.indexOf(p.slug) < 0; }).forEach(function (p) { var o = el('option', p.titulo + (p.ativo ? '' : ' (inativo)')); o.value = p.slug; sel.appendChild(o); });
+      var lib = el('div', null, 'adm-linha'); lib.appendChild(sel);
+      lib.appendChild(bt('Liberar produto', function () { if (sel.value) acao('admin_liberar', { uid: u.id, prod: sel.value }, 'Produto liberado.'); }));
+      f.appendChild(lib);
+
+      f.appendChild(el('h4', 'Ações', 'adm-h4'));
+      var ac = el('div', null, 'adm-linha');
+      ac.appendChild(bt('Mandar link de nova senha', function () { linkSenha(u); }, true));
+      if (!u.admin) ac.appendChild(bt(u.bloqueada ? 'Desbloquear conta' : 'Bloquear conta', function () {
+        if (u.bloqueada || confirm('Bloquear ' + u.email + '? A pessoa sai de todos os aparelhos e não consegue mais entrar até você desbloquear.'))
+          acao('admin_bloquear', { uid: u.id, bloquear: !u.bloqueada }, u.bloqueada ? 'Conta desbloqueada.' : 'Conta bloqueada.');
+      }, true));
+      f.appendChild(ac);
+
+      if (u.log.length) {
+        f.appendChild(el('h4', 'Histórico do painel', 'adm-h4'));
+        var hl = el('ul', null, 'adm-ul');
+        u.log.forEach(function (l) { hl.appendChild(el('li', dt(l.quando) + ' · ' + l.acao + (l.detalhe ? ' · ' + l.detalhe : ''))); });
+        f.appendChild(hl);
+      }
+      f.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+  function acao(fn, args, ok) {
+    sb.rpc(fn, args).then(function (r) {
+      if (r.error) { msg('Não deu: ' + erroTxt(r.error), true); return; }
+      ficha(args.uid); buscar(); setTimeout(function () { msg(ok); }, 300);
+    });
+  }
+  async function linkSenha(u) {
+    if (u.bloqueada) { msg('A conta está bloqueada. Desbloqueie antes de mandar o link.', true); return; }
+    if (!confirm('Mandar para ' + u.email + ' um e-mail com o link para criar uma senha nova?')) return;
+    if (TS_KEY && !capToken) { msg('Aguarde a verificação de segurança terminar e tente de novo.', true); return; }
+    var r = await sb.auth.resetPasswordForEmail(u.email, Object.assign({ redirectTo: location.origin + '/definir-senha/' }, capToken ? { captchaToken: capToken } : {}));
+    capNovo();
+    if (r.error) { msg(/rate|limit|seconds/i.test(r.error.message) ? 'Limite de envio atingido. Espere alguns minutos.' : 'Não deu: ' + erroTxt(r.error), true); return; }
+    await sb.rpc('admin_registrar', { uid: u.id, acao: 'link_senha' });
+    ficha(u.id); setTimeout(function () { msg('Link enviado para ' + u.email + '.'); }, 300);
+  }
+  function exportar() {
+    sb.rpc('admin_exportar').then(function (r) {
+      if (r.error) { alert('Erro: ' + erroTxt(r.error)); return; }
+      var cab = ['email', 'nome', 'origem', 'newsletter', 'criada', 'confirmada', 'ultimo_login', 'bloqueada', 'produtos'];
+      var q = function (v) { v = v == null ? '' : String(v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
+      var linhas = [cab.join(';')].concat(r.data.map(function (u) {
+        return cab.map(function (k) { var v = u[k]; if (/criada|confirmada|ultimo_login/.test(k)) v = v ? dt(v) : ''; if (typeof v === 'boolean') v = v ? 'sim' : 'não'; return q(v); }).join(';');
+      }));
+      var blob = new Blob(['\ufeff' + linhas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+      var a = el('a'); a.href = URL.createObjectURL(blob); a.download = 'contas-bem-planejado-' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+  }
 })();
 </script>
 </main>
