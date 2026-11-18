@@ -1140,7 +1140,17 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         function idDe(u) { var m = /\/(?:d|folders)\/([A-Za-z0-9_-]{20,})/.exec(u); return m ? m[1] : ''; }
         function arquivoDrive(u) { var m = /^https:\/\/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]{20,})/.exec(u); return m ? m[1] : ''; }
         function acao(u) { return arquivoDrive(u) ? 'Baixar' : /\/copy(\?|$)/.test(u) ? 'Fazer minha cópia' : /\/folders\//.test(u) ? 'Abrir pasta' : 'Abrir'; }
-        var comImg = validos.some(function (k) { return mapa[idDe(k.url)]; });
+        // mapa.json é público: a chave é o SHA-256 (24 hex) do id, nunca o id do Drive (auditoria 17/11/2026).
+        var hx = {};
+        try {
+          await Promise.all(validos.map(async function (k) {
+            var i = idDe(k.url); if (!i) return;
+            var b = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(i)));
+            hx[k.url] = Array.prototype.map.call(b, function (x) { return ('0' + x.toString(16)).slice(-2); }).join('').slice(0, 24);
+          }));
+        } catch (x) {}
+        function mini(u) { return hx[u] ? mapa[hx[u]] : undefined; }
+        var comImg = validos.some(function (k) { return mini(k.url); });
         var grupos = [];
         validos.forEach(function (k) { var g = k.grupo || ''; if (grupos.indexOf(g) < 0) grupos.push(g); });
         // Filtro por estilo/grupo quando há mais de um (o combo 4 estilos tem 132 peças).
@@ -1161,14 +1171,14 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
           if (g && grupos.length === 1) sec.appendChild(el('h2', 'p', g));
           var ul = el('ul', comImg ? 'pecas' : 'lks');
           validos.filter(function (k) { return (k.grupo || '') === g; }).forEach(function (k) {
-            var li = el('li'), a = el('a'), mini = mapa[idDe(k.url)];
+            var li = el('li'), a = el('a'), miniatura = mini(k.url);
             // Arquivo do Drive: clique baixa direto (uc?export=download), sem abrir o Drive.
             var idArq = arquivoDrive(k.url);
             if (idArq) { a.href = 'https://drive.google.com/uc?export=download&id=' + idArq; a.rel = 'noopener noreferrer'; }
             else { a.href = k.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
             if (comImg) {
               var fig = el('span', 'mini');
-              if (mini) { var im = el('img'); im.src = '../../' + mini; im.alt = ''; im.loading = 'lazy'; fig.appendChild(im); }
+              if (miniatura) { var im = el('img'); im.src = '../../' + miniatura; im.alt = ''; im.loading = 'lazy'; fig.appendChild(im); }
               var nmi = el('span', 'nm', k.rotulo);
               if (k.detalhe) nmi.appendChild(el('small', null, k.detalhe));
               a.appendChild(fig); a.appendChild(nmi); a.appendChild(el('span', 'ir', acao(k.url)));
