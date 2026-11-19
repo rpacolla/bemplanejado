@@ -619,6 +619,15 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 .pecas .nm small { display:block; font-weight:400; font-size:14px; line-height:1.35; color:#5E554D; margin-top:4px; }
 .pecas .ir { margin-top:auto; font-weight:600; font-size:14px; color:#8A3410; }
 .pecas .ir::after { content:' ↗'; }
+.pecas .cx { display:flex; flex-direction:column; gap:8px; height:100%; background:#FFFFFF; border:1px solid var(--fio); border-radius:var(--r); box-shadow:var(--somb); padding:10px 10px 14px; color:var(--tinta); }
+.pecas .cx .mini { display:grid; place-items:center; aspect-ratio:1; background:#F1E9DE; border-radius:8px; overflow:hidden; }
+.pecas .cx .mini img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+.pecas .cx .nm { font-weight:700; font-size:16px; line-height:1.25; }
+.pecas .cx .nm small { display:block; font-weight:400; font-size:14px; line-height:1.35; color:#5E554D; margin-top:4px; }
+.pecas .cx .bts { margin-top:auto; display:flex; flex-direction:column; gap:8px; }
+.pecas .cx .bt::after { display:none; }
+.pecas .cx .bt { width:100%; min-height:44px; padding:0 12px; font-size:15px; text-align:center; justify-content:center; }
+.prods .vd { align-self:flex-start; min-height:44px; display:inline-flex; align-items:center; font-weight:600; font-size:15px; color:var(--tinta); text-decoration:underline; text-underline-offset:3px; }
 @media (max-width:420px) { .pecas { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
 /* Área do cliente (15/11/2026): menu, avatar, perfil, segurança, ajuda */
@@ -628,7 +637,9 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
   background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); text-decoration:none; white-space:nowrap; }
 .mconta a[aria-current=page] { background:var(--tinta); border-color:var(--tinta); color:#FFFFFF; }
 .mconta a:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
-.mconta .sair { flex:none; margin-left:auto; min-height:44px; padding:0 16px; border:0; background:none; color:#5E554D; font:600 15px/1 var(--sans); text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.mconta .sair { flex:none; margin-left:auto; display:inline-flex; align-items:center; min-height:44px; padding:0 18px; border-radius:999px; border:1px solid var(--tinta); background:#FFFFFF; color:var(--tinta); font:600 15px/1 var(--sans); cursor:pointer; white-space:nowrap; }
+.mconta .sair:hover { background:var(--tinta); color:#FFFFFF; }
+.mconta .sair:focus-visible { outline:3px solid var(--lar); outline-offset:2px; }
 .ola.cab { margin-top:clamp(8px,2vw,20px); }
 .ola.cab h1 { font-size:clamp(28px,5vw,44px); line-height:1.05; margin:0; overflow-wrap:anywhere; }
 .ola.cab .peq { margin:4px 0 0; font-size:15px; color:#5E554D; overflow-wrap:anywhere; }
@@ -1034,6 +1045,8 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
 
   // ---------- Meus produtos
   function el(tag, cls, txt) { var x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; }
+  // Página aberta de cada produto grátis (sem login), para quem quer ver antes de baixar.
+  var PAGINAS = { 'painel-asas-consciencia-negra': 'gratis/painel-asas/', 'mural-consciencia-negra': 'gratis/consciencia-negra/' };
   function cartao(prod, pref, rotulo, acao) {
     var li = el('li'), tx = el('div', 'tx');
     if (prod.capa) { var im = el('img'); im.src = pref + prod.capa; im.alt = ''; im.loading = 'lazy'; im.width = 800; im.height = 600; li.appendChild(im); }
@@ -1043,7 +1056,10 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
     var bt;
     if (typeof acao === 'string') { bt = el('a', 'bt', rotulo); bt.href = acao; }
     else { bt = el('button', 'bt', rotulo); bt.type = 'button'; bt.addEventListener('click', function () { acao(bt); }); }
-    tx.appendChild(bt); li.appendChild(tx); return li;
+    tx.appendChild(bt);
+    var det = PAGINAS[prod.slug];
+    if (det) { var vd = el('a', 'vd', 'Ver detalhes'); vd.href = pref + det; tx.appendChild(vd); }
+    li.appendChild(tx); return li;
   }
   function urlProduto(pref, slug) { return pref + 'conta/produto/?p=' + encodeURIComponent(slug); }
   async function meusSlugs() {
@@ -1120,7 +1136,7 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
         document.title = p.data.titulo + ' | Bem Planejado';
         $('titulo-prod').textContent = p.data.titulo;
         $('desc-prod').textContent = p.data.descricao || '';
-        var l = await sb.from('produto_links').select('grupo,rotulo,url,detalhe,ordem').eq('produto', slug).order('ordem');
+        var l = await sb.from('produto_links').select('grupo,rotulo,url,detalhe,ordem,url_imagem,miniatura').eq('produto', slug).order('ordem');
         if (l.error) { aviso(er, 'Não foi possível carregar os links agora. Atualize a página em instantes.'); return; }
         var links = l.data || [];
         if (!links.length) {
@@ -1146,7 +1162,8 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
           }));
         } catch (x) {}
         function mini(u) { return hx[u] ? mapa[hx[u]] : undefined; }
-        var comImg = validos.some(function (k) { return mini(k.url); });
+        var comImg = validos.some(function (k) { return mini(k.url) || k.miniatura; });
+        function linkBaixar(u, cls, txt) { var x = el('a', cls, txt); var i = arquivoDrive(u); if (i) { x.href = 'https://drive.google.com/uc?export=download&id=' + i; x.rel = 'noopener noreferrer'; } else { x.href = u; x.target = '_blank'; x.rel = 'noopener noreferrer'; } return x; }
         var grupos = [];
         validos.forEach(function (k) { var g = k.grupo || ''; if (grupos.indexOf(g) < 0) grupos.push(g); });
         // Filtro por estilo/grupo quando há mais de um (o combo 4 estilos tem 132 peças).
@@ -1167,7 +1184,19 @@ main a[href$=".jpg"], main a[href$=".png"] { cursor:zoom-in; }
           if (g && grupos.length === 1) sec.appendChild(el('h2', 'p', g));
           var ul = el('ul', comImg ? 'pecas' : 'lks');
           validos.filter(function (k) { return (k.grupo || '') === g; }).forEach(function (k) {
-            var li = el('li'), a = el('a'), miniatura = mini(k.url);
+            var li = el('li'), a = el('a'), miniatura = k.miniatura || mini(k.url);
+            // Arquivo com versão em imagem: miniatura e dois botões (PDF e JPG), sem o cartão inteiro virar link.
+            if (k.url_imagem && /^https:\/\//.test(k.url_imagem)) {
+              var cx2 = el('div', 'cx'), fg = el('span', 'mini');
+              if (miniatura) { var im2 = el('img'); im2.src = '../../' + miniatura; im2.alt = k.rotulo; im2.loading = 'lazy'; fg.appendChild(im2); }
+              var nm2 = el('span', 'nm', k.rotulo);
+              if (k.detalhe) nm2.appendChild(el('small', null, k.detalhe));
+              var bts = el('span', 'bts');
+              bts.appendChild(linkBaixar(k.url, 'bt', 'Baixar PDF'));
+              bts.appendChild(linkBaixar(k.url_imagem, 'bt li', 'Baixar JPG'));
+              cx2.appendChild(fg); cx2.appendChild(nm2); cx2.appendChild(bts); li.appendChild(cx2); ul.appendChild(li);
+              return;
+            }
             // Arquivo do Drive: clique baixa direto (uc?export=download), sem abrir o Drive.
             var idArq = arquivoDrive(k.url);
             if (idArq) { a.href = 'https://drive.google.com/uc?export=download&id=' + idArq; a.rel = 'noopener noreferrer'; }
