@@ -380,6 +380,8 @@ select,input,button{font-size:16px}
     function populateDropdowns() {
       const deSel = document.getElementById('deSelect');
       deSel.innerHTML = '<option value="">Escolha a sua Diretoria de Ensino</option>';
+      const total = RAW.counts.reduce((a, b) => a + b, 0);
+      deSel.insertAdjacentHTML('beforeend', `<option value="all">Todas as DEs (${total.toLocaleString('pt-BR')})</option>`);
       DES.forEach((d, idx) => {
         const opt = document.createElement('option');
         opt.value = String(idx);
@@ -414,8 +416,9 @@ select,input,button{font-size:16px}
 
     function mostrarEscolha() {
       const el = document.getElementById('escolhaDe');
-      if (el) el.style.display = state.deIdx === '' ? 'block' : 'none';
-      document.body.classList.toggle('sem-de', state.deIdx === '');
+      const vazio = ALL_RECORDS.length === 0;
+      if (el) el.style.display = vazio ? 'block' : 'none';
+      document.body.classList.toggle('sem-de', vazio);
     }
 
     function clearDe() {
@@ -431,14 +434,21 @@ select,input,button{font-size:16px}
       const deSel = document.getElementById('deSelect');
       deSel.disabled = true;
       const aviso = document.getElementById('escolhaDe');
-      if (aviso) { aviso.style.display = 'block'; aviso.textContent = 'Carregando...'; }
+      const todas = value === 'all';
+      if (aviso) { aviso.style.display = 'block'; aviso.textContent = todas ? 'Carregando todas as diretorias (cerca de 4 MB), aguarde...' : 'Carregando...'; }
       try {
-        const resp = await fetch('dados/de-' + value + '.json');
-        if (!resp.ok) throw new Error(resp.status);
-        ALL_RECORDS = await resp.json();
+        const buscar = async n => { const resp = await fetch('dados/de-' + n + '.json'); if (!resp.ok) throw new Error(resp.status); return resp.json(); };
+        if (todas) {
+          const partes = await Promise.all(DES.map((_, n) => buscar(n)));
+          ALL_RECORDS = [].concat(...partes);
+        } else {
+          ALL_RECORDS = await buscar(value);
+        }
         NORM_NAMES = ALL_RECORDS.map(r => normalizeText(r[4]));
-        state.deIdx = value; state.discIdx = ''; state.page = 1;
-        if (window.goatcounter && goatcounter.count) goatcounter.count({path: 'aprovados-seduc/de/' + DES[value], title: 'DE ' + DES[value], event: true});
+        state.deIdx = todas ? '' : value; state.discIdx = ''; state.page = 1;
+        document.getElementById('tabChartDe').style.display = todas ? '' : 'none';
+        if (!todas && state.chartMode === 'de') state.chartMode = 'disc';
+        if (window.goatcounter && goatcounter.count) goatcounter.count({path: 'aprovados-seduc/de/' + (todas ? 'TODAS' : DES[value]), title: 'DE ' + (todas ? 'TODAS' : DES[value]), event: true});
         fillDiscs();
         mostrarEscolha();
         applyFilters();
