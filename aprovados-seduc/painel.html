@@ -41,6 +41,7 @@
 .bp-topo nav a:hover{color:#B8400F}
 .bp-aviso{background:#17324A;color:#fff;font-size:14px;line-height:1.4;padding:8px 16px;text-align:center}
 select,input,button{font-size:16px}
+.sem-de section[aria-label="Indicadores principais"],.sem-de section[aria-label="Gráficos analíticos"],.sem-de section[aria-label="Lista de aprovados"]{display:none}
 @media (max-width:700px){
   header.sticky{position:static}
   .bp-topo .w{padding:8px 16px;gap:8px 16px}
@@ -110,60 +111,6 @@ select,input,button{font-size:16px}
 
   <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1">
 
-    <!-- KPI Cards -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Indicadores principais">
-      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Aprovados no Filtro</span>
-          <span class="p-2 rounded-lg bg-indigo-50 text-indigo-600"><i data-lucide="users" class="w-4 h-4"></i></span>
-        </div>
-        <div class="mt-2 flex items-baseline gap-2">
-          <span id="kpiTotal" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
-          <span id="kpiTotalSub" class="text-xs text-slate-500">—</span>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Nota Média Final</span>
-          <span class="p-2 rounded-lg bg-emerald-50 text-emerald-600"><i data-lucide="bar-chart-2" class="w-4 h-4"></i></span>
-        </div>
-        <div class="mt-2 flex items-baseline gap-2">
-          <span id="kpiAvg" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
-          <span id="kpiRange" class="text-xs text-slate-500">mín — / máx —</span>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Maior Nota</span>
-          <span class="p-2 rounded-lg bg-amber-50 text-amber-600"><i data-lucide="award" class="w-4 h-4"></i></span>
-        </div>
-        <div class="mt-2">
-          <div id="kpiMax" class="text-2xl font-bold text-slate-900 tabular-nums">—</div>
-          <div id="kpiMaxSub" class="text-xs text-slate-500 truncate">—</div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">PPI e PcD</span>
-          <span class="p-2 rounded-lg bg-sky-50 text-sky-600"><i data-lucide="shield-check" class="w-4 h-4"></i></span>
-        </div>
-        <div class="mt-2 flex items-baseline gap-3">
-          <div>
-            <span id="kpiPpi" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
-            <span class="text-xs text-slate-500 ml-1">PPI</span>
-          </div>
-          <span class="text-slate-300">|</span>
-          <div>
-            <span id="kpiPcd" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
-            <span class="text-xs text-slate-500 ml-1">PcD</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Filter Bar -->
     <div id="escolhaDe" style="display:block;background:#FDE4D8;border:1px solid #D8CCBD;border-left:6px solid #F15A24;padding:16px 20px;font-size:18px;line-height:1.4;color:#2A2420;margin-bottom:16px"><b>Escolha a sua Diretoria de Ensino</b> na lista abaixo para ver os aprovados dela. Os dados de cada diretoria são carregados só quando você escolhe.</div>
     <section class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm space-y-4" aria-label="Filtros de busca">
@@ -221,6 +168,60 @@ select,input,button{font-size:16px}
         <div>
           <span class="font-semibold" id="discMetaTitle">Parâmetros oficiais do edital:</span>
           <span id="discMetaText" class="ml-1 text-indigo-800"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Indicadores principais">
+      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Aprovados no Filtro</span>
+          <span class="p-2 rounded-lg bg-indigo-50 text-indigo-600"><i data-lucide="users" class="w-4 h-4"></i></span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <span id="kpiTotal" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
+          <span id="kpiTotalSub" class="text-xs text-slate-500">—</span>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Nota Média Final</span>
+          <span class="p-2 rounded-lg bg-emerald-50 text-emerald-600"><i data-lucide="bar-chart-2" class="w-4 h-4"></i></span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <span id="kpiAvg" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
+          <span id="kpiRange" class="text-xs text-slate-500">mín — / máx —</span>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Maior Nota</span>
+          <span class="p-2 rounded-lg bg-amber-50 text-amber-600"><i data-lucide="award" class="w-4 h-4"></i></span>
+        </div>
+        <div class="mt-2">
+          <div id="kpiMax" class="text-2xl font-bold text-slate-900 tabular-nums">—</div>
+          <div id="kpiMaxSub" class="text-xs text-slate-500 truncate">—</div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">PPI e PcD</span>
+          <span class="p-2 rounded-lg bg-sky-50 text-sky-600"><i data-lucide="shield-check" class="w-4 h-4"></i></span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-3">
+          <div>
+            <span id="kpiPpi" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
+            <span class="text-xs text-slate-500 ml-1">PPI</span>
+          </div>
+          <span class="text-slate-300">|</span>
+          <div>
+            <span id="kpiPcd" class="text-2xl font-bold text-slate-900 tabular-nums">—</span>
+            <span class="text-xs text-slate-500 ml-1">PcD</span>
+          </div>
         </div>
       </div>
     </section>
@@ -394,6 +395,7 @@ select,input,button{font-size:16px}
         sitSel.appendChild(opt);
       });
       fillDiscs();
+      mostrarEscolha();
     }
 
     function fillDiscs() {
@@ -413,6 +415,7 @@ select,input,button{font-size:16px}
     function mostrarEscolha() {
       const el = document.getElementById('escolhaDe');
       if (el) el.style.display = state.deIdx === '' ? 'block' : 'none';
+      document.body.classList.toggle('sem-de', state.deIdx === '');
     }
 
     function clearDe() {
