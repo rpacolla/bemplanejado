@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel de Aprovados SEDUC-SP — Todas as Diretorias de Ensino</title>
+  
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <title>Aprovados SEDUC-SP: consulte por Diretoria de Ensino | Bem Planejado</title>
+  <meta name="description" content="Painel de consulta ao resultado final dos aprovados da SEDUC-SP. Escolha a sua Diretoria de Ensino e ache o seu nome. Não é material oficial.">
+  <link rel="canonical" href="https://bemplanejadoeducacional.com.br/aprovados-seduc/">
+  <meta name="theme-color" content="#FBF7F1">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bem Planejado Educacional">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Aprovados SEDUC-SP: consulte por Diretoria de Ensino">
+  <meta property="og:description" content="Escolha a sua Diretoria de Ensino e ache o seu nome sem rolar o PDF. Painel de consulta, não é material oficial.">
+  <meta property="og:url" content="https://bemplanejadoeducacional.com.br/aprovados-seduc/">
+  <meta property="og:image" content="https://bemplanejadoeducacional.com.br/img/og/aprovados-seduc.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="/img/marca/favicon-32.png"><link rel="apple-touch-icon" href="/img/marca/favicon-180.png">
   <!-- bp-identidade -->
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&display=swap">
@@ -25,7 +40,22 @@
 .bp-topo nav a{color:#2A2420;font-weight:600;font-size:16px;text-decoration:none}
 .bp-topo nav a:hover{color:#B8400F}
 .bp-aviso{background:#17324A;color:#fff;font-size:14px;line-height:1.4;padding:8px 16px;text-align:center}
+select,input,button{font-size:16px}
+@media (max-width:700px){
+  header.sticky{position:static}
+  .bp-topo .w{padding:8px 16px;gap:8px 16px}
+  .bp-topo img{height:40px}
+  .bp-topo nav{gap:6px 16px;margin-left:0;width:100%}
+  .bp-topo nav a{font-size:15px;padding:6px 0}
+  table th:nth-child(2),table td:nth-child(2),table th:nth-child(4),table td:nth-child(4),
+  table th:nth-child(6),table td:nth-child(6),table th:nth-child(7),table td:nth-child(7),
+  table th:nth-child(8),table td:nth-child(8){display:none}
+  table td,table th{padding-left:8px!important;padding-right:8px!important}
+  select,input{min-height:44px}
+  button{min-height:44px}
+}
   </style>
+  <script data-goatcounter="https://bemplanejadoeducacional.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <style>
@@ -405,6 +435,7 @@
         ALL_RECORDS = await resp.json();
         NORM_NAMES = ALL_RECORDS.map(r => normalizeText(r[4]));
         state.deIdx = value; state.discIdx = ''; state.page = 1;
+        if (window.goatcounter && goatcounter.count) goatcounter.count({path: 'aprovados-seduc/de/' + DES[value], title: 'DE ' + DES[value], event: true});
         fillDiscs();
         mostrarEscolha();
         applyFilters();
