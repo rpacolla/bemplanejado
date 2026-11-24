@@ -41,6 +41,12 @@
 .bp-topo nav a:hover{color:#B8400F}
 .bp-aviso{background:#17324A;color:#fff;font-size:14px;line-height:1.4;padding:8px 16px;text-align:center}
 select,input,button{font-size:16px}
+.bp-fonte{background:#FBF7F1;border-bottom:1px solid #D8CCBD}
+.bp-fonte .w{max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;font-size:16px;line-height:1.4;color:#2A2420}
+.bp-fonte p{flex:1 1 320px}
+.bp-fonte a.bt{display:inline-block;background:#B8400F;color:#fff;font-weight:700;text-decoration:none;padding:12px 20px;min-height:44px}
+.bp-fonte a.bt:hover{background:#8E300A}
+.bp-fonte a.lk{color:#B8400F;font-weight:600}
 .sem-de section[aria-label="Indicadores principais"],.sem-de section[aria-label="Gráficos analíticos"],.sem-de section[aria-label="Lista de aprovados"]{display:none}
 @media (max-width:700px){
   header.sticky{position:static}
@@ -74,6 +80,7 @@ select,input,button{font-size:16px}
 <body class="min-h-screen flex flex-col">
 <header class="bp-topo"><div class="w"><a href="/" aria-label="Bem Planejado Educacional, página inicial"><img src="/img/marca/logo-horizontal.svg" alt="Bem Planejado Educacional" width="156" height="48"></a><nav aria-label="Menu"><a href="/planners/">Planners</a><a href="/cadernos/">Cadernos</a><a href="/kits/">Kits</a><a href="/kits/formatura/">Formatura</a><a href="/gratis/">Grátis</a></nav></div></header>
 <div class="bp-aviso">Painel de consulta montado a partir do PDF oficial. <b>Não é material da SEDUC-SP nem do Bem Planejado.</b> Confira seu nome no documento oficial.</div>
+<div class="bp-fonte"><div class="w"><p><b>De onde vêm os dados:</b> resultado final de aprovados do Processo Seletivo Simplificado de docentes da SEDUC-SP, documento oficial publicado pela FGV. Este painel só reorganiza as informações desse PDF. <a class="lk" href="https://conhecimento.fgv.br/concursos/seducsp26edbasica" target="_blank" rel="noopener">Página do processo na FGV</a></p><a class="bt" href="https://conhecimento.fgv.br/sites/default/files/concursos/01_seduc-sp-resultado-final-de-aprovados_ampla.pdf" target="_blank" rel="noopener">Baixar o PDF oficial (19,6 MB)</a></div></div>
 
   <!-- Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
